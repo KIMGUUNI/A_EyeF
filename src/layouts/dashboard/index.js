@@ -46,13 +46,12 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                color="dark"
-                icon="weekend"
-                title="Bookings"
+                title="오늘 노출 횟수"
+                icon="leaderboard"
                 count={281}
                 percentage={{
                   color: "success",
-                  amount: "수정수정수정수정+55%",
+                  amount: "+55%",
                   label: "than lask week",
                 }}
               />
@@ -61,8 +60,9 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                icon="leaderboard"
-                title="Today's Users"
+                color="success"
+                icon="store"
+                title="오늘 노출 횟수"
                 count="2,300"
                 percentage={{
                   color: "success",
@@ -75,9 +75,9 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                color="success"
-                icon="store"
-                title="Revenue"
+                color="primary"
+                icon="person_add"
+                title="최대 노출 지역"
                 count="34k"
                 percentage={{
                   color: "success",
@@ -90,9 +90,9 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                color="primary"
-                icon="person_add"
-                title="Followers"
+                color="dark"
+                icon="weekend"
+                title="총 노출 횟수"
                 count="+91"
                 percentage={{
                   color: "success",
@@ -109,9 +109,9 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsBarChart
                   color="info"
-                  title="website views"
+                  title="리액트"
                   description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
+                  date="쉽네"
                   chart={reportsBarChartData}
                 />
               </MDBox>
@@ -120,13 +120,13 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="success"
-                  title="daily sales"
+                  title="별거 없네"
                   description={
                     <>
                       (<strong>+15%</strong>) increase in today sales.
                     </>
                   }
-                  date="updated 4 min ago"
+                  date="ㅎㅎㅎ"
                   chart={sales}
                 />
               </MDBox>
@@ -135,9 +135,9 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="dark"
-                  title="completed tasks"
+                  title="잣밥"
                   description="Last Campaign Performance"
-                  date="just updated"
+                  date="ㅋㅋㅋ"
                   chart={tasks}
                 />
               </MDBox>
