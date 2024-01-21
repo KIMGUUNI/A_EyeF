@@ -52,7 +52,7 @@ function Dashboard() {
                 count={281}
                 percentage={{
                   color: "success",
-                  amount: "+55%",
+                  amount: "수정수정수정수정+55%",
                   label: "than lask week",
                 }}
               />
