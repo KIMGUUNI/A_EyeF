@@ -79,7 +79,7 @@ export default function data() {
 
     rows: [
       {
-        companies: <Company image={logoXD} name="Material UI XD Version" />,
+        companies: <Company image={logoXD} name="여기에" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([
@@ -102,7 +102,7 @@ export default function data() {
         ),
       },
       {
-        companies: <Company image={logoAtlassian} name="Add Progress Track" />,
+        companies: <Company image={logoAtlassian} name="데이터를" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([
@@ -123,7 +123,7 @@ export default function data() {
         ),
       },
       {
-        companies: <Company image={logoSlack} name="Fix Platform Errors" />,
+        companies: <Company image={logoSlack} name="넣는 거구나" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([
@@ -144,7 +144,7 @@ export default function data() {
         ),
       },
       {
-        companies: <Company image={logoSpotify} name="Launch our Mobile App" />,
+        companies: <Company image={logoSpotify} name="잠이안와" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([
@@ -167,7 +167,7 @@ export default function data() {
         ),
       },
       {
-        companies: <Company image={logoJira} name="Add the New Pricing Page" />,
+        companies: <Company image={logoJira} name="죽겠다" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([[team4, "Jessica Doe"]])}
@@ -185,7 +185,7 @@ export default function data() {
         ),
       },
       {
-        companies: <Company image={logoInvesion} name="Redesign New Online Shop" />,
+        companies: <Company image={logoInvesion} name="에휴" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([

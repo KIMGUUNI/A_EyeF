@@ -48,6 +48,10 @@ import SignUp from "layouts/authentication/sign-up";
 // @mui icons
 import Icon from "@mui/material/Icon";
 
+// 페이징 나누는 장소
+
+// layouts 에서 모든 화면 표출하는 곳하는 곳
+
 const routes = [
   {
     type: "collapse",
