@@ -120,7 +120,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="success"
-                  title="별거 없네"
+                  title="별거 없네 2024.01.22"
                   description={
                     <>
                       (<strong>+15%</strong>) increase in today sales.
