@@ -135,7 +135,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="dark"
-                  title="잣밥"
+                  title="바꿔주세요"
                   description="Last Campaign Performance"
                   date="ㅋㅋㅋ"
                   chart={tasks}
