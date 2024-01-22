@@ -65,6 +65,9 @@ function Cover() {
             <MDBox mb={2}>
               <MDInput type="password" label="Password" variant="standard" fullWidth />
             </MDBox>
+            <MDBox mb={2}>
+              <MDInput type="password" label="SSN" variant="standard" fullWidth />
+            </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Checkbox />
               <MDTypography
