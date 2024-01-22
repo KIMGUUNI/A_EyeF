@@ -77,7 +77,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="최대 노출 지역"
+                title="최대 노출 지역 -원제-"
                 count="34k"
                 percentage={{
                   color: "success",
