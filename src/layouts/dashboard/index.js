@@ -63,7 +63,7 @@ function Dashboard() {
                 color="success"
                 icon="store"
                 title="오늘 노출 횟수"
-                count="2,300"
+                count="2,000"
                 percentage={{
                   color: "success",
                   amount: "+3%",
@@ -109,7 +109,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsBarChart
                   color="info"
-                  title="푸시를 해보겠습니다."
+                  title="리액트"
                   description="Last Campaign Performance"
                   date="쉽네"
                   chart={reportsBarChartData}
@@ -135,7 +135,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="dark"
-                  title="잣밥"
+                  title="바꿔주세요"
                   description="Last Campaign Performance"
                   date="ㅋㅋㅋ"
                   chart={tasks}
