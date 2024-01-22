@@ -63,7 +63,7 @@ function Dashboard() {
                 color="success"
                 icon="store"
                 title="오늘 노출 횟수"
-                count="2,000"
+                count="2,200"
                 percentage={{
                   color: "success",
                   amount: "+3%",
