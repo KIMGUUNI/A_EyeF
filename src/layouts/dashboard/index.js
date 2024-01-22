@@ -109,7 +109,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsBarChart
                   color="info"
-                  title="리액트"
+                  title="fff"
                   description="Last Campaign Performance"
                   date="쉽네"
                   chart={reportsBarChartData}
