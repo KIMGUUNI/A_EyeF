@@ -15,7 +15,7 @@
  */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 // @mui material components
@@ -37,6 +37,7 @@ import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 import axios from "axios";
 
 function Cover() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -58,6 +59,7 @@ function Cover() {
       console.log(userData);
       const response = await axiosInstance.post("/api/register", userData);
       alert("회원가입성공");
+      navigate("/authentication/sign-in");
       console.log(response.data);
     } catch (error) {
       console.error("Error during sign in:", error);
