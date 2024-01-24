@@ -57,9 +57,11 @@ function Cover() {
       };
       console.log(userData);
       const response = await axiosInstance.post("/api/register", userData);
+      alert("회원가입성공");
       console.log(response.data);
     } catch (error) {
       console.error("Error during sign in:", error);
+      alert("회원가입실패");
     }
   };
 
