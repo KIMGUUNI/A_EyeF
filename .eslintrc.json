@@ -3,7 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["prettier"], // "plugin:react/recommended" 제거
+  "extends": ["eslint:recommended","prettier"], // "plugin:react/recommended" 제거
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -11,14 +11,9 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["prettier"],  // "react" 제거
+  "plugins": ["prettier"], // "react" 제거
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ],
+    "prettier/prettier": "error",
     "react/display-name": "off",
     "default-param-last": "off",
     "react/react-in-jsx-scope": "off",
