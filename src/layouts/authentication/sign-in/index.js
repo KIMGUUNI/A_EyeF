@@ -13,9 +13,8 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial
  * portions of the Software.
  */
-
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
@@ -35,7 +34,7 @@ function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const axiosInstance = axios.create({
@@ -56,6 +55,7 @@ function Basic() {
       const loginVO = response.data;
       if (loginVO) {
         alert("로그인 성공:");
+        navigate("/dashboard");
       } else {
         alert("로그인 실패");
       }
