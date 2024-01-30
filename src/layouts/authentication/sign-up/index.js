@@ -38,9 +38,9 @@ import axios from "axios";
 
 function Cover() {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user_name, setUser_name] = useState("");
+  const [user_email, setUser_email] = useState("");
+  const [user_pw, setUser_pw] = useState("");
   const [ssn, setSSN] = useState("");
 
   const axiosInstance = axios.create({
@@ -51,9 +51,9 @@ function Cover() {
   const handleSignIn = async () => {
     try {
       const userData = {
-        name,
-        email,
-        password,
+        user_name,
+        user_email,
+        user_pw,
         ssn,
       };
       console.log(userData);
@@ -96,7 +96,7 @@ function Cover() {
                 label="Name"
                 variant="standard"
                 fullWidth
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setUser_name(e.target.value)}
               />
             </MDBox>
             <MDBox mb={2}>
@@ -105,7 +105,7 @@ function Cover() {
                 label="Email"
                 variant="standard"
                 fullWidth
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUser_email(e.target.value)}
               />
             </MDBox>
             <MDBox mb={2}>
@@ -114,7 +114,7 @@ function Cover() {
                 label="Password"
                 variant="standard"
                 fullWidth
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setUser_pw(e.target.value)}
               />
             </MDBox>
             <MDBox mb={2}>
