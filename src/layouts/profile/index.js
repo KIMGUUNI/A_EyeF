@@ -8,6 +8,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Rayout from "layouts/profile/components/Rayout"
 import Footer from "examples/Footer";
 import Header from "layouts/profile/components/Header";
+import Board from "layouts/profile/components/Board";
 
 
 function Overview() {
@@ -113,53 +114,7 @@ function Overview() {
         </MDBox>
       </Header>
       <Rayout>
-        dassdddddddddd
-        das
-        dashboardasddsasad
-        dashboardasddsasaddasasd
-        dashboardasddsasaddasasddsaasdasdsd
-        dsaadsas
-        dassdddddddddd
-        das
-        dashboardasddsasad
-        dashboardasddsasaddasasd
-        dashboardasddsasaddasasddsaasdasdsd
-        dsaadsas
-        dassdddddddddd
-        das
-        dashboardasddsasad
-        dashboardasddsasaddasasd
-        dashboardasddsasaddasasddsaasdasdsd
-        dsaadsas
-        dassdddddddddd
-        das
-        dashboardasddsasad
-        dashboardasddsasaddasasd
-        dashboardasddsasaddasasddsaasdasdsd
-        dsaadsas
-        dassdddddddddd
-        das
-        dashboardasddsasad
-        dashboardasddsasaddasaddddddddd
-        das
-        dashboardasddsasad
-        dashboardasddsasaddasasd
-        dashboardasddsasaddasasddsaasdasdsd
-        dsaadsas
-        dassdddddddddd
-        das
-        dashboardasddsasad
-        dashboardasddsasaddasasd
-        dashboardasddsasaddasasddsaasdasdsd
-        dsaadsas
-        dassdddddddddd
-        das
-        dashboardasddsasad
-        dashboardasddsasaddasasd
-        dashboardasddsasaddasasddsaasdasdsd
-        dassddddddddddsd
-        dashboardasddsasaddasasddsaasdasdsd
-        dsaadsas
+      <Board></Board>
       </Rayout>
       <Footer />
     </DashboardLayout>
