@@ -97,12 +97,12 @@ function Header({ children }) {
             <MDAvatar src={burceMars} alt="profile-image" size="xl" shadow="sm" />
           </Grid>
           <Grid item>
-            <MDBox height="100%" mt={0.5} lineHeight={1}>
+            <MDBox height="200%" mt={0.5} lineHeight={1}>
               <MDTypography variant="h5" fontWeight="medium">
-                Richard Davis
+                조원제
               </MDTypography>
               <MDTypography variant="button" color="text" fontWeight="regular">
-                CEO / Co-Founder
+                개발자 / 연봉1억
               </MDTypography>
             </MDBox>
           </Grid>
