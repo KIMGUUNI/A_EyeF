@@ -22,6 +22,7 @@ import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDProgress from "components/MDProgress";
 import CancelIcon from '@mui/icons-material/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // Images
 import logoXD from "assets/images/small-logos/logo-xd.svg";
@@ -99,6 +100,7 @@ export default function data() {
         completion: (
           <MDBox width="8rem" textAlign="center">
             <CancelIcon fontSize="medium"/>
+            <CheckCircleIcon fontSize="medium" />
           </MDBox>
         ),
         ad_target_gender :(
