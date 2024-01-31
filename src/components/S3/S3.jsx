@@ -49,12 +49,15 @@ const S3 = () => {
     const handleButtonClick = async () => {
         console.log("click");
         if (uploadedFile) {
+            const id_key = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
+            const secret_key = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
+            const region = process.env.REACT_APP_AWS_REGION;
             const ageAndGender = `${age}/${gender}`;
             const key = `${ageAndGender}_${randomRoot}_${year}_${month}_${day}_${uploadedFile.name}`;
             AWS.config.update({
-                accessKeyId: "AKIA4MTWI2EHFY74EDW7",
-                secretAccessKey: "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",
-                region: "ap-northeast-2"
+                accessKeyId: id_key,
+                secretAccessKey: secret_key,
+                region: region
             });
 
             const s3 = new AWS.S3();
