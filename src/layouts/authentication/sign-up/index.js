@@ -38,10 +38,9 @@ import axios from "axios";
 
 function Cover() {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [ssn, setSSN] = useState("");
+  const [user_name, setUser_Name] = useState("");
+  const [user_email, setUser_Email] = useState("");
+  const [user_pw, setUser_Pw] = useState("");
 
   const axiosInstance = axios.create({
     baseURL: "http://localhost:8089/A_Eye",
@@ -51,10 +50,9 @@ function Cover() {
   const handleSignIn = async () => {
     try {
       const userData = {
-        name,
-        email,
-        password,
-        ssn,
+        user_name,
+        user_email,
+        user_pw,
       };
       console.log(userData);
       const response = await axiosInstance.post("/api/register", userData);
@@ -96,7 +94,7 @@ function Cover() {
                 label="Name"
                 variant="standard"
                 fullWidth
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setUser_Name(e.target.value)}
               />
             </MDBox>
             <MDBox mb={2}>
@@ -105,7 +103,7 @@ function Cover() {
                 label="Email"
                 variant="standard"
                 fullWidth
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUser_Email(e.target.value)}
               />
             </MDBox>
             <MDBox mb={2}>
@@ -114,16 +112,7 @@ function Cover() {
                 label="Password"
                 variant="standard"
                 fullWidth
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput
-                type="password"
-                label="SSN"
-                variant="standard"
-                fullWidth
-                onChange={(e) => setSSN(e.target.value)}
+                onChange={(e) => setUser_Pw(e.target.value)}
               />
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
