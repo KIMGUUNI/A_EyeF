@@ -21,6 +21,7 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDProgress from "components/MDProgress";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 // Images
 import logoXD from "assets/images/small-logos/logo-xd.svg";
@@ -71,35 +72,55 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "companies", accessor: "companies", width: "45%", align: "left" },
-      { Header: "members", accessor: "members", width: "10%", align: "left" },
-      { Header: "budget", accessor: "budget", align: "center" },
-      { Header: "completion", accessor: "completion", align: "center" },
+      { Header: "광고", accessor: "companies", width: "25%", align: "left" },
+      { Header: "타겟 연령", accessor: "members", width: "10%", align: "center" },
+      { Header: "타겟 성별", accessor: "budget", align: "center" },
+      { Header: "노출 횟수", accessor: "ad_target_gender", align: "center" },
+      { Header: "결제일", accessor: "pay_date", align: "center" },
+      { Header: "시작 날짜", accessor: "pay_start_date", align: "center" },
+      { Header: "종료 날짜", accessor: "pay_end_date", align: "center" },
+      { Header: "승인", accessor: "completion", align: "center" },
+      
     ],
 
     rows: [
       {
         companies: <Company image={logoXD} name="여기에" />,
         members: (
-          <MDBox display="flex" py={1}>
-            {avatars([
-              [team1, "Ryan Tompson"],
-              [team2, "Romina Hadid"],
-              [team3, "Alexander Smith"],
-              [team4, "Jessica Doe"],
-            ])}
+          <MDBox display="flex" py={1} >
+            10
           </MDBox>
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            $14,000
+            남 
           </MDTypography>
         ),
         completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={60} color="info" variant="gradient" label={false} />
+          <MDBox width="8rem" textAlign="center">
+            <CancelIcon fontSize="medium"/>
           </MDBox>
         ),
+        ad_target_gender :(
+          <MDBox>
+            1
+          </MDBox>
+        ),
+        pay_date :(
+          <MDBox>
+            Date
+          </MDBox>
+        ),
+        pay_start_date :(
+          <MDBox>
+            Start_Date
+          </MDBox>
+        ),
+        pay_end_date :(
+          <MDBox>
+            End_Date
+          </MDBox>
+        )
       },
       {
         companies: <Company image={logoAtlassian} name="데이터를" />,
@@ -113,7 +134,7 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            $3,000
+            여
           </MDTypography>
         ),
         completion: (
@@ -134,7 +155,7 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            Not set
+            여
           </MDTypography>
         ),
         completion: (
@@ -157,7 +178,7 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            $20,500
+            여
           </MDTypography>
         ),
         completion: (
@@ -175,7 +196,7 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            $500
+            여
           </MDTypography>
         ),
         completion: (
@@ -196,7 +217,7 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            $2,000
+            여
           </MDTypography>
         ),
         completion: (
