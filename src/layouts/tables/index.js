@@ -26,18 +26,17 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
-
+import S3 from "components/S3/S3";
 // Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
-
+import TblHeader from "./components/TblHeader";
 function Tables() {
-  const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
+      <TblHeader>
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
@@ -52,19 +51,18 @@ function Tables() {
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
-                  Authors Table
+                <MDTypography variant="h4" color="white" marginLeft="3%">
+                  광고신청
                 </MDTypography>
               </MDBox>
+              <div style={{ textAlign: 'center', marginTop:"2%" }}>
+                <MDTypography variant="h2" color="dark">
+                 Please upload the advertisement
+                </MDTypography>
               <MDBox pt={3}>
-                <DataTable
-                  table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
+                <S3></S3>
               </MDBox>
+              </div>
             </Card>
           </Grid>
           <Grid item xs={12}>
@@ -96,6 +94,7 @@ function Tables() {
           </Grid>
         </Grid>
       </MDBox>
+      </TblHeader>
       <Footer />
     </DashboardLayout>
   );

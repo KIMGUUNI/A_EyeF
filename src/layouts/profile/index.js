@@ -8,7 +8,6 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Rayout from "layouts/profile/components/Rayout"
 import Footer from "examples/Footer";
 import Header from "layouts/profile/components/Header";
-import Board from "layouts/profile/components/Board";
 
 
 function Overview() {
@@ -114,7 +113,6 @@ function Overview() {
         </MDBox>
       </Header>
       <Rayout>
-      <Board></Board>
       </Rayout>
       <Footer />
     </DashboardLayout>
