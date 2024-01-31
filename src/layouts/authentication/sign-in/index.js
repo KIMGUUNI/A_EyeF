@@ -32,8 +32,8 @@ import axios from "axios";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user_email, setUser_Email] = useState("");
+  const [user_pw, setUser_Pw] = useState("");
   const navigate = useNavigate();
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
@@ -45,8 +45,8 @@ function Basic() {
   const handleSignIn = async () => {
     try {
       const userData = {
-        email,
-        password,
+        user_email,
+        user_pw,
       };
 
       console.log(userData);
@@ -55,6 +55,7 @@ function Basic() {
       const loginVO = response.data;
       if (loginVO) {
         alert("로그인 성공:");
+        sessionStorage.setItem('loginVO', JSON.stringify(loginVO));
         navigate("/dashboard");
       } else {
         alert("로그인 실패");
@@ -107,7 +108,7 @@ function Basic() {
                 label="Email"
                 variant="standard"
                 fullWidth
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUser_Email(e.target.value)}
               />
             </MDBox>
             <MDBox mb={2}>
@@ -116,7 +117,7 @@ function Basic() {
                 label="Password"
                 variant="standard"
                 fullWidth
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setUser_Pw(e.target.value)}
               />
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
