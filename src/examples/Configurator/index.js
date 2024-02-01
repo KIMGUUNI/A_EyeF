@@ -207,8 +207,6 @@ function Configurator() {
 
         <MDBox mt={3} lineHeight={1}>
           <MDTypography variant="h6">사이드바 선택</MDTypography>
-          <MDTypography variant="button" color="text">
-          </MDTypography>
 
           <MDBox
             sx={{
@@ -282,10 +280,6 @@ function Configurator() {
         </MDBox>
         <Divider />
         <MDBox mt={2} textAlign="center">
-          <MDBox mb={0.5}>
-            <MDTypography variant="h6"></MDTypography>
-          </MDBox>
-
           <MDBox display="flex" justifyContent="center">
             <MDBox mr={1.5}>
               <MDButton
