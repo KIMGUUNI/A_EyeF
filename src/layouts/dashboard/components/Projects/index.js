@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -31,41 +31,16 @@ import DataTable from "examples/Tables/DataTable";
 
 // Data
 import data from "layouts/dashboard/components/Projects/data";
-import axios from "axios";
 
 
 
 function Projects() {
   const { columns, rows } = data();
   const [menu, setMenu] = useState(null);
-  const [currentAd, setCurrentAd] = useState();
+  
 
   const openMenu = ({ currentTarget }) => setMenu(currentTarget);
   const closeMenu = () => setMenu(null);
-
-
-  useEffect(() =>{
-    const user = JSON.parse(sessionStorage.getItem('loginVO'))
-
-    const axiosInstance = axios.create({
-      baseURL : "http://localhost:8089/A_Eye",
-      withCredentials : true
-    })
-    axiosInstance.post("/api/getUserAds",{user_idx : user.user_idx})
-    .then(res =>{
-      sessionStorage.setItem('adVO', JSON.stringify(res.data));
-    })
-    
-    const ad = JSON.parse(sessionStorage.getItem('adVO'))
-    setCurrentAd(ad[0].ad_idx)
-
-
-    
-
-  },[console.log(currentAd)])
-    
-
-
 
   
   const renderMenu = (
