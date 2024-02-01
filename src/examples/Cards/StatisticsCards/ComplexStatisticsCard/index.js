@@ -74,6 +74,7 @@ function ComplexStatisticsCard({ color, title, count, percentage, icon }) {
 // Setting default values for the props of ComplexStatisticsCard
 ComplexStatisticsCard.defaultProps = {
   color: "info",
+  count: 0,
   percentage: {
     color: "success",
     text: "",

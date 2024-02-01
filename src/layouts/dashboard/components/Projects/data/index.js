@@ -24,8 +24,9 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // Images
 import logoXD from "assets/images/small-logos/logo-xd.svg";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { CurrentAd } from "context/CurrentAd";
 
 // import logoSlack from "assets/images/small-logos/logo-slack.svg";
 // import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
@@ -42,6 +43,8 @@ export default function data() {
     </MDBox>
   );
 
+  const {currentAd, setCurrentAd} = useContext(CurrentAd);
+  
   const [adRows, setAdRows] = useState([]);
   //const [currentAd, setCurrentAd] = useState(null);
 
@@ -58,18 +61,23 @@ export default function data() {
         .then(res => {
           sessionStorage.setItem('adVO', JSON.stringify(res.data));
           getAdList()
+          
+          
         })
     }
   }
+
+
   async function getAdList() {
     const ad = await JSON.parse(sessionStorage.getItem('adVO'))
-
+    setCurrentAd(ad[0].ad_idx)
+    
     if (ad != null) {
       //setCurrentAd(ad[0].ad_idx)
     }
     if (ad != null) {
       setAdRows(ad.map((item) => ({
-        companies: <Company image={logoXD} name={item.ad_name} />, // You can customize the name as per your requirement
+        companies: <span onClick={()=>{setCurrentAd(item)}}><Company  image={logoXD} name={item.ad_name} /></span>, // You can customize the name as per your requirement
         ad_target_age: (
           <MDBox display="flex" py={1}>
             {item.ad_target_age}
@@ -108,13 +116,14 @@ export default function data() {
         )
       })));
     }
+    
   }
 
   useEffect(() => {
 
     getAd()
 
-  }, [])
+  }, [console.log(currentAd)])
 
 
   return {
