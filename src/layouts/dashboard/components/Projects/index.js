@@ -32,6 +32,7 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import data from "layouts/dashboard/components/Projects/data";
 
+
 function Projects() {
   const { columns, rows } = data();
   const [menu, setMenu] = useState(null);
@@ -65,7 +66,7 @@ function Projects() {
       <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
         <MDBox>
           <MDTypography variant="h6" gutterBottom>
-            Projects
+            AD
           </MDTypography>
           <MDBox display="flex" alignItems="center" lineHeight={0}>
             <Icon
