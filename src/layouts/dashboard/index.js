@@ -33,7 +33,6 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
-import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
@@ -63,7 +62,7 @@ function Dashboard() {
                 color="success"
                 icon="store"
                 title="오늘 노출 횟수"
-                count="2,300"
+                count="2,200"
                 percentage={{
                   color: "success",
                   amount: "+3%",
@@ -77,7 +76,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="최대 노출 지역"
+                title="최대 노출 지역 -원제-"
                 count="34k"
                 percentage={{
                   color: "success",
@@ -120,7 +119,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="success"
-                  title="별거 없네"
+                  title="별거 없네 2024.01.22"
                   description={
                     <>
                       (<strong>+15%</strong>) increase in today sales.
@@ -135,7 +134,7 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="dark"
-                  title="잣밥"
+                  title="바꿔주세요"
                   description="Last Campaign Performance"
                   date="ㅋㅋㅋ"
                   chart={tasks}
@@ -146,11 +145,10 @@ function Dashboard() {
         </MDBox>
         <MDBox>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={8}>
+            <Grid item xs={12} md={6} lg={12}>
               <Projects />
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <OrdersOverview />
             </Grid>
           </Grid>
         </MDBox>
