@@ -36,13 +36,16 @@ import Projects from "layouts/dashboard/components/Projects";
 import AdTargets from "layouts/dashboard/components/AdTarget/AdTargets";
 
 import * as React from 'react';
+import { CurrentAd } from "context/CurrentAd";
 
 function Dashboard() {
   const { sales } = reportsLineChartData;
-
+  const [currentAd, setCurrentAd] = React.useState(0);
+  
 
 
   return (
+    <CurrentAd.Provider value={{currentAd, setCurrentAd}}>
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox py={3}>
@@ -52,7 +55,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 title="오늘 노출 횟수"
                 icon="leaderboard"
-                count={281}
+                count={currentAd != null ? currentAd.ad_expo_num : 0 }
                 percentage={{
                   color: "success",
                   amount: "+55%",
@@ -67,7 +70,7 @@ function Dashboard() {
                 color="success"
                 icon="store"
                 title="이번 달 노출 횟수"
-                count="2,200"
+                count={currentAd != null ? currentAd.ad_expo_num+155 : 0 }
                 percentage={{
                   color: "success",
                   amount: "+3%",
@@ -82,7 +85,7 @@ function Dashboard() {
                 color="primary"
                 icon="person_add"
                 title="최대 노출 지역"
-                count="34k"
+                count={currentAd != null ? currentAd.ad_expo_num+200 : 0 }
                 percentage={{
                   color: "success",
                   amount: "+1%",
@@ -152,6 +155,7 @@ function Dashboard() {
       </MDBox>
       <Footer />
     </DashboardLayout>
+    </CurrentAd.Provider>
   );
 }
 
