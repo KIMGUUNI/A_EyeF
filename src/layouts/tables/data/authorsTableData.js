@@ -73,7 +73,7 @@ export default function data() {
         ),
         action: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
+            ㅡㅡㅌㅌㅌㅊㅊㄴㅊㄴㅊ
           </MDTypography>
         ),
       },

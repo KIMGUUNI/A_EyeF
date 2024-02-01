@@ -16,52 +16,20 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Tooltip from "@mui/material/Tooltip";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
-import MDProgress from "components/MDProgress";
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // Images
 import logoXD from "assets/images/small-logos/logo-xd.svg";
-import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import logoJira from "assets/images/small-logos/logo-jira.svg";
-import logoInvesion from "assets/images/small-logos/logo-invision.svg";
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+// import logoSlack from "assets/images/small-logos/logo-slack.svg";
+// import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+// import logoJira from "assets/images/small-logos/logo-jira.svg";
+// import logoInvesion from "assets/images/small-logos/logo-invision.svg";
 
 export default function data() {
-  const avatars = (members) =>
-    members.map(([image, name]) => (
-      <Tooltip key={name} title={name} placeholder="bottom">
-        <MDAvatar
-          src={image}
-          alt="name"
-          size="xs"
-          sx={{
-            border: ({ borders: { borderWidth }, palette: { white } }) =>
-              `${borderWidth[2]} solid ${white.main}`,
-            cursor: "pointer",
-            position: "relative",
-
-            "&:not(:first-of-type)": {
-              ml: -1.25,
-            },
-
-            "&:hover, &:focus": {
-              zIndex: "10",
-            },
-          }}
-        />
-      </Tooltip>
-    ));
-
   const Company = ({ image, name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" />
@@ -71,163 +39,62 @@ export default function data() {
     </MDBox>
   );
 
+  const ad = JSON.parse(sessionStorage.getItem('adVO'))
+
+  const adrows = ad.map((item) => ({
+    companies: <Company image={logoXD} name={item.ad_name} />, // You can customize the name as per your requirement
+    ad_target_age: (
+      <MDBox display="flex" py={1}>
+        {item.ad_target_age}
+      </MDBox>
+    ),
+    ad_target_gender: (
+      <MDTypography variant="caption" color="text" fontWeight="medium">
+        {item.ad_target_gender}
+      </MDTypography>
+    ),
+    ad_approval: (
+      <MDBox width="8rem" textAlign="center">
+        {item.ad_approval == 'N' ? <CancelIcon fontSize="medium" /> :
+        <CheckCircleIcon fontSize="medium" />}
+      </MDBox>
+    ),
+    ad_expo_num: (
+      <MDBox>
+        {item.ad_expo_num}
+      </MDBox>
+    ),
+    pay_date: (
+      <MDBox>
+        Date
+      </MDBox>
+    ),
+    pay_start_date: (
+      <MDBox>
+        Start_Date
+      </MDBox>
+    ),
+    pay_end_date: (
+      <MDBox>
+        End_Date
+      </MDBox>
+    )
+  }));
+  
   return {
     columns: [
       { Header: "광고", accessor: "companies", width: "25%", align: "left" },
-      { Header: "타겟 연령", accessor: "members", width: "10%", align: "center" },
-      { Header: "타겟 성별", accessor: "budget", align: "center" },
-      { Header: "노출 횟수", accessor: "ad_target_gender", align: "center" },
+      { Header: "타겟 연령", accessor: "ad_target_age", width: "10%", align: "center" },
+      { Header: "타겟 성별", accessor: "ad_target_gender", align: "center" },
+      { Header: "노출 횟수", accessor: "ad_expo_num", align: "center" },
       { Header: "결제일", accessor: "pay_date", align: "center" },
       { Header: "시작 날짜", accessor: "pay_start_date", align: "center" },
       { Header: "종료 날짜", accessor: "pay_end_date", align: "center" },
-      { Header: "승인", accessor: "completion", align: "center" },
+      { Header: "승인", accessor: "ad_approval", align: "center" },
       
     ],
 
-    rows: [
-      {
-        companies: <Company image={logoXD} name="여기에" />,
-        members: (
-          <MDBox display="flex" py={1} >
-            10
-          </MDBox>
-        ),
-        budget: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            남 
-          </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="center">
-            <CancelIcon fontSize="medium"/>
-            <CheckCircleIcon fontSize="medium" />
-          </MDBox>
-        ),
-        ad_target_gender :(
-          <MDBox>
-            1
-          </MDBox>
-        ),
-        pay_date :(
-          <MDBox>
-            Date
-          </MDBox>
-        ),
-        pay_start_date :(
-          <MDBox>
-            Start_Date
-          </MDBox>
-        ),
-        pay_end_date :(
-          <MDBox>
-            End_Date
-          </MDBox>
-        )
-      },
-      {
-        companies: <Company image={logoAtlassian} name="데이터를" />,
-        members: (
-          <MDBox display="flex" py={1}>
-            {avatars([
-              [team2, "Romina Hadid"],
-              [team4, "Jessica Doe"],
-            ])}
-          </MDBox>
-        ),
-        budget: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            여
-          </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={10} color="info" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-      {
-        companies: <Company image={logoSlack} name="넣는 거구나" />,
-        members: (
-          <MDBox display="flex" py={1}>
-            {avatars([
-              [team1, "Ryan Tompson"],
-              [team3, "Alexander Smith"],
-            ])}
-          </MDBox>
-        ),
-        budget: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            여
-          </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={100} color="success" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-      {
-        companies: <Company image={logoSpotify} name="잠이안와" />,
-        members: (
-          <MDBox display="flex" py={1}>
-            {avatars([
-              [team4, "Jessica Doe"],
-              [team3, "Alexander Smith"],
-              [team2, "Romina Hadid"],
-              [team1, "Ryan Tompson"],
-            ])}
-          </MDBox>
-        ),
-        budget: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            여
-          </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={100} color="success" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-      {
-        companies: <Company image={logoJira} name="죽겠다" />,
-        members: (
-          <MDBox display="flex" py={1}>
-            {avatars([[team4, "Jessica Doe"]])}
-          </MDBox>
-        ),
-        budget: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            여
-          </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={25} color="info" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-      {
-        companies: <Company image={logoInvesion} name="에휴" />,
-        members: (
-          <MDBox display="flex" py={1}>
-            {avatars([
-              [team1, "Ryan Tompson"],
-              [team4, "Jessica Doe"],
-            ])}
-          </MDBox>
-        ),
-        budget: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            여
-          </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={40} color="info" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-    ],
+    rows: 
+      adrows
   };
 }
