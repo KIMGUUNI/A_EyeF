@@ -24,6 +24,9 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // Images
 import logoXD from "assets/images/small-logos/logo-xd.svg";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 // import logoSlack from "assets/images/small-logos/logo-slack.svg";
 // import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 // import logoJira from "assets/images/small-logos/logo-jira.svg";
@@ -39,48 +42,81 @@ export default function data() {
     </MDBox>
   );
 
-  const ad = JSON.parse(sessionStorage.getItem('adVO'))
+  const [adRows, setAdRows] = useState([]);
+  //const [currentAd, setCurrentAd] = useState(null);
 
-  const adrows = ad.map((item) => ({
-    companies: <Company image={logoXD} name={item.ad_name} />, // You can customize the name as per your requirement
-    ad_target_age: (
-      <MDBox display="flex" py={1}>
-        {item.ad_target_age}
-      </MDBox>
-    ),
-    ad_target_gender: (
-      <MDTypography variant="caption" color="text" fontWeight="medium">
-        {item.ad_target_gender}
-      </MDTypography>
-    ),
-    ad_approval: (
-      <MDBox width="8rem" textAlign="center">
-        {item.ad_approval == 'N' ? <CancelIcon fontSize="medium" /> :
-        <CheckCircleIcon fontSize="medium" />}
-      </MDBox>
-    ),
-    ad_expo_num: (
-      <MDBox>
-        {item.ad_expo_num}
-      </MDBox>
-    ),
-    pay_date: (
-      <MDBox>
-        Date
-      </MDBox>
-    ),
-    pay_start_date: (
-      <MDBox>
-        Start_Date
-      </MDBox>
-    ),
-    pay_end_date: (
-      <MDBox>
-        End_Date
-      </MDBox>
-    )
-  }));
-  
+  async function getAd() {
+
+    const user = await JSON.parse(sessionStorage.getItem('loginVO'))
+
+    if (user != null) {
+      const axiosInstance = axios.create({
+        baseURL: "http://localhost:8089/A_Eye",
+        withCredentials: true
+      })
+      axiosInstance.post("/api/getUserAds", { user_idx: user.user_idx })
+        .then(res => {
+          sessionStorage.setItem('adVO', JSON.stringify(res.data));
+          getAdList()
+        })
+    }
+  }
+  async function getAdList() {
+    const ad = await JSON.parse(sessionStorage.getItem('adVO'))
+
+    if (ad != null) {
+      //setCurrentAd(ad[0].ad_idx)
+    }
+    if (ad != null) {
+      setAdRows(ad.map((item) => ({
+        companies: <Company image={logoXD} name={item.ad_name} />, // You can customize the name as per your requirement
+        ad_target_age: (
+          <MDBox display="flex" py={1}>
+            {item.ad_target_age}
+          </MDBox>
+        ),
+        ad_target_gender: (
+          <MDTypography variant="caption" color="text" fontWeight="medium">
+            {item.ad_target_gender}
+          </MDTypography>
+        ),
+        ad_approval: (
+          <MDBox width="8rem" textAlign="center">
+            {item.ad_approval == 'N' ? <CancelIcon fontSize="medium" /> :
+              <CheckCircleIcon fontSize="medium" />}
+          </MDBox>
+        ),
+        ad_expo_num: (
+          <MDBox>
+            {item.ad_expo_num}
+          </MDBox>
+        ),
+        pay_date: (
+          <MDBox>
+            Date
+          </MDBox>
+        ),
+        pay_start_date: (
+          <MDBox>
+            Start_Date
+          </MDBox>
+        ),
+        pay_end_date: (
+          <MDBox>
+            End_Date
+          </MDBox>
+        )
+      })));
+    }
+  }
+
+  useEffect(() => {
+
+    getAd()
+
+  }, [])
+
+
   return {
     columns: [
       { Header: "광고", accessor: "companies", width: "25%", align: "left" },
@@ -91,10 +127,22 @@ export default function data() {
       { Header: "시작 날짜", accessor: "pay_start_date", align: "center" },
       { Header: "종료 날짜", accessor: "pay_end_date", align: "center" },
       { Header: "승인", accessor: "ad_approval", align: "center" },
-      
+
     ],
 
-    rows: 
-      adrows
+    rows:
+      adRows
   };
+
+
 }
+data.defaultProps = {
+  ad_target_age: "1",
+  companies: "1",
+  ad_target_gender: "1",
+  ad_expo_num: "1",
+  pay_date: "1",
+  pay_start_date: "1",
+  pay_end_date: "1",
+  ad_approval: "1",
+};
