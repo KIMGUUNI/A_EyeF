@@ -75,6 +75,5 @@ AdTargets.defaultProps = {
       "light",
       "dark",
     ]),
-    icon: PropTypes.node.isRequired,
   };
 export default AdTargets;

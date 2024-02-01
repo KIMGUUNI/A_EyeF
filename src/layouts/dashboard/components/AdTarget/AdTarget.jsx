@@ -53,9 +53,6 @@ AdTarget.defaultProps = {
 
 // Typechecking props for the Invoice
 AdTarget.propTypes = {
-  date: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
   noGutter: PropTypes.bool,
 };
 
