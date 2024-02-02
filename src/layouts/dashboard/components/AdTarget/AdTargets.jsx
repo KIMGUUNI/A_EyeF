@@ -29,7 +29,6 @@ import { CurrentAd } from "context/CurrentAd";
 
 function AdTargets({color}) {
     const {currentAd} = useContext(CurrentAd)
-    console.log(currentAd)
   return (
     <Card sx={{ height: "93%" }}>
       <MDBox pt={0} px={2} display="flex" justifyContent="space-between" alignItems="center">

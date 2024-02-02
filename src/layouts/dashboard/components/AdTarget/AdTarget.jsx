@@ -35,10 +35,10 @@ function AdTarget({ ad_target_age, ad_target_gender, noGutter }) {
     >
       <MDBox lineHeight={2.125} >
         <MDTypography display="block" variant="h6" fontWeight="medium" mb={2} >
-          연령 :  {ad_target_age}
+          연령 :  {ad_target_age > 0 ? ad_target_age : 0}
         </MDTypography>
         <MDTypography display='flex' variant="h6" fontWeight="medium">
-          성별 :  {ad_target_gender}
+          성별 :  {ad_target_age > 0 ? ad_target_gender : "성별을 선택해주세요"}
         </MDTypography>
         
       </MDBox>

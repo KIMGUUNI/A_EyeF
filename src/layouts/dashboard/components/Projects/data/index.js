@@ -43,11 +43,12 @@ export default function data() {
     </MDBox>
   );
 
-  const {currentAd, setCurrentAd} = useContext(CurrentAd);
-  const {monthAd, setMonthAd} = useContext(CurrentAd)
+  const {setCurrentAd} = useContext(CurrentAd);
+  const {setMonthAd} = useContext(CurrentAd);
+  const {setChartD} = useContext(CurrentAd);
+  const {setChartBarD} = useContext(CurrentAd);
   const [adRows, setAdRows] = useState([]);
   
-  //const [currentAd, setCurrentAd] = useState(null);
 
   async function getAd() {
 
@@ -78,7 +79,7 @@ export default function data() {
     }
     if (ad != null) {
       setAdRows(ad.map((item) => ({
-        companies: <span onClick={()=>{setCurrentAd(item), getMonthAd(item.ad_idx)}}><Company  image={logoXD} name={item.ad_name} /></span>, // You can customize the name as per your requirement
+        companies: <span onClick={()=>{setCurrentAd(item), getMonthAd(item.ad_idx),getChartAd(item.ad_idx),getBarChartAd(item.ad_idx)}}><Company  image={logoXD} name={item.ad_name} /></span>, // You can customize the name as per your requirement
         ad_target_age: (
           <MDBox display="flex" py={1}>
             {item.ad_target_age}
@@ -122,26 +123,70 @@ export default function data() {
 
   async function getMonthAd(item) {
 
-      const adMonthAxiosInstance = await axios.create({
+      const AxiosInstance = await axios.create({
         baseURL: "http://localhost:8089/A_Eye",
         withCredentials: true
       })
-      adMonthAxiosInstance.post("/api/getMonthAds", { ad_idx: item })
+      AxiosInstance.post("/api/getMonthAds", { ad_idx: item })
         .then(res => {
           //sessionStorage.setItem('adVO', JSON.stringify(res.data));
           console.log(res.data)
           setMonthAd(res.data[0])
-          console.log(monthAd)         
-          
         })
     
   }
 
+  async function getChartAd(item) {
+
+    const AxiosInstance = await axios.create({
+      baseURL: "http://localhost:8089/A_Eye",
+      withCredentials: true
+    })
+    AxiosInstance.post("/api/getChartAd", { ad_idx: item })
+      .then(res => {
+        //sessionStorage.setItem('adVO', JSON.stringify(res.data));
+        let labels = [];
+        let dataC = [];
+        res.data.map(item => {labels.push(item.month),dataC.push(item.month_count)})
+        setChartD({sales: {
+          labels: labels,
+          datasets: { label: "노출 수", data: dataC }
+        }})
+        
+      })
+  
+}
+
+async function getBarChartAd(item) {
+
+  const AxiosInstance = await axios.create({
+    baseURL: "http://localhost:8089/A_Eye",
+    withCredentials: true
+  })
+  AxiosInstance.post("/api/getBarChartAd", { ad_idx: item })
+    .then(res => {
+      //sessionStorage.setItem('adVO', JSON.stringify(res.data));
+      let labels = [];
+      let dataC = [];
+      res.data.map(item => {labels.push(item.day),dataC.push(item.day_count)})
+       console.log(labels)
+       console.log(dataC)
+      setChartBarD({
+         labels: labels,
+         datasets: { label: "노출 수", data: dataC }
+       })
+      console.log(res)
+
+
+    })
+
+}
+
   useEffect(() => {
 
     getAd()
-
-  }, [console.log(currentAd)])
+    
+  }, [])
 
   
 
