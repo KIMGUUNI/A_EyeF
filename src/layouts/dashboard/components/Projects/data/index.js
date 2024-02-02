@@ -44,8 +44,9 @@ export default function data() {
   );
 
   const {currentAd, setCurrentAd} = useContext(CurrentAd);
-  
+  const {monthAd, setMonthAd} = useContext(CurrentAd)
   const [adRows, setAdRows] = useState([]);
+  
   //const [currentAd, setCurrentAd] = useState(null);
 
   async function getAd() {
@@ -77,7 +78,7 @@ export default function data() {
     }
     if (ad != null) {
       setAdRows(ad.map((item) => ({
-        companies: <span onClick={()=>{setCurrentAd(item)}}><Company  image={logoXD} name={item.ad_name} /></span>, // You can customize the name as per your requirement
+        companies: <span onClick={()=>{setCurrentAd(item), getMonthAd(item.ad_idx)}}><Company  image={logoXD} name={item.ad_name} /></span>, // You can customize the name as per your requirement
         ad_target_age: (
           <MDBox display="flex" py={1}>
             {item.ad_target_age}
@@ -119,11 +120,30 @@ export default function data() {
     
   }
 
+  async function getMonthAd(item) {
+
+      const adMonthAxiosInstance = await axios.create({
+        baseURL: "http://localhost:8089/A_Eye",
+        withCredentials: true
+      })
+      adMonthAxiosInstance.post("/api/getMonthAds", { ad_idx: item })
+        .then(res => {
+          //sessionStorage.setItem('adVO', JSON.stringify(res.data));
+          console.log(res.data)
+          setMonthAd(res.data[0])
+          console.log(monthAd)         
+          
+        })
+    
+  }
+
   useEffect(() => {
 
     getAd()
 
   }, [console.log(currentAd)])
+
+  
 
 
   return {

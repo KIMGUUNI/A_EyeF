@@ -1,3 +1,6 @@
 import { createContext } from "react";
 
-export const CurrentAd = createContext(null);
+const monthAd = createContext(null);
+const CurrentAd = createContext(null);
+
+export {monthAd, CurrentAd};

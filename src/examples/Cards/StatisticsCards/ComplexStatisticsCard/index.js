@@ -75,6 +75,7 @@ function ComplexStatisticsCard({ color, title, count, percentage, icon }) {
 ComplexStatisticsCard.defaultProps = {
   color: "info",
   count: 0,
+  title: "월별 노출 횟수",
   percentage: {
     color: "success",
     text: "",
