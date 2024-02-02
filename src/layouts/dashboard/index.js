@@ -41,11 +41,13 @@ import { CurrentAd } from "context/CurrentAd";
 function Dashboard() {
   const { sales } = reportsLineChartData;
   const [currentAd, setCurrentAd] = React.useState(0);
+  const [monthAd, setMonthAd] = React.useState({});
   
+ console.log(monthAd)
 
 
   return (
-    <CurrentAd.Provider value={{currentAd, setCurrentAd}}>
+    <CurrentAd.Provider value={{currentAd, setCurrentAd,monthAd, setMonthAd}}>
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox py={3}>
@@ -55,11 +57,11 @@ function Dashboard() {
               <ComplexStatisticsCard
                 title="오늘 노출 횟수"
                 icon="leaderboard"
-                count={currentAd != null ? currentAd.ad_expo_num : 0 }
+                count={monthAd != null ? monthAd.day_count : 0 }
                 percentage={{
                   color: "success",
                   amount: "+55%",
-                  label: "than lask week",
+                  label: `${monthAd != null ? "than yesterday" : "일별 노출 횟수"}` ,
                 }}
               />
             </MDBox>
@@ -69,12 +71,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="이번 달 노출 횟수"
-                count={currentAd != null ? currentAd.ad_expo_num+155 : 0 }
+                title= "월별 노출 횟수"
+                count={monthAd != null ? monthAd.month_count : 0 }
                 percentage={{
                   color: "success",
                   amount: "+3%",
-                  label: "than last month",
+                  label: `${monthAd != null ? monthAd.month : "월별"} 노출 횟수`,
                 }}
               />
             </MDBox>
@@ -85,11 +87,11 @@ function Dashboard() {
                 color="primary"
                 icon="person_add"
                 title="최대 노출 지역"
-                count={currentAd != null ? currentAd.ad_expo_num+200 : 0 }
+                count={monthAd != null ? monthAd.region_count : 0 }
                 percentage={{
                   color: "success",
                   amount: "+1%",
-                  label: "than yesterday",
+                  label: `${monthAd != null ? monthAd.expoRegion : "가장 높은 지역"}`
                 }}
               />
             </MDBox>
@@ -100,7 +102,7 @@ function Dashboard() {
                 color="dark"
                 icon="weekend"
                 title="총 노출 횟수"
-                count="+91"
+                count={currentAd != null ? currentAd.ad_expo_num : 0 }
                 percentage={{
                   color: "success",
                   amount: "",
