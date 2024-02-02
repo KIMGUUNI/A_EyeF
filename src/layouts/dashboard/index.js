@@ -43,8 +43,6 @@ function Dashboard() {
   const [currentAd, setCurrentAd] = React.useState(0);
   const [monthAd, setMonthAd] = React.useState({});
   
- console.log(monthAd)
-
 
   return (
     <CurrentAd.Provider value={{currentAd, setCurrentAd,monthAd, setMonthAd}}>
