@@ -1,3 +1,7 @@
 import { createContext } from "react";
 
-export const CurrentAd = createContext(null);
+const monthAd = createContext(null);
+const CurrentAd = createContext(null);
+const chartD = createContext(null);
+const chartBarD = createContext(null);
+export {monthAd, CurrentAd, chartD, chartBarD};

@@ -24,8 +24,11 @@ import MDTypography from "components/MDTypography";
 
 // Billing page components
 import Invoice from "layouts/dashboard/components/AdTarget/AdTarget.jsx";
+import { useContext } from "react";
+import { CurrentAd } from "context/CurrentAd";
 
 function AdTargets({color}) {
+    const {currentAd} = useContext(CurrentAd)
   return (
     <Card sx={{ height: "93%" }}>
       <MDBox pt={0} px={2} display="flex" justifyContent="space-between" alignItems="center">
@@ -52,7 +55,7 @@ function AdTargets({color}) {
       </MDBox>
       <MDBox p={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          <Invoice ad_target_age="20대" ad_target_gender="남"/>
+          <Invoice ad_target_age={`${currentAd.ad_target_age}`} ad_target_gender={`${currentAd.ad_target_gender}`}/>
         </MDBox>
       </MDBox>
     </Card>

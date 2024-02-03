@@ -25,14 +25,11 @@ import MDTypography from "components/MDTypography";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import DataTable from "examples/Tables/DataTable";
 import S3 from "components/S3/S3";
 // Data
-import projectsTableData from "layouts/tables/data/projectsTableData";
 import TblHeader from "./components/TblHeader";
 import Video from "components/S3/Video";
 function Tables() {
-  const { columns: pColumns, rows: pRows } = projectsTableData();
 
   return (
     <DashboardLayout>
