@@ -5,11 +5,9 @@ import MDBox from "components/MDBox";
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Rayout from "layouts/profile/components/Rayout"
 import Footer from "examples/Footer";
 import Header from "layouts/profile/components/Header";
-
-
+import Board from "layouts/profile/components/Board";
 function Overview() {
   return (
     <DashboardLayout>
@@ -112,8 +110,7 @@ function Overview() {
         dassdddddddddd
         </MDBox>
       </Header>
-      <Rayout>
-      </Rayout>
+      <Board/>
       <Footer />
     </DashboardLayout>
   );
