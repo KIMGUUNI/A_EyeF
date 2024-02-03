@@ -47,6 +47,7 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
+import axios from "axios";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -64,6 +65,7 @@ export default function App() {
   const { pathname } = useLocation();
 
   // Cache for the rtl
+  axios
 
 
   // Open sidenav when mouse enter on mini sidenav

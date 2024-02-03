@@ -16,7 +16,6 @@ Coded by www.creative-tim.com
 import { useState, useEffect } from "react";
 
 // react-github-btn
-import GitHubButton from "react-github-btn";
 
 // @mui material components
 import Divider from "@mui/material/Divider";
@@ -26,8 +25,6 @@ import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
 
 // @mui icons
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -138,9 +135,9 @@ function Configurator() {
         px={3}
       >
         <MDBox>
-          <MDTypography variant="h5">Material UI Configurator</MDTypography>
+          <MDTypography variant="h5">사용자 이름</MDTypography>
           <MDTypography variant="body2" color="text">
-            See our dashboard options.
+            이메일
           </MDTypography>
         </MDBox>
 
@@ -163,7 +160,7 @@ function Configurator() {
 
       <MDBox pt={0.5} pb={3} px={3}>
         <MDBox>
-          <MDTypography variant="h6">Sidenav Colors</MDTypography>
+          <MDTypography variant="h6">테마 선택</MDTypography>
 
           <MDBox mb={0.5}>
             {sidenavColors.map((color) => (
@@ -209,10 +206,7 @@ function Configurator() {
         </MDBox>
 
         <MDBox mt={3} lineHeight={1}>
-          <MDTypography variant="h6">Sidenav Type</MDTypography>
-          <MDTypography variant="button" color="text">
-            Choose between different sidenav types.
-          </MDTypography>
+          <MDTypography variant="h6">사이드바 선택</MDTypography>
 
           <MDBox
             sx={{
@@ -274,7 +268,7 @@ function Configurator() {
           mt={3}
           lineHeight={1}
         >
-          <MDTypography variant="h6">Navbar Fixed</MDTypography>
+          <MDTypography variant="h6">사이드 고정</MDTypography>
 
           <Switch checked={fixedNavbar} onChange={handleFixedNavbar} />
         </MDBox>
@@ -285,35 +279,7 @@ function Configurator() {
           <Switch checked={darkMode} onChange={handleDarkMode} />
         </MDBox>
         <Divider />
-        <MDBox mt={3} mb={2}>
-          <MDButton
-            component={Link}
-            href="https://www.creative-tim.com/learning-lab/react/quick-start/material-dashboard/"
-            target="_blank"
-            rel="noreferrer"
-            color={darkMode ? "light" : "dark"}
-            variant="outlined"
-            fullWidth
-          >
-            view documentation
-          </MDButton>
-        </MDBox>
-        <MDBox display="flex" justifyContent="center">
-          <GitHubButton
-            href="https://github.com/creativetimofficial/material-dashboard-react"
-            data-icon="octicon-star"
-            data-size="large"
-            data-show-count="true"
-            aria-label="Star creativetimofficial/material-dashboard-react on GitHub"
-          >
-            Star
-          </GitHubButton>
-        </MDBox>
         <MDBox mt={2} textAlign="center">
-          <MDBox mb={0.5}>
-            <MDTypography variant="h6">Thank you for sharing!</MDTypography>
-          </MDBox>
-
           <MDBox display="flex" justifyContent="center">
             <MDBox mr={1.5}>
               <MDButton
@@ -323,8 +289,7 @@ function Configurator() {
                 rel="noreferrer"
                 color="dark"
               >
-                <TwitterIcon />
-                &nbsp; Tweet
+                조만간 
               </MDButton>
             </MDBox>
             <MDButton
@@ -334,8 +299,7 @@ function Configurator() {
               rel="noreferrer"
               color="dark"
             >
-              <FacebookIcon />
-              &nbsp; Share
+              지울 버튼
             </MDButton>
           </MDBox>
         </MDBox>

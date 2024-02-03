@@ -21,6 +21,7 @@ import Icon from "@mui/material/Icon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
+
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -31,13 +32,17 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import data from "layouts/dashboard/components/Projects/data";
 
+
+
 function Projects() {
   const { columns, rows } = data();
   const [menu, setMenu] = useState(null);
+  
 
   const openMenu = ({ currentTarget }) => setMenu(currentTarget);
   const closeMenu = () => setMenu(null);
 
+  
   const renderMenu = (
     <Menu
       id="simple-menu"
@@ -64,7 +69,7 @@ function Projects() {
       <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
         <MDBox>
           <MDTypography variant="h6" gutterBottom>
-            Projects
+            AD
           </MDTypography>
           <MDBox display="flex" alignItems="center" lineHeight={0}>
             <Icon

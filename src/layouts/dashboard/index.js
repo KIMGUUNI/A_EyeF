@@ -28,133 +28,141 @@ import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
 import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
 
 // Data
-import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
-import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
+import AdTargets from "layouts/dashboard/components/AdTarget/AdTargets";
+
+import * as React from 'react';
+import { CurrentAd } from "context/CurrentAd";
 
 function Dashboard() {
-  const { sales, tasks } = reportsLineChartData;
+  const [currentAd, setCurrentAd] = React.useState(0);
+  const [monthAd, setMonthAd] = React.useState(0);
+  const [chartD, setChartD] = React.useState(
+    {sales:{
+      lables: [""],
+      datasets:{label:"" , data:[]}
+  }});
+  const [chartBarD, setChartBarD] = React.useState(
+    {
+      labels: [],
+      datasets: { label: "", data:[] },
+    }
+  )
 
   return (
-    <DashboardLayout>
-      <DashboardNavbar />
-      <MDBox py={3}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                title="오늘 노출 횟수"
-                icon="leaderboard"
-                count={281}
-                percentage={{
-                  color: "success",
-                  amount: "+55%",
-                  label: "than lask week",
-                }}
-              />
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="success"
-                icon="store"
-                title="오늘 노출 횟수"
-                count="2,200"
-                percentage={{
-                  color: "success",
-                  amount: "+3%",
-                  label: "than last month",
-                }}
-              />
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="primary"
-                icon="person_add"
-                title="최대 노출 지역 -원제-"
-                count="34k"
-                percentage={{
-                  color: "success",
-                  amount: "+1%",
-                  label: "than yesterday",
-                }}
-              />
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="dark"
-                icon="weekend"
-                title="총 노출 횟수"
-                count="+91"
-                percentage={{
-                  color: "success",
-                  amount: "",
-                  label: "Just updated",
-                }}
-              />
-            </MDBox>
-          </Grid>
-        </Grid>
-        <MDBox mt={4.5}>
+    <CurrentAd.Provider value={{ currentAd, setCurrentAd, monthAd, setMonthAd,chartD, setChartD, chartBarD, setChartBarD }}>
+      <DashboardLayout>
+        <DashboardNavbar />
+        <MDBox py={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsBarChart
-                  color="info"
-                  title="리액트"
-                  description="Last Campaign Performance"
-                  date="쉽네"
-                  chart={reportsBarChartData}
+            <Grid item xs={12} md={6} lg={3}>
+              <MDBox mb={1.5}>
+                <ComplexStatisticsCard
+                  title="오늘 노출 횟수"
+                  icon="leaderboard"
+                  count={monthAd != null ? monthAd.day_count : 0}
+                  percentage={{
+                    color: "success",
+                    amount: "+55%",
+                    label: `${monthAd != null ? "than yesterday" : "일별 노출 횟수"}`,
+                  }}
                 />
               </MDBox>
             </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
+            <Grid item xs={12} md={6} lg={3}>
+              <MDBox mb={1.5}>
+                <ComplexStatisticsCard
                   color="success"
-                  title="별거 없네 2024.01.22"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) increase in today sales.
-                    </>
-                  }
-                  date="ㅎㅎㅎ"
-                  chart={sales}
+                  icon="store"
+                  title="월별 노출 횟수"
+                  count={monthAd != null ? monthAd.month_count : 0}
+                  percentage={{
+                    color: "success",
+                    amount: "+3%",
+                    label: `${monthAd != null ? monthAd.month : "월별"} 노출 횟수`,
+                  }}
                 />
               </MDBox>
             </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
+            <Grid item xs={12} md={6} lg={3}>
+              <MDBox mb={1.5}>
+                <ComplexStatisticsCard
+                  color="primary"
+                  icon="person_add"
+                  title="최대 노출 지역"
+                  count={monthAd != null ? monthAd.region_count : 0}
+                  percentage={{
+                    color: "success",
+                    amount: "+1%",
+                    label: `${monthAd != null ? monthAd.expoRegion : "가장 높은 지역"}`
+                  }}
+                />
+              </MDBox>
+            </Grid>
+            <Grid item xs={12} md={6} lg={3}>
+              <MDBox mb={1.5}>
+                <ComplexStatisticsCard
                   color="dark"
-                  title="바꿔주세요"
-                  description="Last Campaign Performance"
-                  date="ㅋㅋㅋ"
-                  chart={tasks}
+                  icon="weekend"
+                  title="총 노출 횟수"
+                  count={currentAd != null ? currentAd.ad_expo_num : 0}
+                  percentage={{
+                    color: "success",
+                    amount: "",
+                    label: "Just updated",
+                  }}
                 />
               </MDBox>
             </Grid>
           </Grid>
-        </MDBox>
-        <MDBox>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={12}>
-              <Projects />
+          <MDBox mt={4.5}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6} lg={4}>
+                <MDBox mb={3}>
+                  <ReportsBarChart
+                    color="info"
+                    title="7일 노출 횟수"
+                    description="Last Campaign Performance"
+                    date="쉽네"
+                    chart={chartBarD}
+                  />
+                </MDBox>
+              </Grid>
+              <Grid item xs={12} md={6} lg={4}>
+                <MDBox mb={3}>
+                  <ReportsLineChart
+                    color="success"
+                    title="월별 노출 횟수"
+                    description={
+                      <>
+                        (<strong>+15%</strong>) increase in today sales.
+                      </>
+                    }
+                    date="ㅎㅎㅎ"
+                    chart={chartD.sales}
+                  />
+                </MDBox>
+              </Grid>
+              <Grid item xs={12} md={6} lg={4}>
+                <AdTargets />
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={6} lg={4}>
+          </MDBox>
+          <MDBox>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6} lg={12}>
+                <Projects />
+              </Grid>
+              <Grid item xs={12} md={6} lg={4}>
+              </Grid>
             </Grid>
-          </Grid>
+          </MDBox>
         </MDBox>
-      </MDBox>
-      <Footer />
-    </DashboardLayout>
+        <Footer />
+      </DashboardLayout>
+    </CurrentAd.Provider>
   );
 }
 
