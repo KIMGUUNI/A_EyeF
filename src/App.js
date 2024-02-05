@@ -43,11 +43,10 @@ import routes from "routes";
 
 // Material Dashboard 2 React contexts
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
-
+import {UserInfo} from "context/UserInfo";
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
-import axios from "axios";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -63,10 +62,12 @@ export default function App() {
   } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const { pathname } = useLocation();
-
-  // Cache for the rtl
-  axios
-
+  const [userInfo, setUserInfo] = useState(() => {
+    // localStorage에서 데이터 읽기
+    const storedUserInfo = sessionStorage.getItem('loginVO');
+    return JSON.parse(storedUserInfo) || {};
+  });
+  
 
   // Open sidenav when mouse enter on mini sidenav
   const handleOnMouseEnter = () => {
@@ -136,6 +137,7 @@ export default function App() {
   );
 
   return (
+    <UserInfo.Provider value={{userInfo, setUserInfo}}>
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
       {layout === "dashboard" && (
@@ -148,7 +150,7 @@ export default function App() {
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
           />
-          <Configurator />
+          <Configurator/>
           {configsButton}
         </>
       )}
@@ -159,5 +161,6 @@ export default function App() {
         <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </ThemeProvider>
+    </UserInfo.Provider>
   );
 }

@@ -13,7 +13,7 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial
  * portions of the Software.
  */
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
@@ -29,6 +29,7 @@ import MDButton from "components/MDButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import axios from "axios";
+import { UserInfo } from "context/UserInfo";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -36,6 +37,7 @@ function Basic() {
   const [user_pw, setUser_Pw] = useState("");
   const navigate = useNavigate();
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const {setUserInfo} = useContext(UserInfo);
 
   const axiosInstance = axios.create({
     baseURL: "http://localhost:8089/A_Eye",
@@ -57,6 +59,7 @@ function Basic() {
         alert("로그인 성공:");
         sessionStorage.setItem('loginVO', JSON.stringify(loginVO));
         navigate("/dashboard");
+        setUserInfo(loginVO)
       } else {
         alert("로그인 실패");
       }
