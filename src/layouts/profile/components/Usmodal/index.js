@@ -104,9 +104,6 @@ export default function Tmodal({row}) {
             <TextField label="답변" fullWidth sx={{ mb: 2 }} value={realAnswer_content!==null?realAnswer_content:undefined} onChange={(e) => setAnswer_content(e.target.value)}/>
             {/* 완료 버튼 추가 */}
             <Button variant="contained" color="primary" onClick={() => { answer(); handleClose(); }}>
-              완료
-            </Button>
-            <Button variant="contained" color="primary" onClick={() => { answer(); handleClose(); }}>
               삭제
             </Button>
           </Box>
