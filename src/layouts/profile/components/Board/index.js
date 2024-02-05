@@ -11,6 +11,7 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import Modal from '../Modal';
 import Tmodal from '../Tmodal';
+import Umodal from '../Usmodal';
 
 const columns = [
   { id: 'inquiry_indx', label: 'No', minWidth: 170 },
@@ -42,9 +43,18 @@ export default function StickyHeadTable() {
   const [data, setData] = React.useState([]);
   const [selectedRow, setSelectedRow] = React.useState(null);
   const [modalType, setModalType] = React.useState(null);
-  const [inquiryIndex, setInquiryIndex] = React.useState(null);
+  const [user_position, setUser_position] = React.useState(null);
 
   React.useEffect(() => {
+    let storedLoginVO;
+    try {
+      const storedLoginVOString = sessionStorage.getItem('loginVO');
+      storedLoginVO = storedLoginVOString ? JSON.parse(storedLoginVOString) : null;
+      setUser_position(storedLoginVO ? storedLoginVO.user_position : null);
+    } catch (error) {
+      storedLoginVO = null;
+    }
+
     const fetchData = async () => {
       try {
         const response = await axiosInstance.post("/api/boardList");
@@ -65,7 +75,7 @@ export default function StickyHeadTable() {
 
     // 페이지 로드 시에 실행
     fetchData();
-  }, []);
+  }, []); // 두 번째 매개변수로 빈 배열을 전달하여 초기 렌더링 시에만 실행
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -81,16 +91,13 @@ export default function StickyHeadTable() {
   };
 
   const handleRowClick = (row) => {
-    const { inquiry_indx } = row;
     setSelectedRow(row);
     setModalType('rowClick');
-    setInquiryIndex(inquiry_indx);
-    console.log(inquiryIndex)
   };
 
   const handleWriteButtonClick = () => {
     setSelectedRow(null); // 새 글 작성 시 선택된 행 초기화
-    setModalType('writeButtonClick');
+    user_position == 0 ? setModalType('Umodal') : setModalType('Tmodal');
   };
 
   return (
@@ -146,8 +153,12 @@ export default function StickyHeadTable() {
       <Button variant="contained" color="primary" onClick={handleWriteButtonClick}>
         글쓰기
       </Button>
-      {modalType === 'rowClick' && selectedRow && <Tmodal row={selectedRow} />}
-      {modalType === 'writeButtonClick' && <Modal />}
+      {modalType === 'rowClick' && selectedRow && (
+        user_position === 0 ? <Umodal row={selectedRow} /> : <Tmodal row={selectedRow} />
+      )}
+      {modalType !== null && modalType !== 'rowClick' && (
+        <Modal />
+      )}
     </Paper>
   );
 }
