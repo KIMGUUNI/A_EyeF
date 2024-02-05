@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // react-github-btn
 
@@ -44,8 +44,11 @@ import {
   setSidenavColor,
   setDarkMode,
 } from "context";
+import { UserInfo } from "context/UserInfo";
 
 function Configurator() {
+
+
   const [controller, dispatch] = useMaterialUIController();
   const {
     openConfigurator,
@@ -57,7 +60,22 @@ function Configurator() {
   } = controller;
   const [disabled, setDisabled] = useState(false);
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
+  const {userInfo} = useContext(UserInfo);
+  
+  // useEffect(()=>{
+  //   const fetchData = async () => {
+    
+  //     try {
+  //       const result = await useContext(UserInfo);
+  //       setUserInfo(result);
+  //       console.log("성공", userInfo)
+  //     } catch (error) {
+  //       console.log("실패" , userInfo)
+  //     }
+  //   };
+  //   fetchData();
 
+  // },[userInfo])
   // Use the useEffect hook to change the button state for the sidenav type based on window size.
   useEffect(() => {
     // A function that sets the disabled state of the buttons for the sidenav type.
@@ -135,9 +153,9 @@ function Configurator() {
         px={3}
       >
         <MDBox>
-          <MDTypography variant="h5">사용자 이름</MDTypography>
+          <MDTypography variant="h5">{userInfo != {} ? userInfo.user_name : "로그인을 해주세요"}</MDTypography>
           <MDTypography variant="body2" color="text">
-            이메일
+            {userInfo != {} ? userInfo.user_email :""}
           </MDTypography>
         </MDBox>
 
