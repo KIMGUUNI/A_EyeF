@@ -85,6 +85,7 @@ export default function StickyHeadTable() {
     setSelectedRow(row);
     setModalType('rowClick');
     setInquiryIndex(inquiry_indx);
+    console.log(inquiryIndex)
   };
 
   const handleWriteButtonClick = () => {

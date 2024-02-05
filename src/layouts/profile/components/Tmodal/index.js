@@ -24,6 +24,7 @@ export default function Tmodal({row}) {
   const [realAnswer_content, setRealAnswer_content] = React.useState([]);
   const [answer_content, setAnswer_content] = React.useState("");
   const [inquiry_completed, setInquiry_completed] = React.useState(0);
+  //setInquiry_completed(0)
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const { inquiry_indx } = row;
@@ -80,6 +81,7 @@ export default function Tmodal({row}) {
       
       const response = await axiosInstance.post("/api/boardAnswer", boardAnswer);
       const boardList = response.data;
+      console.log(boardList)
 
       if (boardList) {
         console.log(inquiry_indx);
