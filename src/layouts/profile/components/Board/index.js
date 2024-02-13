@@ -44,6 +44,7 @@ export default function StickyHeadTable() {
   const [selectedRow, setSelectedRow] = React.useState(null);
   const [modalType, setModalType] = React.useState(null);
   const [user_position, setUser_position] = React.useState(null);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   React.useEffect(() => {
     let storedLoginVO;
@@ -96,9 +97,11 @@ export default function StickyHeadTable() {
   };
 
   const handleWriteButtonClick = () => {
-    setSelectedRow(null); // 새 글 작성 시 선택된 행 초기화
-    user_position == 0 ? setModalType('Umodal') : setModalType('Tmodal');
+    setSelectedRow(null);
+    setUser_position(0) ? setModalType('Umodal') : setModalType('Tmodal');
+    setIsModalOpen(true);
   };
+
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -154,10 +157,14 @@ export default function StickyHeadTable() {
         글쓰기
       </Button>
       {modalType === 'rowClick' && selectedRow && (
-        user_position === 0 ? <Umodal row={selectedRow} /> : <Tmodal row={selectedRow} />
+        user_position === 0 ? (
+          <Umodal row={selectedRow} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        ) : (
+          <Tmodal row={selectedRow} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        )
       )}
       {modalType !== null && modalType !== 'rowClick' && (
-        <Modal />
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       )}
     </Paper>
   );
