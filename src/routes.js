@@ -43,7 +43,7 @@ import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-
+import MainPage from "layouts/mainPage";
 // @mui icons
 import Icon from "@mui/material/Icon";
 
@@ -107,6 +107,14 @@ const routes = [
     icon: <Icon fontSize="small">assignment_ind</Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
+  },
+  {
+    type: "collapse",
+    name: "MainPage",
+    key: "MainPage",
+    icon: <Icon fontSize="small">home_icon</Icon>,
+    route: "/mainPage",
+    component: <MainPage />,
   },
 ];
 
