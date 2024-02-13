@@ -52,7 +52,7 @@ export default function data() {
 
   async function getAd() {
 
-    const user = await JSON.parse(sessionStorage.getItem('loginVO'))
+    const user = await JSON.parse(sessionStorage.getItem('UserInfo'))
 
     if (user != null) {
       const axiosInstance = axios.create({

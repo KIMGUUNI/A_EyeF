@@ -54,14 +54,6 @@ function Dashboard() {
     }
   )
 
-/*  useEffect(() => {
-  if(firstRender) {
-    window.location.reload(); // 페이지가 처음 렌더링될 때 새로고침 수행
-    setFirstRender(false);
-  }
-  }, [firstRender]);  */
-
-
   return (
     <CurrentAd.Provider value={{ currentAd, setCurrentAd, monthAd, setMonthAd,chartD, setChartD, chartBarD, setChartBarD }}>
       <DashboardLayout>

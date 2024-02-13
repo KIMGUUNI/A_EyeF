@@ -136,11 +136,6 @@ export default function App() {
     </MDBox>
   );
 
- /*  function YourComponent() {
-    useEffect(() => {
-      window.location.reload();
-    }, []);
- */
 
   return (
     <UserInfo.Provider value={{userInfo, setUserInfo}}>

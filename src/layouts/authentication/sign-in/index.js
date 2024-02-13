@@ -30,6 +30,7 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import axios from "axios";
 import Cookies from "js-cookie";
+/* eslint-disable no-unused-vars */
 import { UserInfo } from "context/UserInfo";
 
 function Basic() {
@@ -42,7 +43,7 @@ function Basic() {
   const [user_rol, setUser_rol] = useState("");
   const expirationTime = 5 * 60 * 1000;
   /* eslint-disable no-unused-vars */
-  const {setUserInfo} = useContext(UserInfo);
+  // const {setUserInfo} = useContext(UserInfo);
 
   const axiosInstance = axios.create({
     baseURL: "http://localhost:8089/A_Eye",
@@ -59,19 +60,27 @@ function Basic() {
 
       const response = await axiosInstance.post("/api/sign-in", userData);
       const token = response.data.jwt;
-      const idx = response.data.user_idx;
+      const user_idx = response.data.user_idx;
+      const user_name = response.data.user_name;
+      const user_Email = response.data.user_email;
+      
+      const UserInfo = {
+        user_idx,
+        user_name,
+        user_Email
+      }
 
       if (token) {
         if (user_email == "admin") {
           alert("로그인 성공");
           Cookies.set("Admin", token, { expires: new Date(Date.now() + expirationTime) });
-          sessionStorage.setItem('user_idx', idx);
+          sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
           setUser_rol("Admin")
         } else {
           alert("로그인 성공");
           Cookies.remove("Admin")
           Cookies.set("User", token, { expires: new Date(Date.now() + expirationTime) });
-          sessionStorage.setItem('user_idx', idx);
+          sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
           setUser_rol("User")
         }
 
