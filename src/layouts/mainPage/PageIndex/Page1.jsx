@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from "prop-types";
 
 // @mui material components
 
@@ -12,6 +11,7 @@ import bgImage1 from "assets/images/elevator3.png";
 import "../CSS/Page.css"
 
 function Page1() {
+    
 
     return (
         <PageLayout style={{overflow:"hidden"}} >
@@ -23,7 +23,7 @@ function Page1() {
             >
                 <MDBox width="100%" height="100%" mx="auto" overflow="hidden">
 
-                        <MDBox display="flex" mt={1} width="100vmax" height="99vh"  overflow="hidden"
+                        <MDBox display="flex" mt={1} width="100vmax" height="99vh"  overflow="hidden" 
                             sx={{
                                 backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
                                 bgImage1 &&
@@ -40,7 +40,7 @@ function Page1() {
                         
 
                     <MDBox style={{zIndex : "500", display:"flex", position : "absolute",top: "35%", left:"7%", overflow:"hidden"}}>
-                        <h2 class="fly-in-text">
+                        <h2 className="fly-in-text">
                             인공지능 <br/>
                             고객맞춤 <br/>
                             엘레베이터 광고
@@ -53,10 +53,5 @@ function Page1() {
     );
 }
 
-// Typechecking props for the BasicLayout
-Page1.propTypes = {
-    image: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
-};
 
 export default Page1
