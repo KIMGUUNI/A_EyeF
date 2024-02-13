@@ -8,8 +8,8 @@ import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React example components
 import PageLayout from "examples/LayoutContainers/PageLayout";
-import bgImage2 from "assets/images/bg-reset-cover.jpeg";
-import "../CSS/Page1.css"
+import bgImage1 from "assets/images/elevator3.png";
+import "../CSS/Page.css"
 
 function Page1() {
 
@@ -21,16 +21,16 @@ function Page1() {
                 minHeight="100vh"
                 overflow="hidden"
             >
-                <MDBox width="100vmax" height="100vmax" mx="auto" overflow="hidden">
+                <MDBox width="100%" height="100%" mx="auto" overflow="hidden">
 
-                        <MDBox display="flex" mt={1} width="100%" height="100%"  overflow="hidden"
+                        <MDBox display="flex" mt={1} width="100vmax" height="99vh"  overflow="hidden"
                             sx={{
                                 backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
-                                    bgImage2 &&
+                                bgImage1 &&
                                     `${linearGradient(
-                                        rgba(gradients.dark.main, 0.6),
-                                        rgba(gradients.dark.state, 0.6)
-                                    )}, url(${bgImage2})`,
+                                        rgba(gradients.dark.main, 0.75),
+                                        rgba(gradients.dark.state, 0.75)
+                                    )}, url(${bgImage1})`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat",
