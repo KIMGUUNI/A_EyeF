@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from 'react'
 
 // @mui material components
 
@@ -11,7 +10,23 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 import bgImage3 from "assets/images/elevator2.png";
 import "../CSS/Page.css"
 
-function Page2() {
+function Page3({onPageTransitionComplete}) {
+
+    const [animationStarted, setAnimationStarted] = useState(false);
+
+    useEffect(() => {
+        // 페이지 이동이 완료된 후에 애니메이션 시작
+        const handlePageTransitionComplete = () => {
+            setAnimationStarted(true);
+        };
+
+        // 페이지 이동 상태를 감지하여 페이지 이동이 완료된 후에 애니메이션을 시작
+        document.addEventListener("pageTransitionComplete1", handlePageTransitionComplete);
+
+        return () => {
+            document.removeEventListener("pageTransitionComplete1", handlePageTransitionComplete);
+        };
+    }, [onPageTransitionComplete ]);
 
     return (
         <PageLayout style={{overflow:"hidden"}} >
@@ -38,7 +53,7 @@ function Page2() {
 
                             }}>
                         <MDBox style={{zIndex : "500", display:"flex", position : "absolute",top: "35%", left: "7%" ,textAlign : "left", overflow:"hidden"}}>
-                            <h2 class="text">
+                            <h2 className="text">
                                 광고주가 <br/>
                                 필요한 <br/>
                                 인사이트 제공
@@ -47,7 +62,7 @@ function Page2() {
                         
 
                         <MDBox style={{zIndex : "500", display:"flex", position : "absolute",top: "35%", right: "7%" ,textAlign : "right", overflow:"hidden"}}>
-                            <h2 class="revers-fly-in-text">
+                            <h2 className={animationStarted ? "revers-fly-in-text" : ""}>
                                 노출수 <br/>
                                 CPC <br/>
                                 노출지역
@@ -61,9 +76,5 @@ function Page2() {
 }
 
 // Typechecking props for the BasicLayout
-Page2.propTypes = {
-    image: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
-};
 
-export default Page2
+export default Page3
