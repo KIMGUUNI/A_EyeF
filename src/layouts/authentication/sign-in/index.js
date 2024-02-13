@@ -31,7 +31,7 @@ import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import axios from "axios";
 import Cookies from "js-cookie";
 /* eslint-disable no-unused-vars */
-import { UserInfo } from "context/UserInfo";
+import { AdHostInfo } from "context/AdHostInfo";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
