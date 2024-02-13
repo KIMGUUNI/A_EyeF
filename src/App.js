@@ -158,7 +158,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       {/**처음 들어가면 가는 홈페이지 */}
       <Routes>
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={<Navigate to="/mainPage" />} />
         {getRoutes(routes)}
       </Routes>
     </ThemeProvider>
