@@ -28,6 +28,7 @@ import Footer from "examples/Footer";
 import S3 from "components/S3/S3";
 // Data
 import TblHeader from "./components/TblHeader";
+import Video from "components/S3/Video";
 function Tables() {
 
   return (
@@ -78,6 +79,7 @@ function Tables() {
                   Projects Table
                 </MDTypography>
               </MDBox>
+                <Video></Video>
               
             </Card>
           </Grid>

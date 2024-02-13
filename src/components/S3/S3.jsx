@@ -53,7 +53,7 @@ const S3 = () => {
             const secret_key = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
             const region = process.env.REACT_APP_AWS_REGION;
             const ageAndGender = `${age}/${gender}`;
-            const key = `${ageAndGender}_${randomRoot}_${year}_${month}_${day}_${uploadedFile.name}`;
+            const key = `${ageAndGender}/${randomRoot}_${year}_${month}_${day}_${uploadedFile.name}`;
             AWS.config.update({
                 accessKeyId: id_key,
                 secretAccessKey: secret_key,
