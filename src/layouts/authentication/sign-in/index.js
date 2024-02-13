@@ -30,8 +30,7 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import axios from "axios";
 import Cookies from "js-cookie";
-
-
+import { UserInfo } from "context/UserInfo";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -42,6 +41,8 @@ function Basic() {
    /* eslint-disable no-unused-vars */
   const [user_rol, setUser_rol] = useState("");
   const expirationTime = 5 * 60 * 1000;
+  /* eslint-disable no-unused-vars */
+  const {setUserInfo} = useContext(UserInfo);
 
   const axiosInstance = axios.create({
     baseURL: "http://localhost:8089/A_Eye",
@@ -76,6 +77,7 @@ function Basic() {
 
         window.location.href = 'http://localhost:3000/dashboard';
         // navigate("/dashboard");
+
       } else {
         alert("로그인 실패");
       }

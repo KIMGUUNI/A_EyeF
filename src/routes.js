@@ -6,6 +6,7 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Cookies from "js-cookie";
+import MainPage from "layouts/mainPage";
 import Icon from "@mui/material/Icon";
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
@@ -16,17 +17,6 @@ const [adminCookie, setAdminCookie] = useState(false); */
 
 const userCookie = Cookies.get("User");
 const adminCookie = Cookies.get("Admin"); 
-
-/* useEffect(()=> {
-  try{
-    setUserCookie(Cookies.get("User"))
-    setAdminCookie(Cookies.get("Admin"))
-  }
-  catch(error){
-    error
-  }
-  
-},[]) */
 
 // 모든 routes를 설정합니다.
 const routes = [];
@@ -90,6 +80,14 @@ if (adminCookie) {
       route: "/authentication/sign-up",
       component: <SignUp />,
     },
+    {
+      type: "collapse",
+      name: "MainPage",
+      key: "MainPage",
+      icon: <Icon fontSize="small">home_icon</Icon>,
+      route: "/mainPage",
+      component: <MainPage />,
+    },
   );
 } else if (userCookie) { // User 쿠키가 있는 경우
   routes.push(
@@ -117,6 +115,15 @@ if (adminCookie) {
       route: "/authentication/sign-up",
       component: <SignUp />,
     },
+    {
+      type: "collapse",
+      name: "MainPage",
+      key: "MainPage",
+      icon: <Icon fontSize="small">home_icon</Icon>,
+      route: "/mainPage",
+      component: <MainPage />,
+    },
+    
 
   );
 } else { // 어느 쿠키도 없는 경우
@@ -144,6 +151,14 @@ if (adminCookie) {
       icon: <Icon fontSize="small">dashboard</Icon>,
       route: "/dashboard",
       component: <Dashboard />,
+    },
+    {
+      type: "collapse",
+      name: "MainPage",
+      key: "MainPage",
+      icon: <Icon fontSize="small">home_icon</Icon>,
+      route: "/mainPage",
+      component: <MainPage />,
     },
   );
 }

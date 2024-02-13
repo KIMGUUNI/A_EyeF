@@ -77,11 +77,18 @@ export default function Tmodal({row}) {
            inquiry_completed: inquiry_completed !== null ? 1 : 0,
           answer_content
         }
-        const response = await axiosInstance.post("/api/boardAnswer", boardAnswer);
-        console.log("res:",response.data)
-        if(response.data==1) {
-          alert("답글 완료")
-        }
+      
+      const response = await axiosInstance.post("/api/boardAnswer", boardAnswer);
+      const boardList = response.data;
+
+      if (boardList) {
+        console.log(inquiry_indx);
+        console.log(boardList);
+        console.log(answer_content);
+        setInquiry_title(boardList[0].inquiry_title);
+        setInquiry_content(boardList[0].inquiry_content);
+        setOpen(true);
+      }
       
     } catch (error) {
       console.error("Error during data fetching:", error);
