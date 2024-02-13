@@ -35,10 +35,13 @@ import AdTargets from "layouts/dashboard/components/AdTarget/AdTargets";
 
 import * as React from 'react';
 import { CurrentAd } from "context/CurrentAd";
+// import { useEffect } from "react";
+
 
 function Dashboard() {
   const [currentAd, setCurrentAd] = React.useState(0);
   const [monthAd, setMonthAd] = React.useState(0);
+  // const [firstRender, setFirstRender] = React.useState(true);
   const [chartD, setChartD] = React.useState(
     {sales:{
       lables: [""],
@@ -50,6 +53,14 @@ function Dashboard() {
       datasets: { label: "", data:[] },
     }
   )
+
+/*  useEffect(() => {
+  if(firstRender) {
+    window.location.reload(); // 페이지가 처음 렌더링될 때 새로고침 수행
+    setFirstRender(false);
+  }
+  }, [firstRender]);  */
+
 
   return (
     <CurrentAd.Provider value={{ currentAd, setCurrentAd, monthAd, setMonthAd,chartD, setChartD, chartBarD, setChartBarD }}>

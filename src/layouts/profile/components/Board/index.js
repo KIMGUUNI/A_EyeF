@@ -48,7 +48,7 @@ export default function StickyHeadTable() {
   React.useEffect(() => {
     let storedLoginVO;
     try {
-      const storedLoginVOString = sessionStorage.getItem('loginVO');
+      const storedLoginVOString = sessionStorage.getItem('user_idx');
       storedLoginVO = storedLoginVOString ? JSON.parse(storedLoginVOString) : null;
       setUser_position(storedLoginVO ? storedLoginVO.user_position : null);
     } catch (error) {

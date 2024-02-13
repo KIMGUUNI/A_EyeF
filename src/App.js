@@ -135,6 +135,12 @@ export default function App() {
     </MDBox>
   );
 
+ /*  function YourComponent() {
+    useEffect(() => {
+      window.location.reload();
+    }, []);
+ */
+
   return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
@@ -155,8 +161,8 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       {/**처음 들어가면 가는 홈페이지 */}
       <Routes>
-        {getRoutes(routes)}
         <Route path="*" element={<Navigate to="/dashboard" />} />
+        {getRoutes(routes)}
       </Routes>
     </ThemeProvider>
   );
