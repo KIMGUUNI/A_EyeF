@@ -22,7 +22,7 @@ const S3 = () => {
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     }
     let randomRoot = guid();
-    const loginVO = JSON.parse(sessionStorage.getItem('loginVO'));
+    const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
    
     const [uploadedFile, setUploadedFile] = useState(null);
     const [showUploadAlert, setShowUploadAlert] = useState(false);

@@ -136,6 +136,7 @@ export default function App() {
     </MDBox>
   );
 
+
   return (
     <UserInfo.Provider value={{userInfo, setUserInfo}}>
     <ThemeProvider theme={darkMode ? themeDark : theme}>
@@ -157,8 +158,8 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       {/**처음 들어가면 가는 홈페이지 */}
       <Routes>
-        {getRoutes(routes)}
         <Route path="*" element={<Navigate to="/dashboard" />} />
+        {getRoutes(routes)}
       </Routes>
     </ThemeProvider>
     </UserInfo.Provider>

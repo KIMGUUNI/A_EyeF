@@ -13,7 +13,7 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial
  * portions of the Software.
  */
-import { useContext, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
@@ -29,6 +29,8 @@ import MDButton from "components/MDButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import axios from "axios";
+import Cookies from "js-cookie";
+/* eslint-disable no-unused-vars */
 import { UserInfo } from "context/UserInfo";
 
 function Basic() {
@@ -37,7 +39,11 @@ function Basic() {
   const [user_pw, setUser_Pw] = useState("");
   const navigate = useNavigate();
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
-  const {setUserInfo} = useContext(UserInfo);
+   /* eslint-disable no-unused-vars */
+  const [user_rol, setUser_rol] = useState("");
+  const expirationTime = 5 * 60 * 1000;
+  /* eslint-disable no-unused-vars */
+  // const {setUserInfo} = useContext(UserInfo);
 
   const axiosInstance = axios.create({
     baseURL: "http://localhost:8089/A_Eye",
@@ -51,15 +57,36 @@ function Basic() {
         user_pw,
       };
 
-      console.log(userData);
+
       const response = await axiosInstance.post("/api/sign-in", userData);
-      console.log(response);
-      const loginVO = response.data;
-      if (loginVO) {
-        alert("로그인 성공:");
-        sessionStorage.setItem('loginVO', JSON.stringify(loginVO));
-        navigate("/dashboard");
-        setUserInfo(loginVO)
+      const token = response.data.jwt;
+      const user_idx = response.data.user_idx;
+      const user_name = response.data.user_name;
+      const user_Email = response.data.user_email;
+      
+      const UserInfo = {
+        user_idx,
+        user_name,
+        user_Email
+      }
+
+      if (token) {
+        if (user_email == "admin") {
+          alert("로그인 성공");
+          Cookies.set("Admin", token, { expires: new Date(Date.now() + expirationTime) });
+          sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
+          setUser_rol("Admin")
+        } else {
+          alert("로그인 성공");
+          Cookies.remove("Admin")
+          Cookies.set("User", token, { expires: new Date(Date.now() + expirationTime) });
+          sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
+          setUser_rol("User")
+        }
+
+        window.location.href = 'http://localhost:3000/dashboard';
+        // navigate("/dashboard");
+
       } else {
         alert("로그인 실패");
       }
@@ -67,6 +94,49 @@ function Basic() {
       console.error("Error during sign in:", error);
     }
   };
+
+
+  const getUserInfo = async () => {
+    try {
+      let token;
+
+      const adminCookie = Cookies.get("Admin");
+      const userCookie = Cookies.get("User");
+
+      if (adminCookie) {
+        token = adminCookie
+      } else if (userCookie) {
+        token = userCookie
+      } else {
+        alert("다시 로그인 해 주세요.")
+        navigate("/authentication/sign-in");
+      }
+
+
+      const config = {
+        headers: {
+          Authorization: `Bearer${token}`
+        }
+      };
+      console.log(config)
+      const response = await axiosInstance.get("/api/prove", config);
+
+      if (response.status === 200) {
+        console.log("response: ", response.data)
+        alert("검증 성공")
+      }
+
+
+    } catch (error) {
+      alert("다시 로그인 해 주세요.")
+      navigate("/authentication/sign-in");
+    }
+  }
+
+  useEffect(() => {
+    console.log("user_rol changed:", user_rol);
+  }, [user_rol]);
+
 
   return (
     <BasicLayout image={bgImage}>
@@ -85,6 +155,7 @@ function Basic() {
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
             Sign in
           </MDTypography>
+          <button onClick={getUserInfo}>정보요청</button>
           <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
             <Grid item xs={2}>
               <MDTypography component={MuiLink} href="#" variant="body1" color="white">
