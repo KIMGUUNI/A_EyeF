@@ -43,7 +43,7 @@ import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-
+import MainPage from "layouts/mainPage";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import Tables2 from "layouts/tables copy";
@@ -110,13 +110,20 @@ const routes = [
     component: <SignUp />,
   },
   {
+    name: "MainPage",
+    key: "MainPage",
+    icon: <Icon fontSize="small">home_icon</Icon>,
+    route: "/mainPage",
+    component: <MainPage />,
+  },
+  {
     type: "collapse",
     name: "Tables2",
     key: "tables2",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/tables2",
     component: <Tables2 />,
-  }
+  },
 ];
 
 export default routes;
