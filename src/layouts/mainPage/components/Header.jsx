@@ -3,7 +3,7 @@ import MDBox from "components/MDBox";
 import MDTypography from 'components/MDTypography';
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
-import MuiLink from "@mui/material/Link";
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
     return (
@@ -13,10 +13,12 @@ export const Header = () => {
             </MDTypography >
             <MDBox ml={"30%"} mr={"20%"} style={{ display: "flex", alignItems: "center" }} >
 
-                <MDTypography component={MuiLink} href="/dashborad" variant="body1" color="white" display="flex">
+                <Link to={"/dashboard"}>
                     <FacebookIcon fontSize='large' color="white" style={{ display: "flex", margin: "10" }} />
+                </Link>
+                <Link to={"/authentication/sign-in"}>
                     <GoogleIcon fontSize='large' color="white" style={{ display: "flex", margin: "10" }} />
-                </MDTypography>
+                </Link>
             </MDBox>
         </MDBox>
     )
