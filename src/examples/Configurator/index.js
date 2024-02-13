@@ -150,11 +150,12 @@ function Configurator() {
         alignItems="baseline"
         pt={4}
         pb={0.5}
-        px={3}>
+        px={3}
+      >
         <MDBox>
           <MDTypography variant="h5">{userInfo != {} ? userInfo.user_name : "로그인을 해주세요"}</MDTypography>
           <MDTypography variant="body2" color="text">
-            {userInfo != {} ? userInfo.user_Email :""}
+            {userInfo != {} ? userInfo.user_email :""}
           </MDTypography>
         </MDBox>
 
