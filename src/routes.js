@@ -46,6 +46,7 @@ import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import Tables2 from "layouts/tables copy";
 
 // 페이징 나누는 장소
 
@@ -108,6 +109,14 @@ const routes = [
     route: "/authentication/sign-up",
     component: <SignUp />,
   },
+  {
+    type: "collapse",
+    name: "Tables2",
+    key: "tables2",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/tables2",
+    component: <Tables2 />,
+  }
 ];
 
 export default routes;
