@@ -27,7 +27,7 @@ import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import bgImage from "assets/images/a-big-company-lobby2.png";
 import axios from "axios";
 import Cookies from "js-cookie";
 /* eslint-disable no-unused-vars */
@@ -152,9 +152,6 @@ function Basic() {
           mb={1}
           textAlign="center"
         >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Sign in
-          </MDTypography>
           <button onClick={getUserInfo}>정보요청</button>
           <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
             <Grid item xs={2}>
@@ -179,7 +176,7 @@ function Basic() {
             <MDBox mb={2}>
               <MDInput
                 type="email"
-                label="Email"
+                label="이메일"
                 variant="standard"
                 fullWidth
                 onChange={(e) => setUser_Email(e.target.value)}
@@ -188,7 +185,7 @@ function Basic() {
             <MDBox mb={2}>
               <MDInput
                 type="password"
-                label="Password"
+                label="비밀번호"
                 variant="standard"
                 fullWidth
                 onChange={(e) => setUser_Pw(e.target.value)}
@@ -203,17 +200,17 @@ function Basic() {
                 onClick={handleSetRememberMe}
                 sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
               >
-                &nbsp;&nbsp;Remember me
+                &nbsp;&nbsp; 자동 로그인
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
               <MDButton variant="gradient" color="info" fullWidth onClick={handleSignIn}>
-                sign in
+              로그인
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
-                Don&apos;t have an account?{" "}
+                계정이 없으신가요?{" "}
                 <MDTypography
                   component={Link}
                   to="/authentication/sign-up"
@@ -222,7 +219,7 @@ function Basic() {
                   fontWeight="medium"
                   textGradient
                 >
-                  Sign up
+                  회원 가입
                 </MDTypography>
               </MDTypography>
             </MDBox>
