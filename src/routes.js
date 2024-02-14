@@ -10,7 +10,7 @@ import MainPage from "layouts/mainPage";
 import Icon from "@mui/material/Icon";
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-
+import Tables2 from "layouts/tables copy";
 // User와 Admin 쿠키를 가져옵니다.
 /* const [userCookie, setUserCookie] = useState(false)
 const [adminCookie, setAdminCookie] = useState(false); */
@@ -87,6 +87,14 @@ if (adminCookie) {
       icon: <Icon fontSize="small">home_icon</Icon>,
       route: "/mainPage",
       component: <MainPage />,
+    },
+    {
+      type: "collapse",
+      name: "Tables2",
+      key: "tables2",
+      icon: <Icon fontSize="small">table_view</Icon>,
+      route: "/tables2",
+      component: <Tables2 />,
     },
   );
 } else if (userCookie) { // User 쿠키가 있는 경우
