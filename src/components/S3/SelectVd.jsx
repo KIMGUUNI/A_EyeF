@@ -135,10 +135,12 @@ export default function StickyHeadTable() {
         ad_idx: row.ad_idx
       };
       const response = await axiosInstance.post("/api/Refuse",requestData);
-      setOpenModal(false);
-      fetchDataFromDB();
+      if(response){
+        setOpenModal(false);
+        fetchDataFromDB();
+      }
     }catch(e){
-
+      e
     }
   }
 
