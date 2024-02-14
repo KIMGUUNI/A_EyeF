@@ -11,6 +11,7 @@ import Icon from "@mui/material/Icon";
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import Tables2 from "layouts/tables copy";
+import NotFoundPage from "layouts/notFoundPage/NotFoundPage";
 // User와 Admin 쿠키를 가져옵니다.
 /* const [userCookie, setUserCookie] = useState(false)
 const [adminCookie, setAdminCookie] = useState(false); */
@@ -96,6 +97,13 @@ if (adminCookie) {
       route: "/tables2",
       component: <Tables2 />,
     },
+    {
+      name: "페이지오류",
+      key: "NotFoundPage",
+      icon: <Icon fontSize="small">home_icon</Icon>,
+      route: "/NotFoundPage",
+      component: <NotFoundPage />
+    },
   );
 } else if (userCookie) { // User 쿠키가 있는 경우
   routes.push(
@@ -131,7 +139,13 @@ if (adminCookie) {
       route: "/mainPage",
       component: <MainPage />,
     },
-    
+    {
+      name: "페이지오류",
+      key: "NotFoundPage",
+      icon: <Icon fontSize="small">home_icon</Icon>,
+      route: "/NotFoundPage",
+      component: <NotFoundPage />
+    },
 
   );
 } else { // 어느 쿠키도 없는 경우
@@ -167,6 +181,13 @@ if (adminCookie) {
       icon: <Icon fontSize="small">home_icon</Icon>,
       route: "/mainPage",
       component: <MainPage />,
+    },
+    {
+      name: "페이지오류",
+      key: "NotFoundPage",
+      icon: <Icon fontSize="small">home_icon</Icon>,
+      route: "/NotFoundPage",
+      component: <NotFoundPage />
     },
   );
 }
