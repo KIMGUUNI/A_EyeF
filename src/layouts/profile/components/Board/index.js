@@ -8,10 +8,11 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
-import Button from '@mui/material/Button';
 import Modal from '../Modal';
 import Tmodal from '../Tmodal';
 import Umodal from '../Usmodal';
+import BasicModal from '../Modal';
+import MDButton from 'components/MDButton';
 
 const columns = [
   { id: 'inquiry_indx', label: 'No', minWidth: 170 },
@@ -44,7 +45,6 @@ export default function StickyHeadTable() {
   const [selectedRow, setSelectedRow] = React.useState(null);
   const [modalType, setModalType] = React.useState(null);
   const [user_position, setUser_position] = React.useState(null);
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   React.useEffect(() => {
     let storedLoginVO;
@@ -97,9 +97,8 @@ export default function StickyHeadTable() {
   };
 
   const handleWriteButtonClick = () => {
-    setSelectedRow(null);
-    setUser_position(0) ? setModalType('Umodal') : setModalType('Tmodal');
-    setIsModalOpen(true);
+    setSelectedRow(null); // 새 글 작성 시 선택된 행 초기화
+    setModalType('modal'); // Set modal type to 'modal' for general writing
   };
 
 
@@ -153,18 +152,17 @@ export default function StickyHeadTable() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      <Button variant="contained" color="primary" onClick={handleWriteButtonClick}>
+      <MDButton variant="contained" color="info" onClick={handleWriteButtonClick}>
         글쓰기
-      </Button>
+      </MDButton>
       {modalType === 'rowClick' && selectedRow && (
-        user_position === 0 ? (
-          <Umodal row={selectedRow} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-        ) : (
-          <Tmodal row={selectedRow} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-        )
+        user_position === 0 ? <Umodal row={selectedRow} /> : <Tmodal row={selectedRow} />
       )}
-      {modalType !== null && modalType !== 'rowClick' && (
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {modalType === 'modal' && (
+        <BasicModal isOpen={true} onClose={() => setModalType(null)} />
+      )}
+      {modalType !== null && modalType !== 'rowClick' && modalType !== 'modal' && (
+        <Modal />
       )}
     </Paper>
   );

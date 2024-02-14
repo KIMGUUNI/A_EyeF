@@ -2,8 +2,10 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import axios from 'axios';
+import MDButton from 'components/MDButton';
+import MDBox from 'components/MDBox';
+import MDTypography from 'components/MDTypography';
 
 const style = {
   position: 'absolute',
@@ -15,11 +17,6 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 6,
-};
-
-const buttonStyle = {
-  marginTop: '2px',
-  color: 'black', 
 };
 
 export default function BasicModal({ isOpen, onClose }) {
@@ -35,23 +32,6 @@ export default function BasicModal({ isOpen, onClose }) {
     onClose();
   };
 
-  const title = (e) => {
-    setInquiry_title(e.target.value);
-  };
-
-  const content = (e) => {
-    setInquiry_content(e.target.value);
-  };
-
-  const b_pw = (e) => {
-    setInquiry_pw(e.target.value);
-  };
-
-  const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8089/A_Eye',
-    withCredentials: true,
-  });
-
   const complete = async () => {
     try {
       var storedLoginVO = JSON.parse(sessionStorage.getItem('loginVO'));
@@ -64,17 +44,17 @@ export default function BasicModal({ isOpen, onClose }) {
         inquiry_pw,
       };
       console.log(boardData);
-      const response = await axiosInstance.post('/api/profile', boardData);
+      const response = await axios.post('http://localhost:8089/A_Eye/api/profile', boardData);
       console.log(response.data);
       alert('완료');
-
+      onClose();
     } catch (error) {
       console.error('Error during sign in:', error);
     }
   };
 
   return (
-      <div>
+    <div>
       <Modal
         open={isOpen}
         onClose={handleClose}
@@ -82,25 +62,29 @@ export default function BasicModal({ isOpen, onClose }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Button
+          <MDBox p={1} style={{ textAlign: 'left', marginBottom: '10px' }}>
+            <MDTypography variant="h5">게시글 작성</MDTypography>
+          </MDBox>
+          <MDButton
             variant="outlined"
-            color="primary"
-            style={{ position: 'absolute', top: 0, right: 0, color:'black'}}
+            color="info"
+            style={{ position: 'absolute', top: 0, right: 0, color: 'black' }}
             onClick={handleClose}
-          >닫기
-          </Button>
+          >
+            닫기
+          </MDButton>
           <TextField
             fullWidth
             sx={{ mb: 2 }}
-            label="작성자"
-            onChange={title}
+            label="제목"
+            onChange={(e) => setInquiry_title(e.target.value)}
             InputLabelProps={{ shrink: true }}
           />
           <TextField
             fullWidth
             sx={{ mb: 2 }}
-            label="제목"
-            onChange={content}
+            label="작성자"
+            onChange={(e) => setInquiry_pw(e.target.value)}
             InputLabelProps={{ shrink: true }}
           />
           <TextField
@@ -109,12 +93,12 @@ export default function BasicModal({ isOpen, onClose }) {
             fullWidth
             sx={{ mb: 2 }}
             label="내용"
-            onChange={b_pw}
+            onChange={(e) => setInquiry_content(e.target.value)}
             InputLabelProps={{ shrink: true }}
           />
-          <Button variant="contained" color="primary" style={buttonStyle} onClick={complete}>
+          <MDButton variant="contained" color="info" onClick={complete}>
             작성
-          </Button>
+          </MDButton>
         </Box>
       </Modal>
     </div>
