@@ -19,7 +19,7 @@ function TblHeader({ children }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
+    const loginVO = JSON.parse(sessionStorage.getItem('loginVO'));
 
     if (loginVO) {
       setUser(loginVO);
@@ -77,7 +77,7 @@ function TblHeader({ children }) {
                 {user ? user.user_name : "로그인을해주세요"}
               </MDTypography>
               <MDTypography variant="button" color="text" fontWeight="regular">
-                {user ? `Email: ${user.user_Email}` : ""}
+                {user ? `Email: ${user.user_email}` : ""}
               </MDTypography>
             </MDBox>
           </Grid>

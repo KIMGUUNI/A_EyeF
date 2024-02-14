@@ -7,10 +7,9 @@ import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React example components
 import PageLayout from "examples/LayoutContainers/PageLayout";
-import bgImage1 from "assets/images/elevator3.png";
-import "../CSS/Page.css"
+import bgImage1 from "assets/images/a-big-departmentstore-lobby.png";
 
-function Page1() {
+function NotFoundPage() {
     
 
     return (
@@ -39,11 +38,9 @@ function Page1() {
                             }}>
                         
 
-                    <MDBox style={{zIndex : "500", display:"flex", position : "absolute",top: "35%", left:"7%", overflow:"hidden"}}>
-                        <h2 className="fly-in-text">
-                            인공지능 <br/>
-                            고객맞춤 <br/>
-                            엘레베이터 광고
+                    <MDBox style={{zIndex : "500", width:"100%",height:"100%", display:"flex", position : "fixed", overflow:"hidden", justifyContent:"center", alignItems:"center"}}>
+                        <h2 className='text' >
+                            페이지를 찾을 수 없습니다!
                         </h2>
                         </MDBox>
                     </MDBox>
@@ -54,4 +51,4 @@ function Page1() {
 }
 
 
-export default Page1
+export default NotFoundPage
