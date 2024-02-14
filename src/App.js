@@ -140,10 +140,6 @@ export default function App() {
   return (
     <AdHostInfo.Provider value={{adHostInfo, setAdHostInfo}}>
     <ThemeProvider theme={darkMode ? themeDark : theme}>
-    <Routes>
-        <Route path="/" element={<Navigate to="/mainPage" />} />
-        {getRoutes(routes)}
-      </Routes>
       <CssBaseline />
       {layout === "dashboard" && (
         <>
@@ -161,7 +157,11 @@ export default function App() {
       )}
       {layout === "vr" && <Configurator />}
       {/**처음 들어가면 가는 홈페이지 */}
-      
+    <Routes>
+      <Route path="/" element={<Navigate to="/mainPage" />} />
+        {getRoutes(routes)}
+        <Route path="*" element={<Navigate to="/notFoundPage" />} />
+    </Routes>
     </ThemeProvider>
     </AdHostInfo.Provider>
   );
