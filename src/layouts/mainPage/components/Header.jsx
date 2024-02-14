@@ -11,7 +11,7 @@ export const Header = () => {
             <MDTypography variant="h1" fontWeight="medium" color="white" >
                 A-eye
             </MDTypography >
-            <MDBox ml={"30%"} mr={"20%"} style={{ display: "flex", alignItems: "center" }} >
+            <MDBox ml={"10%"} mr={"20%"} style={{ display: "flex", alignItems: "center" }} >
 
                 <Link to={"/dashboard"}>
                     <HomeIcon fontSize='large' color="white" style={{ display: "flex", margin: "10" }} />
