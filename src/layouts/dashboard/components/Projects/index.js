@@ -82,7 +82,7 @@ function Projects() {
               done
             </Icon>
             <MDTypography variant="button" fontWeight="regular" color="text">
-              &nbsp;<strong>30 done</strong> this month
+              &nbsp;<strong>최근 30일</strong> 
             </MDTypography>
           </MDBox>
         </MDBox>
