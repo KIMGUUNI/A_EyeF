@@ -32,7 +32,7 @@ import MDButton from "components/MDButton";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
-import bgImage from "assets/images/bg-sign-up-cover.jpeg";
+import bgImage from "assets/images/a-big-company-lobby.png";
 // 통신 라이브러리
 import axios from "axios";
 
@@ -56,12 +56,12 @@ function Cover() {
       };
       console.log(userData);
       const response = await axiosInstance.post("/api/register", userData);
-      alert("회원가입성공");
+      alert("회원가입 성공");
       navigate("/authentication/sign-in");
       console.log(response.data);
     } catch (error) {
       console.error("Error during sign in:", error);
-      alert("회원가입실패");
+      alert("회원가입 실패");
     }
   };
 
@@ -79,11 +79,8 @@ function Cover() {
           mb={1}
           textAlign="center"
         >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Join us today
-          </MDTypography>
-          <MDTypography display="block" variant="button" color="white" my={1}>
-            Enter your email and password to register
+          <MDTypography variant="h5" fontWeight="medium" color="white" mt={1}>
+            A-eye
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
@@ -91,7 +88,7 @@ function Cover() {
             <MDBox mb={2}>
               <MDInput
                 type="text"
-                label="Name"
+                label="이름"
                 variant="standard"
                 fullWidth
                 onChange={(e) => setUser_Name(e.target.value)}
@@ -100,7 +97,7 @@ function Cover() {
             <MDBox mb={2}>
               <MDInput
                 type="email"
-                label="Email"
+                label="이메일"
                 variant="standard"
                 fullWidth
                 onChange={(e) => setUser_Email(e.target.value)}
@@ -109,7 +106,7 @@ function Cover() {
             <MDBox mb={2}>
               <MDInput
                 type="password"
-                label="Password"
+                label="비밀번호"
                 variant="standard"
                 fullWidth
                 onChange={(e) => setUser_Pw(e.target.value)}
@@ -123,7 +120,7 @@ function Cover() {
                 color="text"
                 sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
               >
-                &nbsp;&nbsp;I agree the&nbsp;
+                &nbsp;&nbsp;개인정보 제공에&nbsp;
               </MDTypography>
               <MDTypography
                 component="a"
@@ -133,17 +130,17 @@ function Cover() {
                 color="info"
                 textGradient
               >
-                Terms and Conditions
+                동의합니다
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
               <MDButton variant="gradient" color="info" fullWidth onClick={handleSignIn}>
-                sign in
+                회원 가입
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
-                Already have an account?{" "}
+                계정이 이미 있으신가요?{" "}
                 <MDTypography
                   component={Link}
                   to="/authentication/sign-in"
@@ -152,7 +149,7 @@ function Cover() {
                   fontWeight="medium"
                   textGradient
                 >
-                  Sign In
+                  로그인
                 </MDTypography>
               </MDTypography>
             </MDBox>
