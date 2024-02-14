@@ -52,7 +52,7 @@ export default function data() {
 
   async function getAd() {
 
-    const user = await JSON.parse(sessionStorage.getItem('loginVO'))
+    const user = await JSON.parse(sessionStorage.getItem('UserInfo'))
 
     if (user != null) {
       const axiosInstance = axios.create({
@@ -71,7 +71,10 @@ export default function data() {
 
 
   async function getAdList() {
-    const ad = await JSON.parse(sessionStorage.getItem('adVO'))
+    try {
+      const ad = await JSON.parse(sessionStorage.getItem('adVO'))
+      
+    
     setCurrentAd(ad[0].ad_idx)
     
     if (ad != null) {
@@ -117,6 +120,8 @@ export default function data() {
           </MDBox>
         )
       })));
+    }} catch (error) {
+      error
     }
     
   }
