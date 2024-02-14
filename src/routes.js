@@ -110,6 +110,7 @@ const routes = [
     component: <SignUp />,
   },
   {
+    type: "collapse",
     name: "MainPage",
     key: "MainPage",
     icon: <Icon fontSize="small">home_icon</Icon>,

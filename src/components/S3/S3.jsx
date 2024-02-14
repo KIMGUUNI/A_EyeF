@@ -11,17 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import axios from "axios";
 const S3 = () => {
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    function guid() {
-        function s4() {
-            return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-    }
-    let randomRoot = guid();
+    
     const loginVO = JSON.parse(sessionStorage.getItem('loginVO'));
    
     const [uploadedFile, setUploadedFile] = useState(null);
@@ -53,7 +43,7 @@ const S3 = () => {
             const secret_key = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
             const region = process.env.REACT_APP_AWS_REGION;
             const ageAndGender = `${age}/${gender}`;
-            const key = `${ageAndGender}/${randomRoot}_${year}_${month}_${day}_${uploadedFile.name}`;
+            const key = `${ageAndGender}/${uploadedFile.name}`;
             AWS.config.update({
                 accessKeyId: id_key,
                 secretAccessKey: secret_key,
@@ -123,8 +113,8 @@ const S3 = () => {
                     onChange={handleChange2}
                     sx={{ height: '45px' }}
                 >
-                    <MenuItem value={"M"}>남자</MenuItem>
-                    <MenuItem value={"W"}>여자</MenuItem>
+                    <MenuItem value={"남"}>남자</MenuItem>
+                    <MenuItem value={"여"}>여자</MenuItem>
                 </Select>
                 <FormHelperText>광고하고싶은 성별 선택하세요</FormHelperText>
             </FormControl>
