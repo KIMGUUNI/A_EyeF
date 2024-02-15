@@ -13,7 +13,7 @@ import axios from "axios";
 import { TextField,Card, CardContent } from '@mui/material';
 import MDTypography from "components/MDTypography";
 const S3 = () => {
-    const loginVO = JSON.parse(sessionStorage.getItem('loginVO'));
+    const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
    
     const [uploadedFile, setUploadedFile] = useState(null);
     const [showUploadAlert, setShowUploadAlert] = useState(false);

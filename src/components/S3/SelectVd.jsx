@@ -1,196 +1,226 @@
-import React, { useState } from "react";
-import { useDropzone } from "react-dropzone";
-import AWS from "aws-sdk";
+import * as React from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import axios from 'axios';
+import ReactPlayer from 'react-player';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import MDButton from "components/MDButton";
-import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import axios from "axios";
-import { TextField,Card, CardContent } from '@mui/material';
+import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-const S3 = () => {
-    const loginVO = JSON.parse(sessionStorage.getItem('loginVO'));
-   
-    const [uploadedFile, setUploadedFile] = useState(null);
-    const [showUploadAlert, setShowUploadAlert] = useState(false);
-    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-    const [age, setAge] = useState('');
-    const [gender, setGender] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
 
-    const handleStartDateChange = (e) => {
-        setStartDate(e.target.value);
-    };
+const columns = [
+  { id: 'ad_idx', label: '광고번호', minWidth: 170 },
+  {
+    id: 'ad_name',
+    label: '광고이름',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'user_idx',
+    label: '광고소유자',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  { id: 'ad_target_age', label: '광고 타겟 연령', minWidth: 100 },
+  {
+    id: 'ad_target_gender',
+    label: '광고 타겟 성별',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toFixed(2),
+  },
+];
 
-    const handleEndDateChange = (e) => {
-        setEndDate(e.target.value);
-    };
+function createData(ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender) {
+  return { ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender };
+}
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
+export default function StickyHeadTable() {
+  const style = {
+    display: 'flex',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 700,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rows, setRows] = React.useState([]);
+  const [row, setRow] = React.useState(null);
+  const [selectedVideoUrl, setSelectedVideoUrl] = React.useState(null);
+  const [openModal, setOpenModal] = React.useState(false);
+  const axiosInstance = axios.create({
+    baseURL: "http://localhost:8089/A_Eye",
+    withCredentials: true,
+  });
 
-    const handleChange2 = (event) => {
-        setGender(event.target.value);
-    };
+  React.useEffect(() => {
+    fetchDataFromDB();
+  }, []);
 
-    const onDrop = (acceptedFiles) => {
-        const file = acceptedFiles[0];
-        setUploadedFile(file);
-    };
+  const fetchDataFromDB = async () => {
+    try {
+      const response = await axiosInstance.post("/api/SelectVd");
+      const adData = response.data;
+      const newRows = adData.map(data => createData(data.ad_idx, data.ad_name, data.user_idx, data.ad_target_age, data.ad_target_gender));
+      setRows(newRows);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
-    const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const handleRowClick = async (rowData) => {
+    setRow(rowData);
+    try {
+      const response = await axiosInstance.post("/api/GetVideoUrl", rowData);
+      const videoUrl = response.data;
+      setSelectedVideoUrl(videoUrl);
+      setOpenModal(true);
+    } catch (error) {
+      console.error('Error fetching video URL:', error);
+    }
+  };
 
-    const handleButtonClick = async () => {
-        if (uploadedFile && startDate && endDate) {
-            const id_key = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
-            const secret_key = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
-            const region = process.env.REACT_APP_AWS_REGION;
-            const ageAndGender = `${age}/${gender}`;
-            const key = `${ageAndGender}/${uploadedFile.name}`;
-            AWS.config.update({
-                accessKeyId: id_key,
-                secretAccessKey: secret_key,
-                region: region
-            });
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-            const s3 = new AWS.S3();
-            const params = {
-                Bucket: "video-add",
-                Key: key,
-                Body: uploadedFile
-            };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
-            try {
-                const axiosInstance = axios.create({
-                    baseURL: "http://localhost:8089/A_Eye",
-                    withCredentials: true,
-                });
-                const response = await s3.upload(params).promise();
-                console.log("File uploaded successfully:", response.Location);
-                const adData = {
-                    ad_name: uploadedFile.name,
-                    user_idx: loginVO.user_idx,
-                    ad_target_age: age,
-                    ad_target_gender: gender,
-                    ad_start_date: startDate,
-                    ad_end_date: endDate
-                };
-                console.log(adData)
-                const responseServer = await axiosInstance.post("/api/application", adData);
-                console.log("Server response:", responseServer.data);
-                setShowSuccessAlert(true);
-                setUploadedFile(null);
-            } catch (error) {
-                console.error("Error uploading file:", error);
-            }
-        } else {
-            setShowUploadAlert(true)
-        }
-    };
+  const handleCloseModal = () => {
+    setSelectedVideoUrl(null);
+    setRow(null);
+    setOpenModal(false);
+  };
+  const handleApprove = async () => {
+    try {
+      const requestData = {
+        ad_idx: row.ad_idx,
+        ad_name: row.ad_name,
+        user_idx: row.user_idx,
+        ad_target_age: row.ad_target_age,
+        ad_target_gender: row.ad_target_gender,
+        file_s3_path: selectedVideoUrl,
+      };
+      const response = await axiosInstance.post("/api/Approval", requestData);
+      if (response) {
+        setOpenModal(false);
+        fetchDataFromDB();
+        alert("승인 완료");
+      }
+    } catch (error) {
+      console.error('Error approving:', error);
+    }
+  };
+  const handleRefuse = async () => {
+    try {
+      const requestData = {
+        ad_idx: row.ad_idx
+      };
+      const response = await axiosInstance.post("/api/Refuse", requestData);
+      if (response) {
+        setOpenModal(false);
+        fetchDataFromDB();
+      }
+    } catch (e) {
+      e
+    }
+  }
 
-    return (
-        <Card style={{ marginBottom: 20 }}>
-            <CardContent>
-                <TextField
-                    id="start-date"
-                    type="date"
-                    value={startDate}
-                    onChange={handleStartDateChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    
-                />
-                <MDTypography variant="button" color="text" fontWeight="regular">
-                              ~
+  return (
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead sx={{ display: 'contents' }}>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => {
+                return (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index} onClick={() => handleRowClick(row)}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={handleCloseModal} style={{ fontSize: '30px', cursor: 'pointer' }}>&times;</span>
+              <ReactPlayer url={selectedVideoUrl} playing />
+              <MDBox height="200%" mt={0.5} lineHeight={1}>
+                <MDTypography variant="h5" fontWeight="medium">
+                  <p>광고이름 : {row?.ad_name}</p>
                 </MDTypography>
-                <TextField
-                    id="end-date"
-                    type="date"
-                    value={endDate}
-                    onChange={handleEndDateChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    
-                />
-                <div></div>
-                <FormControl sx={{ minWidth: 150, m: 1, height: '60px' }}>
-                    <InputLabel id="demo-simple-select-helper-label" sx={{ fontSize: '17px', height: '60px' }}>Age</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
-                        sx={{ height: '45px' }}
-                    >
-                        <MenuItem value={10}>10대</MenuItem>
-                        <MenuItem value={20}>20대</MenuItem>
-                        <MenuItem value={30}>30대</MenuItem>
-                        <MenuItem value={40}>40대</MenuItem>
-                        <MenuItem value={50}>50대</MenuItem>
-                    </Select>
-                    <FormHelperText>광고하고싶은 연령대를 선택하세요</FormHelperText>
-                </FormControl>
-                <FormControl sx={{ minWidth: 150, m: 1, height: '60px' }}>
-                    <InputLabel id="demo-simple-select-helper-label2" sx={{ fontSize: '17px', height: '60px' }}>Gender</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-helper-label2"
-                        id="demo-simple-select-helper2"
-                        value={gender}
-                        label="gender"
-                        onChange={handleChange2}
-                        sx={{ height: '45px' }}
-                    >
-                        <MenuItem value={"남"}>남자</MenuItem>
-                        <MenuItem value={"여"}>여자</MenuItem>
-                    </Select>
-                    <FormHelperText>광고하고싶은 성별 선택하세요</FormHelperText>
-                </FormControl>
-                <div {...getRootProps()} style={dropzoneStyles}>
-                    <input {...getInputProps()} />
-                    <p>Drag & drop a file here, or click to select a file</p>
-                </div>
-                <br></br>
-                <MDButton color="info" onClick={handleButtonClick}>
-                    Upload
-                </MDButton>
-                {showUploadAlert && (
-                    <Alert onClose={() => setShowUploadAlert(false)} severity="warning">
-                        파일을 업로드해주세요
-                    </Alert>
-                )}
-                {showSuccessAlert && (
-                    <Alert onClose={() => setShowSuccessAlert(false)} icon={<CheckIcon fontSize="inherit" />} severity="success">
-                        광고신청 완료
-                    </Alert>
-                )}
-                {uploadedFile && (
-                    <div>
-                        <p>Uploaded File:</p>
-                        <p>Name: {uploadedFile.name}</p>
-                        <p>Size: {uploadedFile.size} bytes</p>
-                    </div>
-                )}
-            </CardContent>
-        </Card>
-    );
-};
-
-const dropzoneStyles = {
-    border: "2px dashed #cccccc",
-    borderRadius: "10px",
-    marginTop: '3%',
-    padding: "20px",
-    textAlign: "center",
-    cursor: "pointer"
-};
-
-export default S3;
+                <MDTypography variant="button" color="text" fontWeight="regular">
+                  <p>타겟 연령 : {row?.ad_target_age}</p>
+                  <p>타겟 성별 : {row?.ad_target_gender}</p>
+                </MDTypography>
+              </MDBox>
+              <MDBox height="300%" mt={2} lineHeight={1} textAlign="center">
+                <MDButton color="info" onClick={handleApprove}>승인</MDButton>
+                <MDButton color="warning" onClick={handleRefuse} style={{ marginLeft: '10px' }}>거절</MDButton>
+              </MDBox>
+            </div>
+          </div>
+        </Box>
+      </Modal>
+    </Paper>
+  );
+}
