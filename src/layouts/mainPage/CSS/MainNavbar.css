@@ -1,0 +1,30 @@
+.b-container{
+  position: fixed;
+  overflow: hidden;
+  display: flex;
+  z-index: auto;
+  width: 100%;
+  bottom : 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.b{
+    display: flex;
+    margin: 10px;
+    padding: 6px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 50%;
+    border-color: lemonchiffon;
+}
+
+.b:hover{
+    background-color: #607D8B;
+}
+
+.focused{
+    background-color: #607D8B;
+}

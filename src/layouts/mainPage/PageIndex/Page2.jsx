@@ -7,7 +7,7 @@ import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React example components
 import PageLayout from "examples/LayoutContainers/PageLayout";
-import bgImage3 from "assets/images/bg-sign-up-cover.jpeg";
+import bgImage3 from "assets/images/a-person-wait-elevator.png";
 import "../CSS/Page.css"
 
 function Page2({onPageTransitionComplete}) {

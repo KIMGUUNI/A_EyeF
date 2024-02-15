@@ -45,10 +45,9 @@ function DefaultNavbarMobile({ open, close }) {
       MenuListProps={{ style: { width: `calc(${width}px - 4rem)` } }}
     >
       <MDBox px={0.5}>
-        <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" />
-        <DefaultNavbarLink icon="person" name="profile" route="/profile" />
-        <DefaultNavbarLink icon="account_circle" name="sign up" route="/authentication/sign-up" />
-        <DefaultNavbarLink icon="key" name="sign in" route="/authentication/sign-in" />
+        <DefaultNavbarLink icon="donut_large" name="대시보드" route="/dashboard" />
+        <DefaultNavbarLink icon="key" name="로그인" route="/authentication/sign-in" />
+        <DefaultNavbarLink icon="account_circle" name="회원가입" route="/authentication/sign-up" />
       </MDBox>
     </Menu>
   );

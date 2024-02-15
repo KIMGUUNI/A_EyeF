@@ -2,82 +2,101 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import axios from 'axios';
-import { useEffect} from 'react';
+import { useEffect } from 'react';
+import MDButton from 'components/MDButton';
+import MDBox from 'components/MDBox';
+import MDTypography from 'components/MDTypography';
 
 const style = {
-  position: 'fixed',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 700,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  p: 6,
 };
 
-export default function Tmodal({row}) {
+
+export default function Tmodal({ row }) {
   const [inquiry_title, setInquiry_title] = React.useState("");
   const [inquiry_content, setInquiry_content] = React.useState("");
   const [realAnswer_content, setRealAnswer_content] = React.useState("");
   const [answer_content, setAnswer_content] = React.useState("");
   const [inquiry_completed] = React.useState(0);
   const [open, setOpen] = React.useState(false);
+  const [inquiry_pw, setInquiry_pw] = React.useState("");
   const handleClose = () => setOpen(false);
   const { inquiry_indx } = row;
   const axiosInstance = axios.create({
     baseURL: "http://localhost:8089/A_Eye",
     withCredentials: true,
   });
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = React.useState(false);
+  const [deleteCancelled, setDeleteCancelled] = React.useState(false);
 
-  // 페이지 로드하자마자 실행
+  const handleConfirmDeleteOpen = () => setConfirmDeleteOpen(true);
+
+  const handleConfirmDeleteClose = () => {
+    setConfirmDeleteOpen(false);
+
+    if (!deleteCancelled) {
+      return;
+    }
+    handleClose();
+  };
+
+  const deletePost = async () => {
+    try {
+      await axiosInstance.post("/api/deletePost", { inquiry_indx });
+
+      handleClose();
+    } catch (error) {
+      console.error("Error during post deletion:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.post("/api/boardGet", inquiry_indx);
-        const boardList = response.data;
-  
-        if (boardList) {
-          console.log(inquiry_indx)
-          console.log(boardList);
-          setInquiry_title(boardList[0].inquiry_title);
-          setInquiry_content(boardList[0].inquiry_content);
-          setRealAnswer_content(boardList[0].answer_content);
-          setOpen(true);
+        const requestData = ({
+          inquiry_indx: inquiry_indx
+        })
+        console.log("11", requestData)
+        const response = await axiosInstance.post("/api/boardGet", requestData);
 
-          
+        const boardList = response.data;
+
+        if (boardList) {
+          console.log("가져온데이터", boardList);
+          setInquiry_title(boardList.inquiry_title);
+          setInquiry_content(boardList.inquiry_content);
+          setRealAnswer_content(boardList.answer_content);
+          setInquiry_pw(boardList.inquiry_pw)
+          setOpen(true);
         }
       } catch (error) {
         console.error("Error during data fetching:", error);
       }
     };
-  
-    fetchData()
-   
-  }, [])
-  console.log(answer_content);
-  
-  // 위에 함수에서 [inquiry_title, inquiry_content] 값이 바뀔때마다 실행
-  useEffect(() => {
-    console.log("제목1 : " + inquiry_title);
-    console.log("내용1 : " + inquiry_content);
-    console.log("아아아아아")
-  }, [inquiry_title, inquiry_content]);
 
+    fetchData();
+
+  }, [inquiry_indx]);
 
 
   // T모달창의 완료 버튼을 누를 때 실행
-  const answer = async() => {
+  const answer = async () => {
     try {
+      const boardAnswer = {
+        inquiry_indx,
+        inquiry_completed: inquiry_completed !== null ? 1 : 0,
+        answer_content
+      }
 
-        const boardAnswer = {
-          inquiry_indx,
-           inquiry_completed: inquiry_completed !== null ? 1 : 0,
-          answer_content
-        }
-      
       const response = await axiosInstance.post("/api/boardAnswer", boardAnswer);
       const boardList = response.data;
 
@@ -85,11 +104,11 @@ export default function Tmodal({row}) {
         console.log(inquiry_indx);
         console.log(boardList);
         console.log(answer_content);
-        setInquiry_title(boardList[0].inquiry_title);
-        setInquiry_content(boardList[0].inquiry_content);
-        setOpen(true);
+        setInquiry_title(boardList.inquiry_title);
+        setInquiry_content(boardList.inquiry_content);
+        setInquiry_pw(boardList.inquiry_pw)
       }
-      
+
     } catch (error) {
       console.error("Error during data fetching:", error);
     }
@@ -103,19 +122,77 @@ export default function Tmodal({row}) {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+          BackdropProps={{ onClick: null }}
+          disableBackdropClick
+          disableEscapeKeyDown
         >
           <Box sx={style}>
+            <MDBox p={1} style={{ textAlign: 'left', marginBottom: '10px'}}>
+              <MDTypography variant="h5">문의 내역</MDTypography>
+            </MDBox>
+            <MDButton
+              variant="outlined"
+              color="info"
+              style={{ position: 'absolute', top: 0, right: 0, color: 'black' }}
+              onClick={handleClose}
+              BackdropProps={{ onClick: null }}
+            >닫기
+            </MDButton>
             {/* Input 태그 3개 추가 */}
-            <TextField label="제목" fullWidth sx={{ mb: 2 }} value={inquiry_title} />
-            <TextField label="내용" fullWidth sx={{ mb: 2 }} value={inquiry_content} />
-            <TextField label="답변" fullWidth sx={{ mb: 2 }} value={realAnswer_content!==null?realAnswer_content:undefined} onChange={(e) => setAnswer_content(e.target.value)}/>
+            <TextField label="제목" fullWidth sx={{ mb: 2 }} value={inquiry_title} InputLabelProps={{ shrink: true }} />
+            <TextField
+              fullWidth
+              sx={{ mb: 2 }}
+              label="작성자"
+              value={inquiry_pw}
+              InputLabelProps={{ shrink: true }}
+            />
+            <TextField multiline
+              rows={7} label="내용" fullWidth sx={{ mb: 2 }} value={inquiry_content} InputLabelProps={{ shrink: true }} />
+            <TextField multiline
+              rows={5} label="답변" fullWidth sx={{ mb: 2 }} value={realAnswer_content !== null ? realAnswer_content : undefined} onChange={(e) => setAnswer_content(e.target.value)} InputLabelProps={{ shrink: true }} />
             {/* 완료 버튼 추가 */}
-            <Button variant="contained" color="primary" onClick={() => { answer(); handleClose(); }}>
+            <MDButton variant="contained" color="info" onClick={() => { answer(); handleClose(); }} sx={{ mb: 1 }}>
               완료
-            </Button>
-            <Button variant="contained" color="primary" onClick={() => { answer(); handleClose(); }}>
+            </MDButton>
+            <MDButton variant="contained" color="info" onClick={handleConfirmDeleteOpen} sx={{ mb: 1, ml: 1 }}>
               삭제
-            </Button>
+            </MDButton>
+            <Modal
+              open={confirmDeleteOpen}
+              onClose={handleConfirmDeleteClose}
+              aria-labelledby="confirm-delete-modal-title"
+              aria-describedby="confirm-delete-modal-description"
+            >
+              <Box sx={style}>
+                <MDTypography variant="h6" component="div" id="confirm-delete-modal-title" sx={{ mb: 2 }}>
+                  게시글을 삭제하시겠습니까?
+                </MDTypography>
+                <MDButton
+                  variant="contained"
+                  color="info"
+                  onClick={() => {
+                    deletePost();
+                    handleClose();
+                    handleConfirmDeleteClose();
+                  }}
+                >
+                  확인
+                </MDButton>
+                <MDButton
+                  variant="outlined"
+                  color="info"
+                  onClick={() => {
+                    setDeleteCancelled(true);
+                    handleConfirmDeleteClose();
+                  }}
+                >
+                  취소
+                </MDButton>
+
+
+              </Box>
+            </Modal>
           </Box>
         </Modal>
       )}
