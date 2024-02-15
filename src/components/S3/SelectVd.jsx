@@ -14,6 +14,7 @@ import Modal from '@mui/material/Modal';
 import MDButton from "components/MDButton";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+
 const columns = [
   { id: 'ad_idx', label: '광고번호', minWidth: 170 },
   {
@@ -46,7 +47,7 @@ function createData(ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender) 
 
 export default function StickyHeadTable() {
   const style = {
-    display:'flex',
+    display: 'flex',
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -120,7 +121,7 @@ export default function StickyHeadTable() {
         file_s3_path: selectedVideoUrl,
       };
       const response = await axiosInstance.post("/api/Approval", requestData);
-      if(response){
+      if (response) {
         setOpenModal(false);
         fetchDataFromDB();
         alert("승인 완료");
@@ -129,16 +130,18 @@ export default function StickyHeadTable() {
       console.error('Error approving:', error);
     }
   };
-  const handleRefuse = async () =>{
-    try{
-      const requestData= {
+  const handleRefuse = async () => {
+    try {
+      const requestData = {
         ad_idx: row.ad_idx
       };
-      const response = await axiosInstance.post("/api/Refuse",requestData);
-      setOpenModal(false);
-      fetchDataFromDB();
-    }catch(e){
-
+      const response = await axiosInstance.post("/api/Refuse", requestData);
+      if (response) {
+        setOpenModal(false);
+        fetchDataFromDB();
+      }
+    } catch (e) {
+      e
     }
   }
 
@@ -199,7 +202,7 @@ export default function StickyHeadTable() {
         <Box sx={style}>
           <div className="modal">
             <div className="modal-content">
-              <span className="close" onClick={handleCloseModal}>&times;</span>
+              <span className="close" onClick={handleCloseModal} style={{ fontSize: '30px', cursor: 'pointer' }}>&times;</span>
               <ReactPlayer url={selectedVideoUrl} playing />
               <MDBox height="200%" mt={0.5} lineHeight={1}>
                 <MDTypography variant="h5" fontWeight="medium">
@@ -210,9 +213,9 @@ export default function StickyHeadTable() {
                   <p>타겟 성별 : {row?.ad_target_gender}</p>
                 </MDTypography>
               </MDBox>
-              <MDBox height="300%" mt={0.5} lineHeight={1}>
-              <MDButton color="info" onClick={handleApprove}>승인</MDButton>
-              <MDButton color="warning" onClick={handleRefuse}>거절</MDButton>
+              <MDBox height="300%" mt={2} lineHeight={1} textAlign="center">
+                <MDButton color="info" onClick={handleApprove}>승인</MDButton>
+                <MDButton color="warning" onClick={handleRefuse} style={{ marginLeft: '10px' }}>거절</MDButton>
               </MDBox>
             </div>
           </div>
