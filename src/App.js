@@ -43,7 +43,7 @@ import routes from "routes";
 
 // Material Dashboard 2 React contexts
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
-import {UserInfo} from "context/UserInfo";
+import { AdHostInfo } from "context/AdHostInfo";
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
@@ -62,7 +62,7 @@ export default function App() {
   } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const { pathname } = useLocation();
-  const [userInfo, setUserInfo] = useState(() => {
+  const [adHostInfo, setAdHostInfo] = useState(() => {
     // localStorage에서 데이터 읽기
     const storedUserInfo = sessionStorage.getItem('loginVO');
     return JSON.parse(storedUserInfo) || {};
@@ -138,7 +138,7 @@ export default function App() {
 
 
   return (
-    <UserInfo.Provider value={{userInfo, setUserInfo}}>
+    <AdHostInfo.Provider value={{adHostInfo, setAdHostInfo}}>
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
       {layout === "dashboard" && (
@@ -146,7 +146,7 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="A_Eye"
+            brandName="A-eye"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
@@ -157,11 +157,12 @@ export default function App() {
       )}
       {layout === "vr" && <Configurator />}
       {/**처음 들어가면 가는 홈페이지 */}
-      <Routes>
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+    <Routes>
+      <Route path="/" element={<Navigate to="/mainPage" />} />
         {getRoutes(routes)}
-      </Routes>
+        <Route path="*" element={<Navigate to="/notFoundPage" />} />
+    </Routes>
     </ThemeProvider>
-    </UserInfo.Provider>
+    </AdHostInfo.Provider>
   );
 }

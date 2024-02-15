@@ -44,7 +44,7 @@ import {
   setSidenavColor,
   setDarkMode,
 } from "context";
-import { UserInfo } from "context/UserInfo";
+import { AdHostInfo } from "context/AdHostInfo";
 
 function Configurator() {
 
@@ -60,7 +60,7 @@ function Configurator() {
   } = controller;
   const [disabled, setDisabled] = useState(false);
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
-  const {userInfo} = useContext(UserInfo);
+  const {adHostInfo} = useContext(AdHostInfo);
   
   // useEffect(()=>{
   //   const fetchData = async () => {
@@ -150,11 +150,12 @@ function Configurator() {
         alignItems="baseline"
         pt={4}
         pb={0.5}
-        px={3}>
+        px={3}
+      >
         <MDBox>
-          <MDTypography variant="h5">{userInfo != {} ? userInfo.user_name : "로그인을 해주세요"}</MDTypography>
-          <MDTypography variant="body2" color="text">
-            {userInfo != {} ? userInfo.user_Email :""}
+          <MDTypography variant="body" color="text">
+            {adHostInfo != null ? adHostInfo.user_name : "로그인을 해주세요"}
+            {adHostInfo != null ? adHostInfo.user_email :""}
           </MDTypography>
         </MDBox>
 
@@ -324,5 +325,9 @@ function Configurator() {
     </ConfiguratorRoot>
   );
 }
+Configurator.defaultProps = {
+  adHostInfo: null,
+};
+
 
 export default Configurator;

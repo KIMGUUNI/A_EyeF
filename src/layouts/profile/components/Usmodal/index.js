@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export default function Tmodal({row}) {
+export default function Umodal({row}) {
   const [inquiry_title, setInquiry_title] = React.useState("");
   const [inquiry_content, setInquiry_content] = React.useState("");
   const [realAnswer_content, setRealAnswer_content] = React.useState("");

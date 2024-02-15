@@ -30,10 +30,23 @@ import visaLogo from "assets/images/logos/visa.png";
 
 // Material Dashboard 2 React context
 import { useMaterialUIController } from "context";
+import Dialog from "@mui/material/Dialog";
+import { useState } from "react";
+import Payment from "../Payment";
 
 function PaymentMethod() {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
+
+  const [isAddCardModalOpen, setIsAddCardModalOpen] = useState(false);
+
+  const handleOpenAddCardModal = () => {
+    setIsAddCardModalOpen(true);
+  };
+
+  const handleCloseAddCardModal = () => {
+    setIsAddCardModalOpen(false);
+  };
 
   return (
     <Card id="delete-account">
@@ -41,7 +54,7 @@ function PaymentMethod() {
         <MDTypography variant="h6" fontWeight="medium">
           Payment Method
         </MDTypography>
-        <MDButton variant="gradient" color="dark">
+        <MDButton variant="gradient" color="dark" onClick={handleOpenAddCardModal}>
           <Icon sx={{ fontWeight: "bold" }}>add</Icon>
           &nbsp;add new card
         </MDButton>
@@ -100,6 +113,9 @@ function PaymentMethod() {
           </Grid>
         </Grid>
       </MDBox>
+      <Dialog open={isAddCardModalOpen} onClose={handleCloseAddCardModal}>
+        {isAddCardModalOpen && <Payment onCloseModal={handleCloseAddCardModal} />}
+      </Dialog>
     </Card>
   );
 }

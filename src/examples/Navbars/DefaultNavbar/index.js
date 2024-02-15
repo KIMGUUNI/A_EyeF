@@ -110,21 +110,20 @@ function DefaultNavbar({ transparent, light, action }) {
           pl={{ xs: 0, lg: 1 }}
         >
           <MDTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            로그인
+            메인화면
           </MDTypography>
         </MDBox>
         <MDBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
-          <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
-          <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} />
+          <DefaultNavbarLink icon="donut_large" name="대시보드" route="/dashboard" light={light} />
           <DefaultNavbarLink
             icon="account_circle"
-            name="sign up"
+            name="회원가입"
             route="/authentication/sign-up"
             light={light}
           />
           <DefaultNavbarLink
             icon="key"
-            name="sign in"
+            name="로그인"
             route="/authentication/sign-in"
             light={light}
           />

@@ -8,10 +8,11 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
-import Button from '@mui/material/Button';
 import Modal from '../Modal';
 import Tmodal from '../Tmodal';
 import Umodal from '../Usmodal';
+import BasicModal from '../Modal';
+import MDButton from 'components/MDButton';
 
 const columns = [
   { id: 'inquiry_indx', label: 'No', minWidth: 170 },
@@ -97,8 +98,9 @@ export default function StickyHeadTable() {
 
   const handleWriteButtonClick = () => {
     setSelectedRow(null); // 새 글 작성 시 선택된 행 초기화
-    user_position == 0 ? setModalType('Umodal') : setModalType('Tmodal');
+    setModalType('modal'); // Set modal type to 'modal' for general writing
   };
+
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -150,13 +152,16 @@ export default function StickyHeadTable() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      <Button variant="contained" color="primary" onClick={handleWriteButtonClick}>
+      <MDButton variant="contained" color="info" onClick={handleWriteButtonClick}>
         글쓰기
-      </Button>
+      </MDButton>
       {modalType === 'rowClick' && selectedRow && (
         user_position === 0 ? <Umodal row={selectedRow} /> : <Tmodal row={selectedRow} />
       )}
-      {modalType !== null && modalType !== 'rowClick' && (
+      {modalType === 'modal' && (
+        <BasicModal isOpen={true} onClose={() => setModalType(null)} />
+      )}
+      {modalType !== null && modalType !== 'rowClick' && modalType !== 'modal' && (
         <Modal />
       )}
     </Paper>
