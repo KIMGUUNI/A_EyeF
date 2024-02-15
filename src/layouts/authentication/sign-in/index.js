@@ -13,7 +13,7 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial
  * portions of the Software.
  */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
@@ -39,9 +39,9 @@ function Basic() {
   const [user_pw, setUser_Pw] = useState("");
   const navigate = useNavigate();
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
-   /* eslint-disable no-unused-vars */
+  /* eslint-disable no-unused-vars */
   const [user_rol, setUser_rol] = useState("");
-  const expirationTime = 5 * 60 * 1000;
+  const expirationTime = 10 * 60 * 1000;
   /* eslint-disable no-unused-vars */
   // const {setUserInfo} = useContext(UserInfo);
 
@@ -60,10 +60,12 @@ function Basic() {
 
       const response = await axiosInstance.post("/api/sign-in", userData);
       const token = response.data.jwt;
+      const reToken = response.data.rjwt;
       const user_idx = response.data.user_idx;
       const user_name = response.data.user_name;
       const user_Email = response.data.user_email;
-      
+
+
       const UserInfo = {
         user_idx,
         user_name,
@@ -74,19 +76,20 @@ function Basic() {
         if (user_email == "admin") {
           alert("로그인 성공");
           Cookies.set("Admin", token, { expires: new Date(Date.now() + expirationTime) });
+          Cookies.set("reToken", reToken)
           sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
           setUser_rol("Admin")
         } else {
+          console.log(response)
           alert("로그인 성공");
           Cookies.remove("Admin")
+          Cookies.set("reToken", reToken)
           Cookies.set("User", token, { expires: new Date(Date.now() + expirationTime) });
           sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
           setUser_rol("User")
         }
-
-        window.location.href = 'http://localhost:3000/dashboard';
+        // window.location.href = 'http://localhost:3000/dashboard';
         // navigate("/dashboard");
-
       } else {
         alert("로그인 실패");
       }
@@ -112,31 +115,63 @@ function Basic() {
         navigate("/authentication/sign-in");
       }
 
-
       const config = {
         headers: {
           Authorization: `Bearer${token}`
         }
       };
-      console.log(config)
-      const response = await axiosInstance.get("/api/prove", config);
 
+      const response = await axiosInstance.get("/api/prove", config);
       if (response.status === 200) {
-        console.log("response: ", response.data)
         alert("검증 성공")
       }
 
+      // 이 부분에서 에러 나고 catch문으로 이동
 
     } catch (error) {
-      alert("다시 로그인 해 주세요.")
-      navigate("/authentication/sign-in");
+      // 쿠키가 없을 때  --> 로그아웃해서 쿠키가 사라졌거나 아예 로그인을 안한 상황
+      if (error.response.data == "토큰 검증에 실패했습니다.") {
+        alert("다시 로그인 해주세요.")
+        navigate("/authentication/sign-in");
+        // 쿠키는 있지만 jwt가 만료되었을 때
+      } else if (error.response.data == "토큰이 만료되었습니다.") {
+        var jwtFromCookie = Cookies.get("reToken");
+
+        if (jwtFromCookie) {
+          const reTkken = {
+            headers: {
+              Authorization: `Bearer${jwtFromCookie}`
+            }
+          };
+
+          try {
+            // refresh 토큰을 이용해 access 토큰을 재발급
+            const response = await axiosInstance.get("/api/reProve", reTkken);
+            console.log(response.data)
+            const newToken = response.data
+            const adminCookie = Cookies.get("Admin");
+            const userCookie = Cookies.get("User");
+
+            if (adminCookie) {
+              Cookies.set("Admin", newToken)
+            } else if (userCookie) {
+              Cookies.set("User", newToken)
+            }
+
+            alert("토큰이 갱신되었습니다.");
+          } catch (error) {
+            // refresh 토큰이 유효하지 않거나 발급 실패 등의 처리
+            if (error.response.data == "다시 로그인 해주세요") {
+              alert("다시 로그인 해주세요.");
+            } else {
+              console.error("토큰 갱신 요청 실패:", error);
+            }
+          }
+        }
+
+      }
     }
   }
-
-  useEffect(() => {
-    console.log("user_rol changed:", user_rol);
-  }, [user_rol]);
-
 
   return (
     <BasicLayout image={bgImage}>
