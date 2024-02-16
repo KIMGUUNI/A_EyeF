@@ -54,9 +54,6 @@ function Tables2() {
                 </MDTypography>
               </MDBox>
               <div style={{ textAlign: 'center', marginTop:"2%" }}>
-                <MDTypography variant="h2" color="dark">
-                 
-                </MDTypography>
               <MDBox pt={3}>
                 <SelectVd/>
               </MDBox>
@@ -86,9 +83,6 @@ function Tables2() {
                 </MDTypography>
               </MDBox>
               <div style={{ textAlign: 'center', marginTop:"2%" }}>
-                <MDTypography variant="h2" color="dark">
-                 
-                </MDTypography>
               <MDBox pt={3}>
                 <Date/>
               </MDBox>
