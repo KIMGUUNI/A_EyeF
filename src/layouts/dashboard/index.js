@@ -101,8 +101,8 @@ function Dashboard() {
                   count={monthAd != null ? monthAd.region_count : 0}
                   percentage={{
                     color: "success",
-                    amount: `${isNaN(monthAd) === 0 ? "" : "점유율 " + Math.round(monthAd.region_count /currentAd.ad_expo_num *10000)/100+ "%" }`,
-                    label: `${isNaN(monthAd) === 0 ? "가장 높은 지역" : monthAd.expoRegion}`
+                    amount: `${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0 ? "" : "점유율 " + Math.round(monthAd.region_count /currentAd.ad_expo_num *10000)/100+ "%" }`,
+                    label: `${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0 ? "가장 높은 지역" : monthAd.expoRegion}`
                   }}
                 />
               </MDBox>
