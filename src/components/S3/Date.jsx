@@ -15,15 +15,15 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TablePagination from '@mui/material/TablePagination';
 import axios from "axios";
 
-function createData(ad_name, user_idx, ad_target_age, ad_target_gender, ad_play_number, start_date, end_date) {
+function createData(ad_name, user_idx, ad_target_age, ad_target_gender, ad_play_number, ad_start_date, ad_end_date) {
     return {
         ad_name,
         user_idx,
         ad_target_age,
         ad_target_gender,
         ad_play_number,
-        start_date,
-        end_date,
+        ad_start_date,
+        ad_end_date,
         history: [],
     };
 }
