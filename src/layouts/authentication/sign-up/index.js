@@ -56,7 +56,6 @@ function Cover() {
       };
       console.log(userData);
       const response = await axiosInstance.post("/api/register", userData);
-      alert("회원가입 성공");
       navigate("/authentication/sign-in");
       console.log(response.data);
     } catch (error) {
