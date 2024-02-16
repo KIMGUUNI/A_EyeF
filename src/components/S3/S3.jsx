@@ -11,7 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import axios from "axios";
 const S3 = () => {
-    const loginVO = JSON.parse(sessionStorage.getItem('loginVO'));
+    const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
    
     const [uploadedFile, setUploadedFile] = useState(null);
     const [showUploadAlert, setShowUploadAlert] = useState(false);
