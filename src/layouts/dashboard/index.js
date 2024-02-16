@@ -44,7 +44,7 @@ function Dashboard() {
   // const [firstRender, setFirstRender] = React.useState(true);
   const [chartD, setChartD] = React.useState(
     {sales:{
-      lables: [""],
+      labels: [""],
       datasets:{label:"" , data:[]}
   }});
   const [chartBarD, setChartBarD] = React.useState(
@@ -53,6 +53,9 @@ function Dashboard() {
       datasets: { label: "", data:[] },
     }
   )
+
+  
+  console.log(chartBarD.labels)
 
   return (
     <CurrentAd.Provider value={{ currentAd, setCurrentAd, monthAd, setMonthAd,chartD, setChartD, chartBarD, setChartBarD }}>
@@ -67,9 +70,9 @@ function Dashboard() {
                   icon="leaderboard"
                   count={monthAd != null ? monthAd.day_count : 0}
                   percentage={{
-                    color: "success",
-                    amount: "+55%",
-                    label: `${monthAd != null ? "than yesterday" : "일별 노출 횟수"}`,
+                    color: chartBarD.datasets.data[chartBarD.datasets.data.length-1] - chartBarD.datasets.data[chartBarD.datasets.data.length-2] >= 0 ? "success" : "error" ,
+                    amount: isNaN(chartBarD.datasets.data[chartBarD.datasets.data.length-1]) || chartBarD.datasets.data[chartBarD.datasets.data.length-2] === 0 ? "" :Math.round((chartBarD.datasets.data[chartBarD.datasets.data.length-1] / chartBarD.datasets.data[chartBarD.datasets.data.length-2] - 1) * 100) + "%" ,
+                    label: `${isNaN(chartBarD.datasets.data[chartBarD.datasets.data.length-1]) || chartBarD.datasets.data[chartBarD.datasets.data.length-2] === 0 ? "일별 노출 횟수 " : "어제 보다"}`,
                   }}
                 />
               </MDBox>
@@ -82,9 +85,9 @@ function Dashboard() {
                   title="월별 노출 횟수"
                   count={monthAd != null ? monthAd.month_count : 0}
                   percentage={{
-                    color: "success",
-                    amount: "+3%",
-                    label: `${monthAd != null ? monthAd.month : "월별"} 노출 횟수`,
+                    color: chartD.sales.datasets.data[chartD.sales.datasets.data.length-1] - chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] >= 0 ? "success" : "error" ,
+                    amount: isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0 ? "" :Math.round((chartD.sales.datasets.data[chartD.sales.datasets.data.length-1] / chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] - 1) * 100) + "%" ,
+                    label: `${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0  ? "월별 노출 횟수 " : "전월 보다"}`,
                   }}
                 />
               </MDBox>
@@ -98,8 +101,8 @@ function Dashboard() {
                   count={monthAd != null ? monthAd.region_count : 0}
                   percentage={{
                     color: "success",
-                    amount: "+1%",
-                    label: `${monthAd != null ? monthAd.expoRegion : "가장 높은 지역"}`
+                    amount: `${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0 ? "" : "점유율 " + Math.round(monthAd.region_count /currentAd.ad_expo_num *10000)/100+ "%" }`,
+                    label: `${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0 ? "가장 높은 지역" : monthAd.expoRegion}`
                   }}
                 />
               </MDBox>
@@ -114,7 +117,7 @@ function Dashboard() {
                   percentage={{
                     color: "success",
                     amount: "",
-                    label: "Just updated",
+                    label: "",
                   }}
                 />
               </MDBox>
@@ -127,8 +130,7 @@ function Dashboard() {
                   <ReportsBarChart
                     color="info"
                     title="7일 노출 횟수"
-                    description="Last Campaign Performance"
-                    date="쉽네"
+                    date= {`${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0  ? "월별 노출 횟수 기간 " : chartBarD.labels[0]+ " ~ " + chartBarD.labels[chartBarD.labels.length-1]}`}
                     chart={chartBarD}
                   />
                 </MDBox>
@@ -138,12 +140,7 @@ function Dashboard() {
                   <ReportsLineChart
                     color="success"
                     title="월별 노출 횟수"
-                    description={
-                      <>
-                        (<strong>+15%</strong>) increase in today sales.
-                      </>
-                    }
-                    date="ㅎㅎㅎ"
+                    date= {`${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0  ? "월별 노출 횟수 기간 " : chartD.sales.labels[0]+ " ~ " + chartD.sales.labels[chartD.sales.labels.length-1]}`}
                     chart={chartD.sales}
                   />
                 </MDBox>
