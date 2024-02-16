@@ -76,14 +76,12 @@ function Basic() {
 
       if (token) {
         if (user_email == "admin") {
-          alert("로그인 성공");
           Cookies.set("Admin", token, { expires: new Date(Date.now() + expirationTime) });
           Cookies.set("reToken", reToken)
           sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
           setUser_rol("Admin")
         } else {
           console.log(response)
-          alert("로그인 성공");
           Cookies.remove("Admin")
           Cookies.set("reToken", reToken)
           Cookies.set("User", token, { expires: new Date(Date.now() + expirationTime) });
