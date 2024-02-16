@@ -39,10 +39,12 @@ const columns = [
     align: 'right',
     format: (value) => value.toFixed(2),
   },
+  { id: 'ad_start_date', label: '시작날짜', minWidth: 170,align: 'right' },
+  { id: 'ad_end_date', label: '종료날짜', minWidth: 170,align: 'right' },
 ];
 
-function createData(ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender) {
-  return { ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender };
+function createData(ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender,ad_start_date,ad_end_date) {
+  return { ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender,ad_start_date,ad_end_date};
 }
 
 export default function StickyHeadTable() {
@@ -77,7 +79,7 @@ export default function StickyHeadTable() {
     try {
       const response = await axiosInstance.post("/api/SelectVd");
       const adData = response.data;
-      const newRows = adData.map(data => createData(data.ad_idx, data.ad_name, data.user_idx, data.ad_target_age, data.ad_target_gender));
+      const newRows = adData.map(data => createData(data.ad_idx, data.ad_name, data.user_idx, data.ad_target_age, data.ad_target_gender,data.ad_start_date,data.ad_end_date));
       setRows(newRows);
     } catch (error) {
       console.error('Error fetching data:', error);

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -13,159 +12,135 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import TablePagination from '@mui/material/TablePagination';
+import axios from "axios";
 
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
-      },
-    ],
-  };
+function createData(ad_name, user_idx, ad_target_age, ad_target_gender, ad_play_number, start_date, end_date) {
+    return {
+        ad_name,
+        user_idx,
+        ad_target_age,
+        ad_target_gender,
+        ad_play_number,
+        start_date,
+        end_date,
+        history: [],
+    };
 }
 
 function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
+    const { row } = props;
+    const [open, setOpen] = React.useState(false);
 
-  return (
-    <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell component="th" scope="row">
-          {row.name}
-        </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                History
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead sx={{ display: 'contents' }}>
-                  <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
+    return (
+        <React.Fragment>
+            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+                <TableCell>
+                    <IconButton
+                        aria-label="expand row"
+                        size="small"
+                        onClick={() => setOpen(!open)}
+                    >
+                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                    </IconButton>
+                </TableCell>
+                <TableCell component="th" scope="row">
+                    {row.ad_name}
+                </TableCell>
+                <TableCell align="right">{row.user_idx}</TableCell>
+                <TableCell align="right">{row.ad_target_age}</TableCell>
+                <TableCell align="right">{row.ad_target_gender}</TableCell>
+                <TableCell align="right">{row.ad_play_number}</TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Box sx={{ margin: 1 }}>
+                            <Typography variant="h6" gutterBottom component="div">
+                                History
+                            </Typography>
+                            <Table size="small" aria-label="purchases">
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>시작 날짜</TableCell>
+                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{row.start_date}</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>종료 날짜</TableCell>
+                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{row.end_date}</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>결제할 금액 ($)</TableCell>
+                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{`${row.ad_play_number * 500}원`}</TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </Box>
+                    </Collapse>
+                </TableCell>
+            </TableRow>
+        </React.Fragment>
+    );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-];
-
-const itemsPerPage = 5; 
-
 export default function CollapsibleTable() {
-  const [currentPage, setCurrentPage] = useState(0);
-  const totalPages = Math.ceil(rows.length / itemsPerPage);
-  const startIndex = currentPage * itemsPerPage;
-  const endIndex = Math.min(startIndex + itemsPerPage, rows.length);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rowsData, setRowsData] = useState([]);
 
-  const handleChangePage = (newPage) => {
-    setCurrentPage(newPage);
-  };
+    useEffect(() => {
+        const axiosInstance = axios.create({
+            baseURL: "http://localhost:8089/A_Eye",
+            withCredentials: true,
+        });
 
-  return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead sx={{ display: 'contents' }}>
-          <TableRow>
-            <TableCell />
-            <TableCell>광고이름</TableCell>
-            <TableCell align="right">광고 소유자</TableCell>
-            <TableCell align="right">타겟&nbsp;(연령)</TableCell>
-            <TableCell align="right">타겟&nbsp;(성별)</TableCell>
-            <TableCell align="right">재생횟수</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.slice(startIndex, endIndex).map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-      <div>
-        <button onClick={() => handleChangePage(currentPage - 1)} disabled={currentPage === 0}>
-          Previous
-        </button>
-        <span>{`Page ${currentPage + 1} of ${totalPages}`}</span>
-        <button onClick={() => handleChangePage(currentPage + 1)} disabled={currentPage === totalPages - 1}>
-          Next
-        </button>
-      </div>
-    </TableContainer>
-  );
+        const fetchData = async () => {
+            const response = await axiosInstance.post("/api/Advertising")
+            const adData = response.data;
+            const newRows = adData.map(data => createData(data.ad_name, data.user_idx, data.ad_target_age, data.ad_target_gender, data.ad_play_number, data.ad_start_date, data.ad_end_date));
+            setRowsData(newRows);
+        };
+
+        fetchData();
+    }, []);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
+    return (
+        <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+                <TableHead sx={{ display: 'contents' }}>
+                    <TableRow>
+                        <TableCell />
+                        <TableCell>광고 이름</TableCell>
+                        <TableCell align="right">사용자 ID</TableCell>
+                        <TableCell align="right">광고 대상 연령</TableCell>
+                        <TableCell align="right">광고 대상 성별</TableCell>
+                        <TableCell align="right">광고 재생 횟수</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                        <Row key={row.ad_name} row={row} />
+                    ))}
+                </TableBody>
+            </Table>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={rowsData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+        </TableContainer>
+    );
 }
