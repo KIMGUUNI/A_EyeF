@@ -63,11 +63,11 @@ function Row(props) {
                                 <TableBody>
                                     <TableRow>
                                         <TableCell align="right" sx={{ fontWeight: 'bold' }}>시작 날짜</TableCell>
-                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{row.start_date}</TableCell>
+                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{row.ad_start_date}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell align="right" sx={{ fontWeight: 'bold' }}>종료 날짜</TableCell>
-                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{row.end_date}</TableCell>
+                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{row.ad_end_date}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell align="right" sx={{ fontWeight: 'bold' }}>결제할 금액 ($)</TableCell>
