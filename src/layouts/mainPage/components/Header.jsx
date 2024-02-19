@@ -2,7 +2,7 @@ import React from 'react'
 import MDBox from "components/MDBox";
 import MDTypography from 'components/MDTypography';
 import HomeIcon from '@mui/icons-material/Home';
-import LoginIcon from '@mui/icons-material/Login';
+import KeyIcon from '@mui/icons-material/Key';
 import { Link } from 'react-router-dom';
 
 export const Header = () => {
@@ -17,7 +17,7 @@ export const Header = () => {
                     <HomeIcon fontSize='large' color="white" style={{ display: "flex", margin: "10" }} />
                 </Link>
                 <Link to={"/authentication/sign-in"}>
-                    <LoginIcon fontSize='large' color="white" style={{ display: "flex", margin: "10" }} />
+                    <KeyIcon fontSize='large' color="white" style={{ display: "flex", margin: "10" }} />
                 </Link>
             </MDBox>
         </MDBox>
