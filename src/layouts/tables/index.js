@@ -28,6 +28,7 @@ import Footer from "examples/Footer";
 import S3 from "components/S3/S3";
 // Data
 import TblHeader from "./components/TblHeader";
+import Video from "components/S3/Video";
 function Tables() {
 
   return (
@@ -63,6 +64,7 @@ function Tables() {
             </Card>
           </Grid>
           <Grid item xs={12}>
+            <Video></Video>
           </Grid>
         </Grid>
       </MDBox>
