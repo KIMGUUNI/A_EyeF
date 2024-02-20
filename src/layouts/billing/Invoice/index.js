@@ -63,6 +63,7 @@ Invoice.propTypes = {
   id: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   noGutter: PropTypes.bool,
+  
 };
 
 export default Invoice;

@@ -27,10 +27,10 @@ import MasterCard from "examples/Cards/MasterCard";
 import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
 // Billing page components
-import PaymentMethod from "layouts/billing/components/PaymentMethod";
-import Invoices from "layouts/billing/components/Invoices";
-import BillingInformation from "layouts/billing/components/BillingInformation";
-import Transactions from "layouts/billing/components/Transactions";
+import PaymentMethod from "./PaymentMethod";
+import Invoices from "./Invoices";
+import BillingInformation from "./BillingInformation";
+import Transactions from "./Transactions";
 
 function Billing() {
   return (

@@ -17,6 +17,7 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 6,
+  textAlign: 'center',
 };
 
 export default function BasicModal({ isOpen, onClose }) {
@@ -96,7 +97,7 @@ export default function BasicModal({ isOpen, onClose }) {
             onChange={(e) => setInquiry_content(e.target.value)}
             InputLabelProps={{ shrink: true }}
           />
-          <MDButton variant="contained" color="info" onClick={complete}>
+           <MDButton variant="contained" color="info" onClick={complete} sx={{ mt: 3, width: '70%' }}>
             작성
           </MDButton>
         </Box>

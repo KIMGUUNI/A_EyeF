@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
@@ -62,12 +62,13 @@ export default function App() {
   } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const { pathname } = useLocation();
+
   const [adHostInfo, setAdHostInfo] = useState(() => {
     // localStorage에서 데이터 읽기
     const storedUserInfo = sessionStorage.getItem('loginVO');
     return JSON.parse(storedUserInfo) || {};
   });
-  
+
 
   // Open sidenav when mouse enter on mini sidenav
   const handleOnMouseEnter = () => {
@@ -138,31 +139,33 @@ export default function App() {
 
 
   return (
-    <AdHostInfo.Provider value={{adHostInfo, setAdHostInfo}}>
-    <ThemeProvider theme={darkMode ? themeDark : theme}>
-      <CssBaseline />
-      {layout === "dashboard" && (
-        <>
-          <Sidenav
-            color={sidenavColor}
-            brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="A-eye"
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
-          <Configurator/>
-          {configsButton}
-        </>
-      )}
-      {layout === "vr" && <Configurator />}
-      {/**처음 들어가면 가는 홈페이지 */}
-    <Routes>
-      <Route path="/" element={<Navigate to="/mainPage" />} />
-        {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/notFoundPage" />} />
-    </Routes>
-    </ThemeProvider>
+
+    <AdHostInfo.Provider value={{ adHostInfo, setAdHostInfo }}>
+      <ThemeProvider theme={darkMode ? themeDark : theme}>
+        <CssBaseline />
+        {layout === "dashboard" && pathname !== "/notifications" && (
+          <>
+            <Sidenav
+              color={sidenavColor}
+              brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+              brandName="A-eye"
+              routes={routes}
+              onMouseEnter={handleOnMouseEnter}
+              onMouseLeave={handleOnMouseLeave}
+            />
+            <Configurator />
+            {configsButton}
+          </>
+        )}
+        {layout === "vr" && <Configurator />}
+        {/**처음 들어가면 가는 홈페이지 */}
+        <Routes>
+          <Route path="/" element={<Navigate to="/mainPage" />} />
+          {getRoutes(routes)}
+          <Route path="*" element={<Navigate to="/notFoundPage" />} />
+        </Routes>
+      </ThemeProvider>
     </AdHostInfo.Provider>
+
   );
 }

@@ -35,6 +35,13 @@ import { useState } from "react";
 import Payment from "../Payment";
 
 function PaymentMethod() {
+
+  const [paymentMethods, setPaymentMethods] = useState([]); // Add state for payment methods
+
+  const updatePaymentMethods = (newCardData) => {
+    setPaymentMethods([...paymentMethods, newCardData]);
+  };
+
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
 
@@ -114,7 +121,7 @@ function PaymentMethod() {
         </Grid>
       </MDBox>
       <Dialog open={isAddCardModalOpen} onClose={handleCloseAddCardModal}>
-        {isAddCardModalOpen && <Payment onCloseModal={handleCloseAddCardModal} />}
+        {isAddCardModalOpen && <Payment onCloseModal={handleCloseAddCardModal} updatePaymentMethods={updatePaymentMethods} />}
       </Dialog>
     </Card>
   );
