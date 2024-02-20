@@ -33,16 +33,19 @@ import MDAvatar from "components/MDAvatar";
 
 // Material Dashboard 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
-
+import Date from "components/S3/Date"
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
 import backgroundImage from "assets/images/bg-profile.jpeg";
-
 function Header({ children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
+
   useEffect(() => {
+
+    
+
     // A function that sets the orientation state of the tabs.
     function handleTabsOrientation() {
       return window.innerWidth < breakpoints.values.sm
@@ -61,9 +64,8 @@ function Header({ children }) {
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleTabsOrientation);
   }, [tabsOrientation]);
-
+  
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
-
   return (
     <MDBox position="relative" mb={5}>
       <MDBox
@@ -118,10 +120,10 @@ function Header({ children }) {
                   }
                 />
                 <Tab
-                  label="Message"
+                  label="결제 현황"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      email
+                      money
                     </Icon>
                   }
                 />
@@ -137,7 +139,8 @@ function Header({ children }) {
             </AppBar>
           </Grid>
         </Grid>
-        {children}
+        {tabValue == 0 ? <Date/> : ""}        
+        {tabValue == 1 ? children : ""}
       </Card>
     </MDBox>
   );

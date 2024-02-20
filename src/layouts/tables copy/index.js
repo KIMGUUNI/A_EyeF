@@ -28,6 +28,7 @@ import Footer from "examples/Footer";
 // Data
 import TblHeader from "./components/TblHeader";
 import SelectVd from "components/S3/SelectVd"
+import Date from "components/S3/Date"
 function Tables2() {
 
   return (
@@ -53,11 +54,37 @@ function Tables2() {
                 </MDTypography>
               </MDBox>
               <div style={{ textAlign: 'center', marginTop:"2%" }}>
-                <MDTypography variant="h2" color="dark">
-                 
-                </MDTypography>
               <MDBox pt={3}>
                 <SelectVd/>
+              </MDBox>
+              </div>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+          </Grid>
+        </Grid>
+      </MDBox>
+      <MDBox pt={6} pb={3}>
+        <Grid container spacing={6}>
+          <Grid item xs={12}>
+            <Card>
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
+                <MDTypography variant="h4" color="white" marginLeft="3%">
+                  광고 상위 리스트
+                </MDTypography>
+              </MDBox>
+              <div style={{ textAlign: 'center', marginTop:"2%" }}>
+              <MDBox pt={3}>
+                <Date/>
               </MDBox>
               </div>
             </Card>

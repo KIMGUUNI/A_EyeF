@@ -1,15 +1,3 @@
-.current-focus{
-  display: flex;
-  color: red;
-}
-
-.not-current-focus{
-    display: flex;
-    color : white
-
-}
-
-
 .b-container{
   position: fixed;
   overflow: hidden;

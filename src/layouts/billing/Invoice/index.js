@@ -46,8 +46,6 @@ function Invoice({ date, id, price, noGutter }) {
           {price}
         </MDTypography>
         <MDBox display="flex" alignItems="center" lineHeight={1} ml={3} sx={{ cursor: "pointer" }}>
-          <MDTypography variant="button" fontWeight="bold">
-          </MDTypography>
         </MDBox>
       </MDBox>
     </MDBox>

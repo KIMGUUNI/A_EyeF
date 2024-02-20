@@ -14,6 +14,7 @@ import Modal from '@mui/material/Modal';
 import MDButton from "components/MDButton";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+
 const columns = [
   { id: 'ad_idx', label: '광고번호', minWidth: 170 },
   {
@@ -38,15 +39,17 @@ const columns = [
     align: 'right',
     format: (value) => value.toFixed(2),
   },
+  { id: 'ad_start_date', label: '시작날짜', minWidth: 170,align: 'right' },
+  { id: 'ad_end_date', label: '종료날짜', minWidth: 170,align: 'right' },
 ];
 
-function createData(ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender) {
-  return { ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender };
+function createData(ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender,ad_start_date,ad_end_date) {
+  return { ad_idx, ad_name, user_idx, ad_target_age, ad_target_gender,ad_start_date,ad_end_date};
 }
 
 export default function StickyHeadTable() {
   const style = {
-    display:'flex',
+    display: 'flex',
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -76,7 +79,7 @@ export default function StickyHeadTable() {
     try {
       const response = await axiosInstance.post("/api/SelectVd");
       const adData = response.data;
-      const newRows = adData.map(data => createData(data.ad_idx, data.ad_name, data.user_idx, data.ad_target_age, data.ad_target_gender));
+      const newRows = adData.map(data => createData(data.ad_idx, data.ad_name, data.user_idx, data.ad_target_age, data.ad_target_gender,data.ad_start_date,data.ad_end_date));
       setRows(newRows);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -120,7 +123,7 @@ export default function StickyHeadTable() {
         file_s3_path: selectedVideoUrl,
       };
       const response = await axiosInstance.post("/api/Approval", requestData);
-      if(response){
+      if (response) {
         setOpenModal(false);
         fetchDataFromDB();
         alert("승인 완료");
@@ -129,17 +132,17 @@ export default function StickyHeadTable() {
       console.error('Error approving:', error);
     }
   };
-  const handleRefuse = async () =>{
-    try{
-      const requestData= {
+  const handleRefuse = async () => {
+    try {
+      const requestData = {
         ad_idx: row.ad_idx
       };
-      const response = await axiosInstance.post("/api/Refuse",requestData);
-      if(response){
+      const response = await axiosInstance.post("/api/Refuse", requestData);
+      if (response) {
         setOpenModal(false);
         fetchDataFromDB();
       }
-    }catch(e){
+    } catch (e) {
       e
     }
   }
@@ -170,7 +173,7 @@ export default function StickyHeadTable() {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell sx={{ fontWeight: 'normal' }} key={column.id} align={column.align}>
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}
@@ -201,7 +204,7 @@ export default function StickyHeadTable() {
         <Box sx={style}>
           <div className="modal">
             <div className="modal-content">
-              <span className="close" onClick={handleCloseModal}>&times;</span>
+              <span className="close" onClick={handleCloseModal} style={{ fontSize: '30px', cursor: 'pointer' }}>&times;</span>
               <ReactPlayer url={selectedVideoUrl} playing />
               <MDBox height="200%" mt={0.5} lineHeight={1}>
                 <MDTypography variant="h5" fontWeight="medium">
@@ -212,9 +215,9 @@ export default function StickyHeadTable() {
                   <p>타겟 성별 : {row?.ad_target_gender}</p>
                 </MDTypography>
               </MDBox>
-              <MDBox height="300%" mt={0.5} lineHeight={1}>
-              <MDButton color="info" onClick={handleApprove}>승인</MDButton>
-              <MDButton color="warning" onClick={handleRefuse}>거절</MDButton>
+              <MDBox height="300%" mt={2} lineHeight={1} textAlign="center">
+                <MDButton color="info" onClick={handleApprove}>승인</MDButton>
+                <MDButton color="warning" onClick={handleRefuse} style={{ marginLeft: '10px' }}>거절</MDButton>
               </MDBox>
             </div>
           </div>
