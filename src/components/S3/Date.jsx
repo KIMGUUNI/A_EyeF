@@ -28,6 +28,7 @@ function createData(ad_name, user_idx, ad_target_age, ad_target_gender, ad_play_
     };
 }
 
+     
 function Row(props) {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
@@ -44,13 +45,13 @@ function Row(props) {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" sx={{ fontWeight: 'normal' }}> 
                     {row.ad_name}
                 </TableCell>
-                <TableCell align="right">{row.user_idx}</TableCell>
-                <TableCell align="right">{row.ad_target_age}</TableCell>
-                <TableCell align="right">{row.ad_target_gender}</TableCell>
-                <TableCell align="right">{row.ad_play_number}</TableCell>
+                <TableCell sx={{ fontWeight: 'normal' }} align="right">{row.user_idx}</TableCell>
+                <TableCell sx={{ fontWeight: 'normal' }} align="right">{row.ad_target_age}</TableCell>
+                <TableCell sx={{ fontWeight: 'normal' }} align="right">{row.ad_target_gender}</TableCell>
+                <TableCell sx={{ fontWeight: 'normal' }} align="right">{row.ad_play_number}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
