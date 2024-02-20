@@ -35,7 +35,6 @@ const Video = () => {
           return { current: prevUrls.current, next: [...nextFirstUrl, ...newVideoUrls] };
         }
       });
-      console.log("재생한 동영상",videoUrls)
     });
 
     return () => socket.close();
@@ -69,6 +68,7 @@ const Video = () => {
   };
 
   useEffect(() => {
+    console.log(videoUrls)
     if (videoUrls.current.length === 0 && videoUrls.next.length === 0) {
       sessionStorage.removeItem("playedVideos");
     }
