@@ -17,7 +17,6 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // @mui material components
-import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -47,9 +46,7 @@ function Invoice({ date, id, price, noGutter }) {
           {price}
         </MDTypography>
         <MDBox display="flex" alignItems="center" lineHeight={1} ml={3} sx={{ cursor: "pointer" }}>
-          <Icon fontSize="small">picture_as_pdf</Icon>
           <MDTypography variant="button" fontWeight="bold">
-            &nbsp;PDF
           </MDTypography>
         </MDBox>
       </MDBox>
@@ -68,6 +65,7 @@ Invoice.propTypes = {
   id: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   noGutter: PropTypes.bool,
+  
 };
 
 export default Invoice;

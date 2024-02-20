@@ -21,12 +21,11 @@ const style = {
 };
 
 
-export default function Tmodal({ row }) {
+export default function Tmodal({ row, setData }) {
   const [inquiry_title, setInquiry_title] = React.useState("");
   const [inquiry_content, setInquiry_content] = React.useState("");
   const [realAnswer_content, setRealAnswer_content] = React.useState("");
   const [answer_content, setAnswer_content] = React.useState("");
-  const [inquiry_completed] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [inquiry_pw, setInquiry_pw] = React.useState("");
   const handleClose = () => setOpen(false);
@@ -51,8 +50,22 @@ export default function Tmodal({ row }) {
 
   const deletePost = async () => {
     try {
+      console.log("보내줄거", inquiry_indx);
       await axiosInstance.post("/api/deletePost", { inquiry_indx });
-
+  
+      // Fetch updated data after deletion
+      const response = await axiosInstance.post("/api/boardList");
+      const boardList = response.data;
+  
+      if (boardList) {
+        const updatedBoardList = boardList.map((row) => ({
+          ...row,
+          answerStatus: row.inquiry_completed === 1 ? '답변완료' : '미등록',
+        }));
+  
+        setData(updatedBoardList);
+      }
+  
       handleClose();
     } catch (error) {
       console.error("Error during post deletion:", error);
@@ -67,7 +80,7 @@ export default function Tmodal({ row }) {
         })
         console.log("11", requestData)
         const response = await axiosInstance.post("/api/boardGet", requestData);
-
+        
         const boardList = response.data;
 
         if (boardList) {
@@ -93,26 +106,34 @@ export default function Tmodal({ row }) {
     try {
       const boardAnswer = {
         inquiry_indx,
-        inquiry_completed: inquiry_completed !== null ? 1 : 0,
-        answer_content
-      }
-
-      const response = await axiosInstance.post("/api/boardAnswer", boardAnswer);
+        inquiry_completed: 1, // Assuming 1 means answered, you might want to adjust this based on your logic
+        answer_content,
+      };
+  
+      // Send the answer to the server
+      await axiosInstance.post("/api/boardAnswer", boardAnswer);
+  
+      // Fetch the updated data after answering
+      const response = await axiosInstance.post("/api/boardList");
       const boardList = response.data;
-
+  
       if (boardList) {
-        console.log(inquiry_indx);
-        console.log(boardList);
-        console.log(answer_content);
-        setInquiry_title(boardList.inquiry_title);
-        setInquiry_content(boardList.inquiry_content);
-        setInquiry_pw(boardList.inquiry_pw)
+        const updatedBoardList = boardList.map((row) => ({
+          ...row,
+          answerStatus: row.inquiry_completed === 1 ? '답변완료' : '미등록',
+        }));
+  
+        // Update the state with the new data
+        setData(updatedBoardList);
       }
-
+  
+      // Close the modal
+      handleClose();
     } catch (error) {
       console.error("Error during data fetching:", error);
     }
-  }
+  };
+  
 
   return (
     <div>

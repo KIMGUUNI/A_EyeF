@@ -8,7 +8,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import Header from "layouts/profile/components/Header";
 import Board from "layouts/profile/components/Board";
-import Invoice from "layouts/billing/components/Invoice";
+import Invoice from "layouts/billing/Invoice";
 function Overview() {
   return (
     <DashboardLayout>
