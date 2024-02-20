@@ -28,7 +28,6 @@ import Footer from "examples/Footer";
 import S3 from "components/S3/S3";
 // Data
 import TblHeader from "./components/TblHeader";
-import Video from "components/S3/Video";
 function Tables() {
 
   return (
@@ -53,10 +52,7 @@ function Tables() {
                   광고신청
                 </MDTypography>
               </MDBox>
-              <div style={{ textAlign: 'center', marginTop:"2%" }}>
-                <MDTypography variant="h2" color="dark">
-                 Please upload the advertisement
-                </MDTypography>
+              <div style={{ textAlign: 'center'}}>
               <MDBox pt={3}>
                 <S3></S3>
               </MDBox>
@@ -64,7 +60,6 @@ function Tables() {
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Video></Video>
           </Grid>
         </Grid>
       </MDBox>
