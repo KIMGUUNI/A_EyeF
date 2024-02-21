@@ -53,9 +53,6 @@ function Dashboard() {
     }
   )
 
-  
-  console.log(chartBarD.labels)
-
   return (
     <CurrentAd.Provider value={{ currentAd, setCurrentAd, monthAd, setMonthAd,chartD, setChartD, chartBarD, setChartBarD }}>
       <DashboardLayout>

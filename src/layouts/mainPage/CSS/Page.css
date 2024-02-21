@@ -31,7 +31,7 @@
   }
 
   .fly-in-text {
-    animation: fly-in 1s ease-in-out forwards;
+    animation: fly-in 1.5s ease-in-out forwards;
     color: white;
     font-weight: 900;
     font-size: 2em;
@@ -41,7 +41,7 @@
   }
 
   .revers-fly-in-text {
-    animation: re-fly-in 1s ease-in-out forwards;
+    animation: re-fly-in 1.5s ease-in-out forwards;
     color: white;
     font-weight: 900;
     font-size: 2em;
@@ -132,7 +132,7 @@
   /* 절대 위치로 설정하여 다른 페이지 위에 겹쳐지도록 함 */
   width: 100%;
   /* 페이지 컴포넌트의 너비를 100%로 설정 */
-  transition: transform 1.25s ease;
+  transition: transform 1s ease;
   /* transform 속성에 대한 트랜지션을 적용하여 애니메이션을 부드럽게 함 */
 }
 

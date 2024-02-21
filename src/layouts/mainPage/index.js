@@ -28,7 +28,8 @@ function mainPage() {
 
   const handlePageTransitionComplete = (Index) => {
     // 페이지 이동이 완료되었음을 알리는 이벤트 발생
-    document.dispatchEvent(new Event(`pageTransitionComplete${Index}`));
+      document.dispatchEvent(new Event(`pageTransitionComplete${Index}`));
+
   };
 
   const handleScroll = (event) => {
@@ -60,7 +61,7 @@ function mainPage() {
             {pages[2]}
           </div>
         </div>
-        <MainNavbutton pages={pages} value={currentPageIndex} />
+        <MainNavbutton pages={pages}/>
       </div>
     </currentMainPage.Provider>
   );
