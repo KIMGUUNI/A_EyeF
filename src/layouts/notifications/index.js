@@ -107,7 +107,7 @@ function Notifications() {
       setSlideAnimation(`
       @keyframes slide {
         from {
-          transform: translateX(calc(2.6% * ${articleLength.length})); /* 오른쪽 끝에서 시작합니다. */
+          transform: translateX(calc(1.22% * ${articleLength.length})); /* 오른쪽 끝에서 시작합니다. */
         }
         to {
           transform: translateX(-100%); /* 왼쪽 끝까지 이동합니다. */
