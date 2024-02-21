@@ -125,6 +125,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
     },
   });
 
+  console.log(sessionStorage.getItem('UserInfo'))
   return (
     <AppBar
       position={absolute ? "absolute" : navbarType}
