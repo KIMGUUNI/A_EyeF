@@ -76,7 +76,6 @@ function Basic() {
           sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
           setUser_rol("Admin")
         } else {
-          console.log(response)
           Cookies.remove("Admin")
           Cookies.set("reToken", reToken)
           Cookies.set("User", token, { expires: new Date(Date.now() + expirationTime) });

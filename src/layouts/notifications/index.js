@@ -16,6 +16,8 @@ function Notifications() {
   const [weatherData, setWeatherData] = useState([]);
   const [articles, setArticles] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [articleLength, setArticleLength] = useState(0);
+  const [slideAnimation, setSlideAnimation] = useState('');
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
@@ -37,6 +39,9 @@ function Notifications() {
         );
 
         setArticles(response.data.articles.map(article => article.title));
+
+        
+        setArticleLength(response.data.articles.map(article => article.title).reduce((acc,curr) => acc+ curr, 0))
       } catch (error) {
         console.error('뉴스 데이터를 가져오는 중 오류 발생:', error);
       }
@@ -85,18 +90,39 @@ function Notifications() {
     return `wi ${iconName}`;
   };
 
+  
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex(prevIndex => (prevIndex + 1) % 20);
     }, 1000); // 15초마다 기사 변경
-
-    console.log(currentIndex)
+    
     return () => clearInterval(intervalId);
   }, [currentIndex]);
+  
+  useEffect(()=>{
+    const timer = setTimeout(()=>{
+      
+      console.log(articleLength.length)
+      setSlideAnimation(`
+      @keyframes slide {
+        from {
+          transform: translateX(calc(1.22% * ${articleLength.length})); /* 오른쪽 끝에서 시작합니다. */
+        }
+        to {
+          transform: translateX(-100%); /* 왼쪽 끝까지 이동합니다. */
+        }
+      }
+    `)
+    },1000)
+
+    return () => clearTimeout(timer);
+  }, [articleLength]);
+
 
   return (
     <div>
+      <style>{slideAnimation}</style>
       <div className="main-container">
         <div className="weather-container">
           <ul className="weather-list">
@@ -121,7 +147,7 @@ function Notifications() {
               key={index}
               className={`news-item`}
             >
-              {title}
+              {title}{index}
             </div>
           ))}
 
