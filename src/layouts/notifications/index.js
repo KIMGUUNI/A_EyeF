@@ -14,8 +14,8 @@ const NEWS_API_KEY = 'd8048ee103aa4740909844166d05e92d'; // Replace with your ac
 function Notifications() {
 
   const [weatherData, setWeatherData] = useState([]);
-  const [newsData, setNewsData] = useState([]);
-
+  const [articles, setArticles] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
@@ -36,8 +36,7 @@ function Notifications() {
           `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${NEWS_API_KEY}`
         );
 
-        console.log('News API 응답:', response.data);
-        setNewsData(response.data.articles.slice(0, 5));
+        setArticles(response.data.articles.map(article => article.title));
       } catch (error) {
         console.error('뉴스 데이터를 가져오는 중 오류 발생:', error);
       }
@@ -86,36 +85,51 @@ function Notifications() {
     return `wi ${iconName}`;
   };
 
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex(prevIndex => (prevIndex + 1) % 20);
+    }, 1000); // 15초마다 기사 변경
+
+    console.log(currentIndex)
+    return () => clearInterval(intervalId);
+  }, [currentIndex]);
+
   return (
+    <div>
+      <div className="main-container">
+        <div className="weather-container">
+          <ul className="weather-list">
+            {filteredWeatherData.map((item) => (
+              <li key={item.dt} className="weather-item">
+                <p>{moment.unix(item.dt).format('MM월 DD일 HH:mm A')}</p>
+                <p>온도: {Math.round(item.main.temp)}°C</p>
+                <i className={getWeatherIcon(item.weather[0].icon)}></i>
+              </li>
+            ))}
+          </ul>
+          <MDBox px={0.5}>
+            <DefaultNavbarLink icon="donut_large" name="대시보드" route="/dashboard" />
+          </MDBox>
+        </div>
 
-    <div className="main-container">
-      <div className="weather-container">
-        <ul className="weather-list">
-          {filteredWeatherData.map((item) => (
-            <li key={item.dt} className="weather-item">
-              <p>{moment.unix(item.dt).format('MM월 DD일 HH:mm A')}</p>
-              <p>온도: {Math.round(item.main.temp)}°C</p>
-              <i className={getWeatherIcon(item.weather[0].icon)}></i>
-            </li>
-          ))}
-        </ul>
-        <MDBox px={0.5}>
-          <DefaultNavbarLink icon="donut_large" name="대시보드" route="/dashboard" />
-        </MDBox>
       </div>
-
       <div className="news-container">
-        <ul className="news-list">
-          {newsData.map((article) => (
-            <li key={article.title} className="news-item">
-              <h3>{article.title}</h3>
-            </li>
+        <div className="news-wrapper">
+          {articles.map((title, index) => (
+            <div
+              key={index}
+              className={`news-item`}
+            >
+              {title}
+            </div>
           ))}
-        </ul>
+
+        </div>
       </div>
     </div>
-
   );
+
 }
 
 
