@@ -14,6 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useState, useEffect, useContext } from "react";
+import { useCookies } from 'react-cookie';
 
 // react-github-btn
 
@@ -48,7 +49,7 @@ import { AdHostInfo } from "context/AdHostInfo";
 
 function Configurator() {
 
-
+  const [,,removeCookie] = useCookies(['MM']);
   const [controller, dispatch] = useMaterialUIController();
   const {
     openConfigurator,
@@ -62,6 +63,18 @@ function Configurator() {
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
   const {adHostInfo} = useContext(AdHostInfo);
   
+  const logoutHandler = async () => {
+    try {
+      // 여기에서 로그아웃 동작 수행
+      document.cookie = "MM=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      localStorage.clear();
+      sessionStorage.clear();
+      removeCookie('MM');
+      window.location.reload(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   // useEffect(()=>{
   //   const fetchData = async () => {
     
@@ -300,15 +313,18 @@ function Configurator() {
         <MDBox mt={2} textAlign="center">
           <MDBox display="flex" justifyContent="center">
             <MDBox mr={1.5}>
+
+              
               <MDButton
                 component={Link}
-                href="//twitter.com/intent/tweet?text=Check%20Material%20Dashboard%20React%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23react%20%mui&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-dashboard-react"
+                onClick={logoutHandler}
                 target="_blank"
                 rel="noreferrer"
                 color="dark"
               >
                 조만간 
               </MDButton>
+            
             </MDBox>
             <MDButton
               component={Link}

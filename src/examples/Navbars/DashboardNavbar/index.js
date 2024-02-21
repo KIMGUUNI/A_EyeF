@@ -180,6 +180,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               >
                 <Icon sx={iconsStyle}>settings</Icon>
               </IconButton>
+
               <IconButton
                 size="small"
                 disableRipple
