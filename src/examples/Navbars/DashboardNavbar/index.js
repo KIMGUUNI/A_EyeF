@@ -163,7 +163,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   </IconButton>
                 </Link>
               }
-
               <IconButton
                 size="small"
                 disableRipple
