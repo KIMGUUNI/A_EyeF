@@ -5,7 +5,6 @@ import axios from 'axios';
 const Video = () => {
   const [videoUrls, setVideoUrls] = useState({ current: [], next: [] });
   const [key, setKey] = useState(0);
-
   const handleVideoEnded = () => {
     setKey(prevKey => prevKey + 1);
   };
@@ -19,32 +18,34 @@ const Video = () => {
 
     socket.addEventListener("message", (event) => {
       const data = JSON.parse(event.data);
-      const playedVideos = JSON.parse(sessionStorage.getItem("playedVideos")) || [];
-
       setVideoUrls(prevUrls => {
-        const newVideoUrls = data.video_urls.filter(url => 
-          !prevUrls.current.includes(url) && 
-          !prevUrls.next.includes(url) &&
-          !playedVideos.includes(url)
-        );
-
-        if (prevUrls.current.length === 0) {
-          return { current: newVideoUrls, next: prevUrls.next };
+        const sessionUrls = JSON.parse(sessionStorage.getItem('sessionUrls')) || [];
+        const currentUrl = prevUrls.current[0];
+        const filteredUrls = data.video_urls.filter(url => !sessionUrls.includes(url) && url !== currentUrl);
+        if (filteredUrls.length > 0) {
+          if (prevUrls.current.length === 0) {
+            return { current: filteredUrls, next: prevUrls.next };
+          } else {
+            return { current: prevUrls.current, next: [...prevUrls.next, ...filteredUrls] };
+          }
         } else {
-          const nextFirstUrl = prevUrls.next.length > 0 ? [prevUrls.next[0]] : [];
-          return { current: prevUrls.current, next: [...nextFirstUrl, ...newVideoUrls] };
+          console.log("All received URLs are either duplicates or already playing. Ignoring.");
+          return prevUrls;
         }
       });
     });
-
+  
     return () => socket.close();
   }, []);
 
-  const playNextVideo = () => {
+  const playNextVideo = (url) => {
+    const sessionUrls = JSON.parse(sessionStorage.getItem('sessionUrls')) || [];
+    const updatedSessionUrls = [...sessionUrls, url];
+    sessionStorage.setItem('sessionUrls', JSON.stringify(updatedSessionUrls));
+
     setVideoUrls(prevUrls => {
-      if (prevUrls.current.length > 0) {
+      if (prevUrls.next.length > 0) {
         sendUrlToSpringBoot(prevUrls.current[0]);
-        sessionStorage.setItem("playedVideos", JSON.stringify([prevUrls.current[0], ...JSON.parse(sessionStorage.getItem("playedVideos")) || []]));
         return { current: prevUrls.next, next: [] };
       } else {
         sendUrlToSpringBoot(prevUrls.current[0]);
@@ -60,20 +61,21 @@ const Video = () => {
         withCredentials: true,
       });
       const response = await axiosInstance.post('/api/s3Url', { url });
-      
-      console.log('URL이 성공적으로 전송되었습니다.',response.data);
+
+      console.log('URL이 성공적으로 전송되었습니다.', response.data);
     } catch (error) {
       console.error('HTTP POST 요청 중 오류 발생:', error);
     }
   };
+  const resetSession = () => {
+    sessionStorage.removeItem('sessionUrls');
+  };
 
   useEffect(() => {
-    console.log(videoUrls)
     if (videoUrls.current.length === 0 && videoUrls.next.length === 0) {
-      sessionStorage.removeItem("playedVideos");
+      resetSession();
     }
   }, [videoUrls]);
-
   return (
     <div>
       {videoUrls.current.length > 0 ? (
@@ -83,17 +85,17 @@ const Video = () => {
           width="100%"
           height="100%"
           playing
-          onEnded={playNextVideo}
+          onEnded={() => playNextVideo(videoUrls.current[0])}
         />
       ) : (
-        <ReactPlayer 
-        key={key}
-        url="https://video-add.s3.ap-northeast-2.amazonaws.com/default/%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%9D%B8%EC%9E%AC%EA%B0%9C%EB%B0%9C%EC%9B%90%EC%98%81%EC%83%81.mp4"
-        controls
+        <ReactPlayer
+          key={key}
+          url="https://video-add.s3.ap-northeast-2.amazonaws.com/default/%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%9D%B8%EC%9E%AC%EA%B0%9C%EB%B0%9C%EC%9B%90%EC%98%81%EC%83%81.mp4"
+          controls
           width="100%"
           height="100%"
           playing
-          onEnded={handleVideoEnded}/>
+          onEnded={handleVideoEnded} />
 
       )}
     </div>
