@@ -92,7 +92,7 @@ function Basic() {
   };
 
 
-  /* const getUserInfo = async () => {
+  const getUserInfo = async () => {
     try {
       let token;
 
@@ -170,7 +170,7 @@ function Basic() {
 
       }
     }
-  } */
+  }
 
   return (
     <BasicLayout image={bgImage}>
@@ -186,6 +186,7 @@ function Basic() {
           mb={1}
           textAlign="center"
         >
+          <button onClick={getUserInfo}>정보요청</button>
           <MDTypography variant="h5" fontWeight="medium" color="white" mt={1}>
             A-eye
           </MDTypography>
