@@ -78,6 +78,7 @@ const Payment = ({ onCloseModal, totalAmount, result }) => {
               pay_method: 'card' // pay_method 변수에 'card' 값 할당
             });
           }
+          alert('결제 완료.')
         } catch (error) {
           console.error('Error during data fetching:', error);
         }
