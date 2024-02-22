@@ -71,6 +71,7 @@ function Configurator() {
       sessionStorage.clear();
       removeCookie('MM');
       window.location.reload(true);
+      window.location.href = "http://localhost:3000/mainPage";
     } catch (error) {
       console.error(error);
     }
@@ -322,7 +323,7 @@ function Configurator() {
                 rel="noreferrer"
                 color="dark"
               >
-                조만간 
+                로그아웃 
               </MDButton>
             
             </MDBox>
