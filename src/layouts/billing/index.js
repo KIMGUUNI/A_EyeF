@@ -9,19 +9,9 @@ import MDTypography from 'components/MDTypography';
 import PayTable from './PayTable';
 
 
-// @mui material components
-import Grid from "@mui/material/Grid";
-
-// Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-
-// Material Dashboard 2 React examples
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-
 function Billing() {
 
-
+  console.log("빌링")
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -38,7 +28,7 @@ function Billing() {
             </Grid>
             <Grid item xs={12} xl={4}></Grid>
           </Grid>
-          <MDBox p={0} mb={-5} mt={-5}>
+          <MDBox p={0} mb={-5} mt={-3}>
             <MDBox
               mx={2}
               mt={-3}
@@ -49,14 +39,13 @@ function Billing() {
               borderRadius="lg"
               coloredShadow="info"
             >
-
               <MDTypography variant="h4" color="white" marginLeft="3%">
                 결제 광고 리스트
               </MDTypography>
             </MDBox>
             <PayTable/>
             <br />
-          
+
             <br />
             <br />
             <br />

@@ -113,7 +113,7 @@ function Header({ children }) {
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
-                  label="App"
+                  label="결제 현황"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       home
@@ -121,7 +121,7 @@ function Header({ children }) {
                   }
                 />
                 <Tab
-                  label="결제 현황"
+                  label="내 광고"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       money
@@ -140,8 +140,8 @@ function Header({ children }) {
             </AppBar>
           </Grid>
         </Grid>
-        {tabValue == 0 ? <Date/> : ""}        
-        {tabValue == 1 ? children : ""}
+        {tabValue == 0 ? children : ""}
+        {tabValue == 1 ? <Date/> : ""}        
       </Card>
     </MDBox>
   );

@@ -71,14 +71,14 @@ function Basic() {
 
       if (token) {
         if (user_email == "admin") {
-          Cookies.set("Admin", token, { expires: new Date(Date.now() + expirationTime) });
+          Cookies.set("Admin", token, { expires: null });
           Cookies.set("reToken", reToken)
           sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
           setUser_rol("Admin")
         } else {
           Cookies.remove("Admin")
           Cookies.set("reToken", reToken)
-          Cookies.set("User", token, { expires: new Date(Date.now() + expirationTime) });
+          Cookies.set("User", token, { expires: null });
           sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
           setUser_rol("User")
         }

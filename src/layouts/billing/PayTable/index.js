@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import ResultTable from '../resultTable';
-import PaymentMethod from '../components/PaymentMethod';
+import PaymentMethod from '../PaymentMethod';
 
 export default function PayTable() {
   const axiosInstance = axios.create({
