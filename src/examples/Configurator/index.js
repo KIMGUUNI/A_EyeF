@@ -76,21 +76,7 @@ function Configurator() {
       console.error(error);
     }
   };
-  // useEffect(()=>{
-  //   const fetchData = async () => {
-    
-  //     try {
-  //       const result = await useContext(UserInfo);
-  //       setUserInfo(result);
-  //       console.log("성공", userInfo)
-  //     } catch (error) {
-  //       console.log("실패" , userInfo)
-  //     }
-  //   };
-  //   fetchData();
 
-  // },[userInfo])
-  // Use the useEffect hook to change the button state for the sidenav type based on window size.
   useEffect(() => {
     // A function that sets the disabled state of the buttons for the sidenav type.
     function handleDisabled() {
