@@ -41,8 +41,9 @@ import backgroundImage from "assets/images/bg-profile.jpeg";
 function Header({ children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
-
-
+  const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
+  const email = loginVO.user_name;
+  console.log("email",email)
   useEffect(() => {
 
     
@@ -103,10 +104,10 @@ function Header({ children }) {
           <Grid item>
             <MDBox height="200%" mt={0.5} lineHeight={1}>
               <MDTypography variant="h5" fontWeight="medium">
-                조원제
+              {email}
               </MDTypography>
               <MDTypography variant="button" color="text" fontWeight="regular">
-                개발자 / 연봉1억
+                Email: {loginVO.user_email}
               </MDTypography>
             </MDBox>
           </Grid>

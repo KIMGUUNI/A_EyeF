@@ -1,8 +1,21 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const Payment = ({ onCloseModal }) => {
+const Payment = ({ onCloseModal, totalAmount, result }) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
-
+  const axiosInstance = axios.create({
+    baseURL: 'http://localhost:8089/A_Eye',
+    withCredentials: true,
+  });
+  /*  const modifiedAdList = boardList.map(row => ({
+              id: row.ad_idx,
+              광고: row.ad_name,
+              금액: row.ad_play_number * 500,
+              '재생 횟수': row.ad_play_number,
+              '시작 날짜': row.ad_start_date,
+              '종료 날짜': row.ad_end_date,
+              '결제 상태': 500
+            })); */
   useEffect(() => {
     const loadScripts = async () => {
       try {
@@ -15,7 +28,7 @@ const Payment = ({ onCloseModal }) => {
             document.head.appendChild(script);
           });
         };
-
+        console.log(totalAmount)
         await loadScript('https://code.jquery.com/jquery-1.12.4.min.js');
         await loadScript('https://cdn.iamport.kr/js/iamport.payment-1.1.7.js');
 
@@ -28,17 +41,17 @@ const Payment = ({ onCloseModal }) => {
             pay_method: 'card',
             merchant_uid: `mid_${new Date().getTime()}`,
             name: '결제 테스트',
-            amount: '100',
+            amount: totalAmount,
             custom_data: {
-                name: '부가정보',
-                desc: '세부 부가정보'
+              name: '부가정보',
+              desc: '세부 부가정보'
             },
             buyer_name: 'q',
             buyer_tel: '01012345678',
             buyer_email: '14279625@gmail.com',
             buyer_addr: '구천면로 000-00',
             buyer_postalcode: '01234',
-        };
+          };
 
 
           IMP.request_pay(data, callback);
@@ -50,19 +63,32 @@ const Payment = ({ onCloseModal }) => {
       }
     };
 
-    const callback = (response) => {
-        const { success, error_msg, cancel_request } = response;
-      
-        if (success) {
-          alert('결제 성공');
-        } else if (cancel_request) {
-          alert('결제가 취소되었습니다.');
-        } else {
-          alert(`결제 실패: ${error_msg}`);
+    const callback = async (response) => {
+      const { success, error_msg, cancel_request } = response;
+      if (success) {
+        try {
+          // result 배열을 순회하여 각 객체의 id와 계산된 금액을 이용하여 요청을 보내기
+          for (const item of result) {
+            const id = item.id;
+            const pay_cost = item.금액; // 금액 값을 사용하여 결제 비용 설정
+        
+            await axiosInstance.post('/api/payResult', {
+              ad_idx: id, // id를 ad_idx로 설정
+              pay_cost,
+              pay_method: 'card' // pay_method 변수에 'card' 값 할당
+            });
+          }
+        } catch (error) {
+          console.error('Error during data fetching:', error);
         }
-      
-        setIsModalOpen(false); // Move this line outside the if-else block
-      };
+      } else if (cancel_request) {
+        alert('결제가 취소되었습니다.');
+      } else {
+        alert(`결제 실패: ${error_msg}`);
+      }
+
+      setIsModalOpen(false); // if-else 블록 바깥으로 이동
+    };
 
     loadScripts();
 
@@ -71,17 +97,15 @@ const Payment = ({ onCloseModal }) => {
     };
   }, []);
 
-useEffect(() => {
-  // Close the modal when isModalOpen changes to false
-  if (!isModalOpen) {
-    onCloseModal();
-    // Set the display style to 'none'
-    const modalContainer = document.querySelector('.MuiDialog-container');
-    if (modalContainer) {
-      modalContainer.style.display = 'none';
+  useEffect(() => {
+    if (!isModalOpen) {
+      onCloseModal();
+      const modalContainer = document.querySelector('.MuiDialog-container');
+      if (modalContainer) {
+        modalContainer.style.display = 'none';
+      }
     }
-  }
-}, [isModalOpen, onCloseModal]);
+  }, [isModalOpen, onCloseModal]);
 
 
   return null;
