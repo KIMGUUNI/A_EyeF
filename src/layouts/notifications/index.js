@@ -1,10 +1,10 @@
-import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
 import MDBox from "components/MDBox";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import './index.css'
 import 'weather-icons/css/weather-icons.css';
+import Video from "components/S3/Video";
 
 const API_KEY = 'f828f2753374c6d5cf9bd283096a7a21';
 const CITY_NAME = 'Gwangju';
@@ -13,7 +13,12 @@ const NEWS_API_KEY = 'd8048ee103aa4740909844166d05e92d'; // Replace with your ac
 function Notifications() {
 
   const [weatherData, setWeatherData] = useState([]);
-  const [newsData, setNewsData] = useState([]);
+  const [articles, setArticles] = useState([]);
+  const [articleLength, setArticleLength] = useState(0);
+  const [slideAnimation, setSlideAnimation] = useState('');
+  const [currentWeather , setCurrentWeather] = useState('');
+  const [currentTime, setCurrentTime] = useState(new Date());
+
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -24,6 +29,7 @@ function Notifications() {
 
         console.log('Weather API 응답:', response.data);
         setWeatherData(response.data.list);
+        setCurrentWeather(response.data.list[0].weather[0].main)
       } catch (error) {
         console.error('날씨 데이터를 가져오는 중 오류 발생:', error);
       }
@@ -35,13 +41,17 @@ function Notifications() {
           `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${NEWS_API_KEY}`
         );
 
-        console.log('News API 응답:', response.data);
-        setNewsData(response.data.articles.slice(0, 5));
+        setArticles(response.data.articles.map(article => article.title));
+
+
+        setArticleLength(response.data.articles.map(article => article.title).reduce((acc, curr) => acc + curr, 0))
       } catch (error) {
         console.error('뉴스 데이터를 가져오는 중 오류 발생:', error);
       }
     };
 
+
+    
     fetchWeatherData();
     fetchNewsData();
   }, []);
@@ -85,37 +95,82 @@ function Notifications() {
     return `wi ${iconName}`;
   };
 
-  return (
 
-    <div className="main-container">
-      <div className="weather-container">
-        <ul className="weather-list">
-          {filteredWeatherData.map((item) => (
-            <li key={item.dt} className="weather-item">
-              <p>{moment.unix(item.dt).format('MM월 DD일 HH:mm A')}</p>
-              <p>온도: {Math.round(item.main.temp)}°C</p>
-              <i className={getWeatherIcon(item.weather[0].icon)}></i>
-            </li>
-          ))}
-        </ul>
-        <MDBox px={0.5}>
-          <DefaultNavbarLink icon="donut_large" name="대시보드" route="/dashboard" />
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+
+      setSlideAnimation(`
+      @keyframes slide {
+        from {
+          transform: translateX(calc(1.22% * ${articleLength.length})); /* 오른쪽 끝에서 시작합니다. */
+        }
+        to {
+          transform: translateX(-100%); /* 왼쪽 끝까지 이동합니다. */
+        }
+      }
+    `)
+    }, 1000)
+
+    return () => clearTimeout(timer);
+  }, [articleLength]);
+
+  function tick() {
+    setCurrentTime(new Date());
+  }
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 타이머를 시작하고, 언마운트될 때 타이머를 정리합니다.
+    const timerID = setInterval(() => tick(), 1000);
+    return () => clearInterval(timerID);
+  }, []);
+
+
+  return (
+    <div>
+      <style>{slideAnimation}</style>
+      <div className="main-container">
+        <div className="weather-container">
+          <div className={`weather-background-${currentWeather}`} />
+          <div className="Aeye-Logo"></div>
+          <div className="time-container">{currentTime.toLocaleTimeString()}</div>
+          <ul className="weather-list" >
+            {filteredWeatherData.map((item) => (
+              <li key={item.dt} className={`weather-item`}>
+                <p>{moment.unix(item.dt).format('MM월 DD일 HH:mm A')}</p>
+                <p>온도: {Math.round(item.main.temp)}°C &nbsp;
+                  <i className={getWeatherIcon(item.weather[0].icon)}></i></p>
+              </li>
+            ))}
+          </ul>
+            <div className={`weather-box ${currentWeather}`}>
+              </div>
+        </div>
+        <MDBox className="ad-container" mt={-3} >
+          <Video />
         </MDBox>
       </div>
-
       <div className="news-container">
-        <ul className="news-list">
-          {newsData.map((article) => (
-            <li key={article.title} className="news-item">
-              <h3>{article.title}</h3>
-            </li>
+        <div className="news-wrapper">
+          {articles.map((title, index) => (
+            <div
+              key={index}
+              className={`news-item`}
+            >
+              {title}
+            </div>
           ))}
-        </ul>
+
+        </div>
       </div>
     </div>
-
   );
+
 }
 
+Notifications.default={
+  currentWeather : "Rain"
+}
 
 export default Notifications;

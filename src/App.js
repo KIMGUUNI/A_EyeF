@@ -143,7 +143,7 @@ export default function App() {
     <AdHostInfo.Provider value={{ adHostInfo, setAdHostInfo }}>
       <ThemeProvider theme={darkMode ? themeDark : theme}>
         <CssBaseline />
-        {layout === "dashboard" && pathname !== "/notifications" && (
+        {layout === "dashboard" && pathname !== "/monitor" && (
           <>
             <Sidenav
               color={sidenavColor}
