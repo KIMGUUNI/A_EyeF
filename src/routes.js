@@ -94,7 +94,7 @@ if (adminCookie) {
       name: "광고 송출",
       key: "notifications",
       icon: <Icon fontSize="small">monitor</Icon>,
-      route: "/notifications",
+      route: "/monitor",
       component: <Notifications />,
     },
     {
