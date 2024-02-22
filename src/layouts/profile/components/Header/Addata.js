@@ -145,8 +145,4 @@ export default function CollapsibleTable() {
             />
         </TableContainer>
     );
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> ba002112304ce55b8380d6953f8ed924f2c4df09
+                    }
