@@ -61,6 +61,7 @@ export default function PayTable() {
     <>
       <div style={{ height: 500, width: '100%', display: 'flex', justifyContent: 'center' }}>
         <DataGrid
+          style={{fontWeight:"normal"}}
           rows={rows}
           columns={columns}
           pageSize={10}

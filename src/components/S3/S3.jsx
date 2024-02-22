@@ -152,7 +152,7 @@ const S3 = () => {
                             <MenuItem value={40}>40대</MenuItem>
                             <MenuItem value={50}>50대</MenuItem>
                         </Select>
-                        <FormHelperText>광고하고싶은 연령대를 선택하세요</FormHelperText>
+                        <FormHelperText>광고하고싶은 연령대를 선택해주세요.</FormHelperText>
                     </FormControl>
                     <FormControl sx={{ minWidth: 150, m: 1, height: '60px', margin: 5 }}>
                         <InputLabel id="demo-simple-select-helper-label2" sx={{ fontSize: '17px', height: '60px' }}>Gender</InputLabel>
@@ -167,19 +167,19 @@ const S3 = () => {
                             <MenuItem value={"남"}>남자</MenuItem>
                             <MenuItem value={"여"}>여자</MenuItem>
                         </Select>
-                        <FormHelperText>광고하고싶은 성별 선택하세요</FormHelperText>
+                        <FormHelperText>광고하고싶은 성별 선택해주세요.</FormHelperText>
                     </FormControl>
                     <div {...getRootProps()} style={{ ...dropzoneStyles, padding: '20px', border: '1px dashed #000' }}>
                         <input {...getInputProps()} />
-                        <p>Drag & drop a file here, or click to select a file</p>
+                        <p>파일을 여기로 끌어다 놓거나 클릭하여 파일을 선택해주세요.</p>
                     </div>
                     <br></br>
                     <MDButton color="info" variant="contained" onClick={handleButtonClick}>
-                        Upload
+                        광고신청하기
                     </MDButton>
                     {showUploadAlert && (
                         <Alert onClose={() => setShowUploadAlert(false)} severity="warning">
-                            파일을 업로드해주세요
+                            파일을 업로드해주세요.
                         </Alert>
                     )}
                     {showSuccessAlert && (
