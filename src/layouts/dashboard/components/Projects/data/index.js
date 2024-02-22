@@ -84,9 +84,9 @@ export default function data() {
       setAdRows(ad.map((item) => ({
         companies: <span onClick={()=>{setCurrentAd(item), getMonthAd(item.ad_idx),getChartAd(item.ad_idx),getBarChartAd(item.ad_idx)}}><Company  image={logoXD} name={item.ad_name} /></span>, // You can customize the name as per your requirement
         ad_target_age: (
-          <MDBox display="flex" py={1}>
+          <MDTypography variant="caption" color="text" fontWeight="medium">
             {item.ad_target_age}
-          </MDBox>
+          </MDTypography>
         ),
         ad_target_gender: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
@@ -94,29 +94,29 @@ export default function data() {
           </MDTypography>
         ),
         ad_approval: (
-          <MDBox width="8rem" textAlign="center">
+          <MDBox color="text" width="8rem" textAlign="center">
             {item.ad_approval == 'N' ? <CancelIcon fontSize="medium" /> :
               <CheckCircleIcon fontSize="medium" />}
           </MDBox>
         ),
         ad_expo_num: (
-          <MDBox>
+          <MDBox color="text">
             {item.ad_expo_num}
           </MDBox>
         ),
         pay_date: (
-          <MDBox>
-            Date
+          <MDBox color="text">
+            &nbsp;
           </MDBox>
         ),
         pay_start_date: (
-          <MDBox>
-            Start_Date
+          <MDBox color="text">
+            {item.ad_start_date}
           </MDBox>
         ),
         pay_end_date: (
-          <MDBox>
-            End_Date
+          <MDBox color="text">
+            {item.ad_end_date}
           </MDBox>
         )
       })));

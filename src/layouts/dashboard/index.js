@@ -126,7 +126,7 @@ function Dashboard() {
                   <ReportsBarChart
                     color="secondary"
                     title="7일 노출 횟수"
-                    date= {`${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0  ? "월별 노출 횟수 기간 " : chartBarD.labels[0]+ " ~ " + chartBarD.labels[chartBarD.labels.length-1]}`}
+                    date= {`${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0  ? "일별 노출 횟수 기간 " : chartBarD.labels[0]+ " ~ " + chartBarD.labels[chartBarD.labels.length-1]}`}
                     chart={chartBarD}
                   />
                 </MDBox>

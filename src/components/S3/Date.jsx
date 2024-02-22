@@ -120,7 +120,7 @@ export default function CollapsibleTable() {
                 <TableHead sx={{ display: 'contents' }}>
                     <TableRow>
                         <TableCell />
-                        <TableCell>광고 이름</TableCell>
+                        <TableCell >광고 이름</TableCell>
                         <TableCell align="right">사용자 ID</TableCell>
                         <TableCell align="right">광고 대상 연령</TableCell>
                         <TableCell align="right">광고 대상 성별</TableCell>

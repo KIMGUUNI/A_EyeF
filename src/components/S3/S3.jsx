@@ -119,7 +119,7 @@ const S3 = () => {
                         }}
                         style={{ margin: 10, width: '10%' }}
                     />
-                    <MDTypography variant="button" color="text" fontWeight="regular" style={{ margin: 8 }}>
+                    <MDTypography variant="button" fontWeight="regular" style={{ margin: 8 }}>
                         ~
                     </MDTypography>
                     <TextField
@@ -167,7 +167,7 @@ const S3 = () => {
                             <MenuItem value={"남"}>남자</MenuItem>
                             <MenuItem value={"여"}>여자</MenuItem>
                         </Select>
-                        <FormHelperText>광고하고싶은 성별 선택해주세요.</FormHelperText>
+                        <FormHelperText >광고하고싶은 성별 선택해주세요.</FormHelperText>
                     </FormControl>
                     <div {...getRootProps()} style={{ ...dropzoneStyles, padding: '20px', border: '1px dashed #000' }}>
                         <input {...getInputProps()} />
