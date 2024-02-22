@@ -57,7 +57,7 @@ const Video = () => {
   const sendUrlToSpringBoot = async (url) => {
     try {
       const axiosInstance = axios.create({
-        baseURL: "http://localhost:8089/A_Eye",
+        baseURL: "http://43.201.117.185:8089/A_Eye",
         withCredentials: true,
       });
       const response = await axiosInstance.post('/api/s3Url', { url });

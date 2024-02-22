@@ -41,8 +41,7 @@ function Basic() {
   // const {setUserInfo} = useContext(UserInfo);
 
   const axiosInstance = axios.create({
-    baseURL: "http://localhost:8089/A_Eye",
-    withCredentials: true,
+    baseURL: "http://43.201.117.185:8089/A_Eye",
   });
 
   const handleSignIn = async () => {
@@ -82,7 +81,7 @@ function Basic() {
           sessionStorage.setItem('UserInfo', JSON.stringify(UserInfo));
           setUser_rol("User")
         }
-        window.location.href = 'http://localhost:3000/dashboard';
+        window.location.href = '/dashboard';
       } else {
         alert("로그인 실패");
       }
