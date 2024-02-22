@@ -114,6 +114,13 @@ function Header({ children }) {
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
                   label="광고 신청 리스트"
+                  icon={
+                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                      home
+                    </Icon>
+                  }
+                />
+                  <Tab
                   label="결제 현황"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
