@@ -28,7 +28,6 @@ function createData(ad_name, user_idx, ad_target_age, ad_target_gender, ad_play_
     };
 }
 
-     
 function Row(props) {
     const { row } = props;
     const [open, setOpen] = React.useState(false);

@@ -113,6 +113,7 @@ function Header() {
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
+
                   label="광고"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
@@ -128,6 +129,7 @@ function Header() {
         </Grid>
 
         {tabValue == 0 ? <Addata /> : ""}
+        {/* {tabValue == 0 ? children : ""} */}
       </Card>
       
     </MDBox>
