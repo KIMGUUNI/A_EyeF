@@ -22,8 +22,8 @@ const style = {
 
 export default function BasicModal({ isOpen, onClose }) {
   const [inquiry_title, setInquiry_title] = React.useState('');
-  const [inquiry_content, setInquiry_content] = React.useState('');
   const [inquiry_pw, setInquiry_pw] = React.useState('');
+  const [inquiry_content, setInquiry_content] = React.useState('');
   const [user_idx] = React.useState(null);
 
   const handleClose = (event, reason) => {
@@ -35,7 +35,7 @@ export default function BasicModal({ isOpen, onClose }) {
 
   const complete = async () => {
     try {
-      if (!inquiry_title || !inquiry_content || !inquiry_pw) {
+      if (!inquiry_title || !inquiry_pw || !inquiry_content ) {
         // Check if any of the required fields is empty
         alert('모든 필드를 작성해주세요.');
         return;
@@ -46,9 +46,9 @@ export default function BasicModal({ isOpen, onClose }) {
       console.log(storedLoginVO.user_idx);
       const boardData = {
         user_idx: storedLoginVO.user_idx,
-        inquiry_content,
         inquiry_title,
         inquiry_pw,
+        inquiry_content,
       };
       console.log(user_idx);
       console.log(boardData);
@@ -61,7 +61,6 @@ export default function BasicModal({ isOpen, onClose }) {
     }
   };
   
-
   return (
     <div>
       <Modal

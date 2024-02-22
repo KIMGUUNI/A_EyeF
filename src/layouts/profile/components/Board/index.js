@@ -19,13 +19,7 @@ import MDTypography from 'components/MDTypography';
 const columns = [
   { id: 'inquiry_indx', label: '글 번호', minWidth: 170 },
   { id: 'inquiry_title', label: '제목', minWidth: 100 },
-  {
-    id: 'inquiry_date',
-    label: '작성날짜',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
+  { id: 'inquiry_pw', label: '작성자', minWidth: 100 },
   {
     id: 'answerStatus',
     label: '답변 여부',
@@ -33,6 +27,14 @@ const columns = [
     align: 'right',
     format: (value) => value.toFixed(2),
   },
+  {
+    id: 'inquiry_date',
+    label: '작성날짜',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+
 ];
 
 const axiosInstance = axios.create({
@@ -76,7 +78,6 @@ export default function StickyHeadTable() {
       }
     };
   
-    // 페이지 로드 시에 실행
     fetchData();
   }, []);
 
@@ -102,7 +103,6 @@ export default function StickyHeadTable() {
     setSelectedRow(null); // 새 글 작성 시 선택된 행 초기화
     setModalType('modal'); // Set modal type to 'modal' for general writing
   };
-
 
 
   return (
