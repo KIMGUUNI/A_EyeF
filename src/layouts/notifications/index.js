@@ -8,7 +8,6 @@ import Video from "components/S3/Video";
 
 const CITY_NAME = 'Gwangju';
 
-
 function Notifications() {
 
   const [weatherData, setWeatherData] = useState([]);

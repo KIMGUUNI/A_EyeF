@@ -113,6 +113,31 @@ function Header() {
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
+<<<<<<< HEAD
+                  label="광고 신청 리스트"
+                  icon={
+                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                      home
+                    </Icon>
+                  }
+                />
+                  <Tab
+                  label="결제 현황"
+                  icon={
+                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                      home
+                    </Icon>
+                  }
+                />
+                <Tab
+                  label="내 광고"
+                  icon={
+                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                      money
+                    </Icon>
+                  }
+                />
+=======
                   label="광고"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
@@ -121,6 +146,7 @@ function Header() {
                   }
                 />
                   
+>>>>>>> ba002112304ce55b8380d6953f8ed924f2c4df09
 
               </Tabs>
             </AppBar>
@@ -128,6 +154,12 @@ function Header() {
         </Grid>
 
         {tabValue == 0 ? <Addata /> : ""}
+<<<<<<< HEAD
+        {tabValue == 1 ? children : ""}
+        {tabValue == 0 ? children : ""}
+        {tabValue == 1 ? <Date/> : ""}        
+=======
+>>>>>>> ba002112304ce55b8380d6953f8ed924f2c4df09
       </Card>
       
     </MDBox>
