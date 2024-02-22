@@ -19,7 +19,7 @@ function TblHeader({ children }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const loginVO = JSON.parse(sessionStorage.getItem('loginVO'));
+    const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
 
     if (loginVO) {
       setUser(loginVO);

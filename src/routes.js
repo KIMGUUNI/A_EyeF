@@ -35,43 +35,11 @@ if (adminCookie) {
     },
     {
       type: "collapse",
-      name: "광고 신청",
-      key: "tables",
-      icon: <Icon fontSize="small">table_view</Icon>,
-      route: "/tables",
-      component: <Tables />,
-    },
-    {
-      type: "collapse",
-      name: "결제",
-      key: "billing",
-      icon: <Icon fontSize="small">receipt_long</Icon>,
-      route: "/billing",
-      component: <Billing />,
-    },
-    {
-      type: "collapse",
       name: "마이페이지",
       key: "profile",
       icon: <Icon fontSize="small">person</Icon>,
       route: "/profile",
       component: <Profile />,
-    },
-    {
-      type: "collapse",
-      name: "로그인",
-      key: "sign-in",
-      icon: <Icon fontSize="small">key</Icon>,
-      route: "/authentication/sign-in",
-      component: <SignIn />,
-    },
-    {
-      type: "collapse",
-      name: "회원가입",
-      key: "sign-up",
-      icon: <Icon fontSize="small">assignment_ind</Icon>,
-      route: "/authentication/sign-up",
-      component: <SignUp />,
     },
     {
       type: "collapse",
@@ -109,27 +77,11 @@ if (adminCookie) {
   routes.push(
     {
       type: "collapse",
-      name: "로그인",
-      key: "sign-in",
-      icon: <Icon fontSize="small">key</Icon>,
-      route: "/authentication/sign-in",
-      component: <SignIn />,
-    },
-    {
-      type: "collapse",
       name: "대시보드",
       key: "dashboard",
       icon: <Icon fontSize="small">dashboard</Icon>,
       route: "/dashboard",
       component: <Dashboard />,
-    },
-    {
-      type: "collapse",
-      name: "회원가입",
-      key: "sign-up",
-      icon: <Icon fontSize="small">assignment_ind</Icon>,
-      route: "/authentication/sign-up",
-      component: <SignUp />,
     },
     {
       type: "collapse",
@@ -145,6 +97,30 @@ if (adminCookie) {
       icon: <Icon fontSize="small">home_icon</Icon>,
       route: "/NotFoundPage",
       component: <NotFoundPage />
+    },
+    {
+      type: "collapse",
+      name: "광고 신청",
+      key: "tables",
+      icon: <Icon fontSize="small">table_view</Icon>,
+      route: "/tables",
+      component: <Tables />,
+    },
+    {
+      type: "collapse",
+      name: "결제",
+      key: "billing",
+      icon: <Icon fontSize="small">receipt_long</Icon>,
+      route: "/billing",
+      component: <Billing />,
+    },
+    {
+      type: "collapse",
+      name: "마이페이지",
+      key: "profile",
+      icon: <Icon fontSize="small">person</Icon>,
+      route: "/profile",
+      component: <Profile />,
     },
 
   );
@@ -168,14 +144,6 @@ if (adminCookie) {
     },
     {
       type: "collapse",
-      name: "대시보드",
-      key: "dashboard",
-      icon: <Icon fontSize="small">dashboard</Icon>,
-      route: "/dashboard",
-      component: <Dashboard />,
-    },
-    {
-      type: "collapse",
       name: "메인화면",
       key: "MainPage",
       icon: <Icon fontSize="small">home_icon</Icon>,
@@ -188,6 +156,14 @@ if (adminCookie) {
       icon: <Icon fontSize="small">home_icon</Icon>,
       route: "/NotFoundPage",
       component: <NotFoundPage />
+    },
+    {
+      type: "collapse",
+      name: "대시보드",
+      key: "dashboard",
+      icon: <Icon fontSize="small">dashboard</Icon>,
+      route: "/dashboard",
+      component: <Dashboard />,
     },
   );
 }
