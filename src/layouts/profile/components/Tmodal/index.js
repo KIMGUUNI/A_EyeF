@@ -23,17 +23,19 @@ const style = {
 
 export default function Tmodal({ row, setData }) {
   const [inquiry_title, setInquiry_title] = React.useState("");
+  const [inquiry_pw, setInquiry_pw] = React.useState("");
   const [inquiry_content, setInquiry_content] = React.useState("");
   const [realAnswer_content, setRealAnswer_content] = React.useState("");
   const [answer_content, setAnswer_content] = React.useState("");
   const [open, setOpen] = React.useState(false);
-  const [inquiry_pw, setInquiry_pw] = React.useState("");
-  const handleClose = () => setOpen(false);
   const { inquiry_indx } = row;
   const axiosInstance = axios.create({
     baseURL: "http://localhost:8089/A_Eye",
     withCredentials: true,
   });
+  const handleClose = () => {
+    setOpen(false);
+  };
   const [confirmDeleteOpen, setConfirmDeleteOpen] = React.useState(false);
   const [deleteCancelled, setDeleteCancelled] = React.useState(false);
 
@@ -52,20 +54,21 @@ export default function Tmodal({ row, setData }) {
     try {
       console.log("보내줄거", inquiry_indx);
       await axiosInstance.post("/api/deletePost", { inquiry_indx });
-  
+
       // Fetch updated data after deletion
       const response = await axiosInstance.post("/api/boardList");
       const boardList = response.data;
-  
+
       if (boardList) {
         const updatedBoardList = boardList.map((row) => ({
           ...row,
           answerStatus: row.inquiry_completed === 1 ? '답변완료' : '미등록',
         }));
-  
+
+        // Update the state with the new data using the prop
         setData(updatedBoardList);
       }
-  
+
       handleClose();
     } catch (error) {
       console.error("Error during post deletion:", error);
@@ -78,17 +81,16 @@ export default function Tmodal({ row, setData }) {
         const requestData = ({
           inquiry_indx: inquiry_indx
         })
-        console.log("11", requestData)
         const response = await axiosInstance.post("/api/boardGet", requestData);
-        
+
         const boardList = response.data;
 
         if (boardList) {
           console.log("가져온데이터", boardList);
           setInquiry_title(boardList.inquiry_title);
+          setInquiry_pw(boardList.inquiry_pw)
           setInquiry_content(boardList.inquiry_content);
           setRealAnswer_content(boardList.answer_content);
-          setInquiry_pw(boardList.inquiry_pw)
           setOpen(true);
         }
       } catch (error) {
@@ -109,31 +111,31 @@ export default function Tmodal({ row, setData }) {
         inquiry_completed: 1, // Assuming 1 means answered, you might want to adjust this based on your logic
         answer_content,
       };
-  
+
       // Send the answer to the server
       await axiosInstance.post("/api/boardAnswer", boardAnswer);
-  
+
       // Fetch the updated data after answering
       const response = await axiosInstance.post("/api/boardList");
       const boardList = response.data;
-  
+
       if (boardList) {
         const updatedBoardList = boardList.map((row) => ({
           ...row,
           answerStatus: row.inquiry_completed === 1 ? '답변완료' : '미등록',
         }));
-  
+
         // Update the state with the new data
         setData(updatedBoardList);
       }
-  
+
       // Close the modal
       handleClose();
     } catch (error) {
       console.error("Error during data fetching:", error);
     }
   };
-  
+
 
   return (
     <div>
@@ -148,7 +150,7 @@ export default function Tmodal({ row, setData }) {
           disableEscapeKeyDown
         >
           <Box sx={style}>
-            <MDBox p={1} style={{ textAlign: 'left', marginBottom: '10px'}}>
+            <MDBox p={1} style={{ textAlign: 'left', marginBottom: '10px' }}>
               <MDTypography variant="h5">문의 내역</MDTypography>
             </MDBox>
             <MDButton
@@ -161,17 +163,9 @@ export default function Tmodal({ row, setData }) {
             </MDButton>
             {/* Input 태그 3개 추가 */}
             <TextField label="제목" fullWidth sx={{ mb: 2 }} value={inquiry_title} InputLabelProps={{ shrink: true }} />
-            <TextField
-              fullWidth
-              sx={{ mb: 2 }}
-              label="작성자"
-              value={inquiry_pw}
-              InputLabelProps={{ shrink: true }}
-            />
-            <TextField multiline
-              rows={7} label="내용" fullWidth sx={{ mb: 2 }} value={inquiry_content} InputLabelProps={{ shrink: true }} />
-            <TextField multiline
-              rows={5} label="답변" fullWidth sx={{ mb: 2 }} value={realAnswer_content !== null ? realAnswer_content : undefined} onChange={(e) => setAnswer_content(e.target.value)} InputLabelProps={{ shrink: true }} />
+            <TextField fullWidth sx={{ mb: 2 }} label="작성자" value={inquiry_pw} InputLabelProps={{ shrink: true }} />
+            <TextField multiline rows={7} label="내용" fullWidth sx={{ mb: 2 }} value={inquiry_content} InputLabelProps={{ shrink: true }} />
+            <TextField multiline rows={5} label="답변" fullWidth sx={{ mb: 2 }} value={realAnswer_content !== null ? realAnswer_content : undefined} onChange={(e) => setAnswer_content(e.target.value)} InputLabelProps={{ shrink: true }} />
             {/* 완료 버튼 추가 */}
             <MDButton variant="contained" color="info" onClick={() => { answer(); handleClose(); }} sx={{ mb: 1 }}>
               완료
