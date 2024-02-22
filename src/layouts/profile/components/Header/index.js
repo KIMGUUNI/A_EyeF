@@ -40,8 +40,9 @@ import backgroundImage from "assets/images/bg-profile.jpeg";
 function Header({ children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
-
-
+  const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
+  const email = loginVO.user_name;
+  console.log("email",email)
   useEffect(() => {
 
     
@@ -101,10 +102,10 @@ function Header({ children }) {
           <Grid item>
             <MDBox height="200%" mt={0.5} lineHeight={1}>
               <MDTypography variant="h5" fontWeight="medium">
-                조원제
+              {email}
               </MDTypography>
               <MDTypography variant="button" color="text" fontWeight="regular">
-                개발자 / 연봉1억
+                Email: {loginVO.user_email}
               </MDTypography>
             </MDBox>
           </Grid>
@@ -112,7 +113,7 @@ function Header({ children }) {
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
-                  label="App"
+                  label="결제 현황"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       home
@@ -120,7 +121,7 @@ function Header({ children }) {
                   }
                 />
                 <Tab
-                  label="결제 현황"
+                  label="내 광고"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       money
@@ -139,8 +140,8 @@ function Header({ children }) {
             </AppBar>
           </Grid>
         </Grid>
-        {tabValue == 0 ? <Date/> : ""}        
-        {tabValue == 1 ? children : ""}
+        {tabValue == 0 ? children : ""}
+        {tabValue == 1 ? <Date/> : ""}        
       </Card>
     </MDBox>
   );
