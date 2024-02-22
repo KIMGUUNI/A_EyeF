@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .weather-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .weather-container {
+    background-color: #e8eaf6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    min-width: 180px; /* Adjust as needed */
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .weather-item p {
+    margin: 1px 0;
+    white-space: nowrap;
+    color: #555;
+  }
+  
+  
+  .news-container {
+    position: fixed;
+    bottom: 2%;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .news-wrapper {
+    display: flex;
+    flex-direction: row-reverse; /* 기사들을 오른쪽에서 왼쪽으로 정렬합니다. */
+    animation: slide 200s linear infinite;
+  }
+  
+  .news-item {
+    white-space: nowrap;
+    margin-right: 20%; /* 각 기사 사이의 간격을 조절합니다. */
+  }
+  
+  .current {
+    font-weight: bold; /* 현재 기사를 강조하기 위해 bold 스타일 적용 */
+  }
+  
+  @keyframes slide {
+    from {
+      transform: translateX(3000%); /* 오른쪽 끝에서 시작합니다. */
+    }
+    to {
+      transform: translateX(-100%); /* 왼쪽 끝까지 이동합니다. */
+    }
+  }
+  

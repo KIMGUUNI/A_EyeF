@@ -135,7 +135,6 @@ export default function data() {
       AxiosInstance.post("/api/getMonthAds", { ad_idx: item })
         .then(res => {
           //sessionStorage.setItem('adVO', JSON.stringify(res.data));
-          console.log(res.data)
           setMonthAd(res.data[0])
         })
     
@@ -174,13 +173,10 @@ async function getBarChartAd(item) {
       let labels = [];
       let dataC = [];
       res.data.map(item => {labels.push(item.day),dataC.push(item.day_count)})
-       console.log(labels)
-       console.log(dataC)
       setChartBarD({
          labels: labels,
          datasets: { label: "노출 수", data: dataC }
        })
-      console.log(res)
 
 
     })

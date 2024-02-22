@@ -1,480 +1,162 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-
-
-
-
-// import { useState } from "react";
-
-// @mui material components
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-
-// Material Dashboard 2 React components
+import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
 import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import moment from 'moment';
+import './index.css'
+import 'weather-icons/css/weather-icons.css';
 
-// Material Dashboard 2 React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-
-
-// 추가된 코드
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
-import { ResponsiveLine } from '@nivo/line' // 라인 차트
-
-
-
-
+const API_KEY = 'f828f2753374c6d5cf9bd283096a7a21';
+const CITY_NAME = 'Gwangju';
+const NEWS_API_KEY = 'd8048ee103aa4740909844166d05e92d'; // Replace with your actual news API key
 
 
 function Notifications() {
 
-  const [age, setAge] = React.useState('');
+  const [weatherData, setWeatherData] = useState([]);
+  const [articles, setArticles] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [articleLength, setArticleLength] = useState(0);
+  const [slideAnimation, setSlideAnimation] = useState('');
+  useEffect(() => {
+    const fetchWeatherData = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${CITY_NAME}&appid=${API_KEY}&cnt=24&units=metric`
+        );
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+        console.log('Weather API 응답:', response.data);
+        setWeatherData(response.data.list);
+      } catch (error) {
+        console.error('날씨 데이터를 가져오는 중 오류 발생:', error);
+      }
+    };
+
+    const fetchNewsData = async () => {
+      try {
+        const response = await axios.get(
+          `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${NEWS_API_KEY}`
+        );
+
+        setArticles(response.data.articles.map(article => article.title));
+
+        
+        setArticleLength(response.data.articles.map(article => article.title).reduce((acc,curr) => acc+ curr, 0))
+      } catch (error) {
+        console.error('뉴스 데이터를 가져오는 중 오류 발생:', error);
+      }
+    };
+
+    fetchWeatherData();
+    fetchNewsData();
+  }, []);
+
+  const currentTimestamp = moment().unix();
+
+  const filteredWeatherData = weatherData.filter((item) => {
+    const itemTimestamp = item.dt;
+    // Filter data for the next 24 hours and include the current time
+    return itemTimestamp >= currentTimestamp && itemTimestamp <= currentTimestamp + 24 * 3600;
+  });
+
+  const getWeatherIcon = (iconCode) => {
+    const iconMapping = {
+      '01d': 'wi-day-sunny',
+      '01n': 'wi-night-clear',
+      '02d': 'wi-day-cloudy',
+      '02n': 'wi-night-alt-cloudy',
+      '03d': 'wi-cloud',
+      '03n': 'wi-cloud',
+      '04d': 'wi-cloudy',
+      '04n': 'wi-cloudy',
+      '09d': 'wi-showers',
+      '09n': 'wi-showers',
+      '10d': 'wi-day-rain',
+      '10n': 'wi-night-alt-rain',
+      '11d': 'wi-thunderstorm',
+      '11n': 'wi-thunderstorm',
+      '13d': 'wi-snow',
+      '13n': 'wi-snow',
+      '50d': 'wi-fog',
+      '50n': 'wi-fog',
+    };
+
+    const iconName = iconMapping[iconCode] || 'wi-day-sunny';
+
+    if (iconCode.includes('09') || iconCode.includes('10')) {
+      return `wi wi-rain `;
+    }
+
+    return `wi ${iconName}`;
   };
 
-  const data = [
-    {
-      "id": "japan",
-      "color": "hsl(226, 70%, 50%)",
-      "data": [
-        {
-          "x": "plane",
-          "y": 199
-        },
-        {
-          "x": "helicopter",
-          "y": 263
-        },
-        {
-          "x": "boat",
-          "y": 216
-        },
-        {
-          "x": "train",
-          "y": 147
-        },
-        {
-          "x": "subway",
-          "y": 81
-        },
-        {
-          "x": "bus",
-          "y": 239
-        },
-        {
-          "x": "car",
-          "y": 86
-        },
-        {
-          "x": "moto",
-          "y": 59
-        },
-        {
-          "x": "bicycle",
-          "y": 22
-        },
-        {
-          "x": "horse",
-          "y": 194
-        },
-        {
-          "x": "skateboard",
-          "y": 269
-        },
-        {
-          "x": "others",
-          "y": 120
-        }
-      ]
-    },
-    {
-      "id": "france",
-      "color": "hsl(49, 70%, 50%)",
-      "data": [
-        {
-          "x": "plane",
-          "y": 197
-        },
-        {
-          "x": "helicopter",
-          "y": 198
-        },
-        {
-          "x": "boat",
-          "y": 126
-        },
-        {
-          "x": "train",
-          "y": 297
-        },
-        {
-          "x": "subway",
-          "y": 138
-        },
-        {
-          "x": "bus",
-          "y": 20
-        },
-        {
-          "x": "car",
-          "y": 158
-        },
-        {
-          "x": "moto",
-          "y": 243
-        },
-        {
-          "x": "bicycle",
-          "y": 183
-        },
-        {
-          "x": "horse",
-          "y": 7
-        },
-        {
-          "x": "skateboard",
-          "y": 253
-        },
-        {
-          "x": "others",
-          "y": 228
-        }
-      ]
-    },
-    {
-      "id": "us",
-      "color": "hsl(359, 70%, 50%)",
-      "data": [
-        {
-          "x": "plane",
-          "y": 215
-        },
-        {
-          "x": "helicopter",
-          "y": 126
-        },
-        {
-          "x": "boat",
-          "y": 256
-        },
-        {
-          "x": "train",
-          "y": 236
-        },
-        {
-          "x": "subway",
-          "y": 118
-        },
-        {
-          "x": "bus",
-          "y": 201
-        },
-        {
-          "x": "car",
-          "y": 66
-        },
-        {
-          "x": "moto",
-          "y": 135
-        },
-        {
-          "x": "bicycle",
-          "y": 115
-        },
-        {
-          "x": "horse",
-          "y": 198
-        },
-        {
-          "x": "skateboard",
-          "y": 239
-        },
-        {
-          "x": "others",
-          "y": 106
-        }
-      ]
-    },
-    {
-      "id": "germany",
-      "color": "hsl(30, 70%, 50%)",
-      "data": [
-        {
-          "x": "plane",
-          "y": 112
-        },
-        {
-          "x": "helicopter",
-          "y": 29
-        },
-        {
-          "x": "boat",
-          "y": 27
-        },
-        {
-          "x": "train",
-          "y": 245
-        },
-        {
-          "x": "subway",
-          "y": 151
-        },
-        {
-          "x": "bus",
-          "y": 45
-        },
-        {
-          "x": "car",
-          "y": 269
-        },
-        {
-          "x": "moto",
-          "y": 299
-        },
-        {
-          "x": "bicycle",
-          "y": 7
-        },
-        {
-          "x": "horse",
-          "y": 266
-        },
-        {
-          "x": "skateboard",
-          "y": 118
-        },
-        {
-          "x": "others",
-          "y": 271
-        }
-      ]
-    },
-    {
-      "id": "norway",
-      "color": "hsl(355, 70%, 50%)",
-      "data": [
-        {
-          "x": "plane",
-          "y": 10
-        },
-        {
-          "x": "helicopter",
-          "y": 246
-        },
-        {
-          "x": "boat",
-          "y": 68
-        },
-        {
-          "x": "train",
-          "y": 300
-        },
-        {
-          "x": "subway",
-          "y": 41
-        },
-        {
-          "x": "bus",
-          "y": 158
-        },
-        {
-          "x": "car",
-          "y": 141
-        },
-        {
-          "x": "moto",
-          "y": 282
-        },
-        {
-          "x": "bicycle",
-          "y": 41
-        },
-        {
-          "x": "horse",
-          "y": 29
-        },
-        {
-          "x": "skateboard",
-          "y": 190
-        },
-        {
-          "x": "others",
-          "y": 78
-        }
-      ]
-    }
-  ]
+  
 
-
-
-  const MyResponsiveLine = (props) => (
-    <ResponsiveLine
-      data={props.data}
-      margin={{ right: 110, bottom: 50, left: 60 }}
-      xScale={{ type: 'point' }}
-      yScale={{
-        type: 'linear',
-        min: 'auto',
-        max: 'auto',
-        stacked: true,
-        reverse: false
-      }}
-      yFormat=" >-.2f"
-      curve="natural"
-      axisTop={null}
-      axisRight={null}
-      axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: 'transportation',
-        legendOffset: 36,
-        legendPosition: 'middle'
-      }}
-      axisLeft={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: 'count',
-        legendOffset: -40,
-        legendPosition: 'middle'
-      }}
-      pointSize={10}
-      pointColor={{ theme: 'background' }}
-      pointBorderWidth={2}
-      pointBorderColor={{ from: 'serieColor' }}
-      pointLabelYOffset={-12}
-      useMesh={true}
-      legends={[
-        {
-          anchor: 'bottom-right',
-          direction: 'column',
-          justify: false,
-          translateX: 100,
-          translateY: 0,
-          itemsSpacing: 0,
-          itemDirection: 'left-to-right',
-          itemWidth: 80,
-          itemHeight: 20,
-          itemOpacity: 0.75,
-          symbolSize: 12,
-          symbolShape: 'circle',
-          symbolBorderColor: 'rgba(0, 0, 0, .5)',
-          effects: [
-            {
-              on: 'hover',
-              style: {
-                itemBackground: 'rgba(0, 0, 0, .03)',
-                itemOpacity: 1
-              }
-            }
-          ]
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex(prevIndex => (prevIndex + 1) % 20);
+    }, 1000); // 15초마다 기사 변경
+    
+    return () => clearInterval(intervalId);
+  }, [currentIndex]);
+  
+  useEffect(()=>{
+    const timer = setTimeout(()=>{
+      
+      console.log(articleLength.length)
+      setSlideAnimation(`
+      @keyframes slide {
+        from {
+          transform: translateX(calc(1.22% * ${articleLength.length})); /* 오른쪽 끝에서 시작합니다. */
         }
-      ]}
-    />
-  )
+        to {
+          transform: translateX(-100%); /* 왼쪽 끝까지 이동합니다. */
+        }
+      }
+    `)
+    },1000)
+
+    return () => clearTimeout(timer);
+  }, [articleLength]);
 
 
   return (
-
-
-    <DashboardLayout>
-      <DashboardNavbar />
-      <MDBox mt={6} mb={3} sx={{ textAlign: 'right' }}>
-
-
-
-
-        <div style={{ marginBottom: 20 }}>
-          <FormControl sx={{ minWidth: 150, marginRight: '10%', height: '60px' }}>
-            <InputLabel id="demo-simple-select-autowidth-label" sx={{ fontSize: '17px', height: '60px' }}>검색</InputLabel>
-            <Select
-              labelId="demo-simple-select-autowidth-label"
-              id="demo-simple-select-autowidth"
-              value={age}
-              onChange={handleChange}
-              autoWidth
-              label="Age"
-              sx={{ height: '45px' }}
-            >
-              <MenuItem value="">
-                <em>광고</em>
-              </MenuItem>
-              <MenuItem value={1}>광고1</MenuItem>
-              <MenuItem value={2}>광고2</MenuItem>
-              <MenuItem value={3}>광고3</MenuItem>
-            </Select>
-          </FormControl>
+    <div>
+      <style>{slideAnimation}</style>
+      <div className="main-container">
+        <div className="weather-container">
+          <ul className="weather-list">
+            {filteredWeatherData.map((item) => (
+              <li key={item.dt} className="weather-item">
+                <p>{moment.unix(item.dt).format('MM월 DD일 HH:mm A')}</p>
+                <p>온도: {Math.round(item.main.temp)}°C</p>
+                <i className={getWeatherIcon(item.weather[0].icon)}></i>
+              </li>
+            ))}
+          </ul>
+          <MDBox px={0.5}>
+            <DefaultNavbarLink icon="donut_large" name="대시보드" route="/dashboard" />
+          </MDBox>
         </div>
 
+      </div>
+      <div className="news-container">
+        <div className="news-wrapper">
+          {articles.map((title, index) => (
+            <div
+              key={index}
+              className={`news-item`}
+            >
+              {title}{index}
+            </div>
+          ))}
 
-
-        <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12} lg={8}>
-            <Card>
-              <MDBox p={2} style={{ textAlign: 'center' }}>
-                <MDTypography variant="h5">광고 이름</MDTypography>
-              </MDBox>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} lg={8}>
-
-            <Card style={{  textAlign: 'left', width: '100%', marginBottom: "10px", display: 'flex' }}>
-              <MDTypography variant="h5"  style={{margin :"20px" }}>Chart1</MDTypography>
-                <div style={{ height: '400px', width: '100%', margin : "10px" }}>
-                  <MyResponsiveLine data={data} />
-                </div>
-            </Card>
-
-
-            <Card style={{  textAlign: 'left', width: '100%', marginBottom: "10px", display: 'flex' }}>
-              <MDTypography variant="h5"  style={{margin :"20px" }}>Chart1</MDTypography>
-                <div style={{ height: '400px', width: '100%', margin : "10px" }}>
-                  <MyResponsiveLine data={data} />
-                </div>
-            </Card>
-
-
-            <Card style={{  textAlign: 'left', width: '100%', marginBottom: "10px", display: 'flex' }}>
-              <MDTypography variant="h5"  style={{margin :"20px" }}>Chart1</MDTypography>
-                <div style={{ height: '400px', width: '100%', margin : "10px" }}>
-                  <MyResponsiveLine data={data} />
-                </div>
-            </Card>
-
-          </Grid>
-
-
-
-        </Grid>
-      </MDBox>
-      <Footer />
-    </DashboardLayout>
+        </div>
+      </div>
+    </div>
   );
+
 }
+
 
 export default Notifications;

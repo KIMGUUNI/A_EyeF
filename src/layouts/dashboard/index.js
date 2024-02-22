@@ -26,7 +26,6 @@ import Footer from "examples/Footer";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
 import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
 import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
-
 // Data
 
 // Dashboard components
@@ -54,9 +53,6 @@ function Dashboard() {
     }
   )
 
-  
-  console.log(chartBarD.labels)
-
   return (
     <CurrentAd.Provider value={{ currentAd, setCurrentAd, monthAd, setMonthAd,chartD, setChartD, chartBarD, setChartBarD }}>
       <DashboardLayout>
@@ -81,7 +77,7 @@ function Dashboard() {
               <MDBox mb={1.5}>
                 <ComplexStatisticsCard
                   color="success"
-                  icon="store"
+                  icon="show_chart_icon"
                   title="월별 노출 횟수"
                   count={monthAd != null ? monthAd.month_count : 0}
                   percentage={{
@@ -96,7 +92,7 @@ function Dashboard() {
               <MDBox mb={1.5}>
                 <ComplexStatisticsCard
                   color="primary"
-                  icon="person_add"
+                  icon="store"
                   title="최대 노출 지역"
                   count={monthAd != null ? monthAd.region_count : 0}
                   percentage={{
@@ -111,7 +107,7 @@ function Dashboard() {
               <MDBox mb={1.5}>
                 <ComplexStatisticsCard
                   color="dark"
-                  icon="weekend"
+                  icon="addchart_icon"
                   title="총 노출 횟수"
                   count={currentAd != null ? currentAd.ad_expo_num : 0}
                   percentage={{
@@ -128,7 +124,7 @@ function Dashboard() {
               <Grid item xs={12} md={6} lg={4}>
                 <MDBox mb={3}>
                   <ReportsBarChart
-                    color="info"
+                    color="secondary"
                     title="7일 노출 횟수"
                     date= {`${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0  ? "월별 노출 횟수 기간 " : chartBarD.labels[0]+ " ~ " + chartBarD.labels[chartBarD.labels.length-1]}`}
                     chart={chartBarD}
@@ -138,7 +134,7 @@ function Dashboard() {
               <Grid item xs={12} md={6} lg={4}>
                 <MDBox mb={3}>
                   <ReportsLineChart
-                    color="success"
+                    color="dark"
                     title="월별 노출 횟수"
                     date= {`${isNaN(chartD.sales.datasets.data[chartD.sales.datasets.data.length-1]) || chartD.sales.datasets.data[chartD.sales.datasets.data.length-2] === 0  ? "월별 노출 횟수 기간 " : chartD.sales.labels[0]+ " ~ " + chartD.sales.labels[chartD.sales.labels.length-1]}`}
                     chart={chartD.sales}

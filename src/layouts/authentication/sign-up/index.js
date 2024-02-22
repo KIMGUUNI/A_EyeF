@@ -54,10 +54,8 @@ function Cover() {
         user_email,
         user_pw,
       };
-      console.log(userData);
-      const response = await axiosInstance.post("/api/register", userData);
+      await axiosInstance.post("/api/register", userData);
       navigate("/authentication/sign-in");
-      console.log(response.data);
     } catch (error) {
       console.error("Error during sign in:", error);
       alert("회원가입 실패");

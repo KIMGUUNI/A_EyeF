@@ -44,6 +44,7 @@ function PaymentMethod({ result }) {
     }
   }, [result]);
 
+
   const [isAddCardModalOpen, setIsAddCardModalOpen] = useState(false);
 
   const handleOpenAddCardModal = () => {
@@ -72,6 +73,5 @@ function PaymentMethod({ result }) {
     </Card>
   );
 }
-
 
 export default PaymentMethod;

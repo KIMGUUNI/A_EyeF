@@ -27,6 +27,7 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
 function DefaultNavbarLink({ icon, name, route, light }) {
+  
   return (
     <MDBox
       component={Link}
@@ -65,5 +66,10 @@ DefaultNavbarLink.propTypes = {
   route: PropTypes.string.isRequired,
   light: PropTypes.bool.isRequired,
 };
+
+DefaultNavbarLink.default ={
+  light: true
+
+}
 
 export default DefaultNavbarLink;

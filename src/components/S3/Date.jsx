@@ -28,6 +28,7 @@ function createData(ad_name, user_idx, ad_target_age, ad_target_gender, ad_play_
     };
 }
 
+     
 function Row(props) {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
@@ -44,13 +45,13 @@ function Row(props) {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" sx={{ fontWeight: 'normal' }}> 
                     {row.ad_name}
                 </TableCell>
-                <TableCell align="right">{row.user_idx}</TableCell>
-                <TableCell align="right">{row.ad_target_age}</TableCell>
-                <TableCell align="right">{row.ad_target_gender}</TableCell>
-                <TableCell align="right">{row.ad_play_number}</TableCell>
+                <TableCell sx={{ fontWeight: 'normal' }} align="right">{row.user_idx}</TableCell>
+                <TableCell sx={{ fontWeight: 'normal' }} align="right">{row.ad_target_age}</TableCell>
+                <TableCell sx={{ fontWeight: 'normal' }} align="right">{row.ad_target_gender}</TableCell>
+                <TableCell sx={{ fontWeight: 'normal' }} align="right">{row.ad_play_number}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -63,11 +64,11 @@ function Row(props) {
                                 <TableBody>
                                     <TableRow>
                                         <TableCell align="right" sx={{ fontWeight: 'bold' }}>시작 날짜</TableCell>
-                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{row.start_date}</TableCell>
+                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{row.ad_start_date}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell align="right" sx={{ fontWeight: 'bold' }}>종료 날짜</TableCell>
-                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{row.end_date}</TableCell>
+                                        <TableCell align="right" sx={{ fontWeight: 'bold' }}>{row.ad_end_date}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell align="right" sx={{ fontWeight: 'bold' }}>결제할 금액 ($)</TableCell>
