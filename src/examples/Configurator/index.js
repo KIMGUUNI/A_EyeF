@@ -14,6 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useState, useEffect, useContext } from "react";
+import { useCookies } from 'react-cookie';
 
 // react-github-btn
 
@@ -48,7 +49,7 @@ import { AdHostInfo } from "context/AdHostInfo";
 
 function Configurator() {
 
-
+  const [,,removeCookie] = useCookies(['MM']);
   const [controller, dispatch] = useMaterialUIController();
   const {
     openConfigurator,
@@ -62,21 +63,20 @@ function Configurator() {
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
   const {adHostInfo} = useContext(AdHostInfo);
   
-  // useEffect(()=>{
-  //   const fetchData = async () => {
-    
-  //     try {
-  //       const result = await useContext(UserInfo);
-  //       setUserInfo(result);
-  //       console.log("성공", userInfo)
-  //     } catch (error) {
-  //       console.log("실패" , userInfo)
-  //     }
-  //   };
-  //   fetchData();
+  const logoutHandler = async () => {
+    try {
+      // 여기에서 로그아웃 동작 수행
+      document.cookie = "MM=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      localStorage.clear();
+      sessionStorage.clear();
+      removeCookie('MM');
+      window.location.reload(true);
+      window.location.href = "http://localhost:3000/mainPage";
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  // },[userInfo])
-  // Use the useEffect hook to change the button state for the sidenav type based on window size.
   useEffect(() => {
     // A function that sets the disabled state of the buttons for the sidenav type.
     function handleDisabled() {
@@ -300,15 +300,18 @@ function Configurator() {
         <MDBox mt={2} textAlign="center">
           <MDBox display="flex" justifyContent="center">
             <MDBox mr={1.5}>
+
+              
               <MDButton
                 component={Link}
-                href="//twitter.com/intent/tweet?text=Check%20Material%20Dashboard%20React%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23react%20%mui&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-dashboard-react"
+                onClick={logoutHandler}
                 target="_blank"
                 rel="noreferrer"
                 color="dark"
               >
-                조만간 
+                로그아웃 
               </MDButton>
+            
             </MDBox>
             <MDButton
               component={Link}

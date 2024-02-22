@@ -88,7 +88,7 @@ const Video = () => {
       ) : (
         <ReactPlayer 
         key={key}
-        url="https://video-add.s3.ap-northeast-2.amazonaws.com/default/%5B%EA%B3%B5%EC%9D%B5%EA%B4%91%EA%B3%A0%ED%98%91%EC%9D%98%ED%9A%8C%5D+%ED%94%BC%EC%8B%B1%C2%B7%EC%8A%A4%EB%AF%B8%EC%8B%B1+%EC%98%88%EB%B0%A9+-+%EC%8B%AC%EC%B2%AD(viral).mp4"
+        url="https://video-add.s3.ap-northeast-2.amazonaws.com/default/%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%9D%B8%EC%9E%AC%EA%B0%9C%EB%B0%9C%EC%9B%90%EC%98%81%EC%83%81.mp4"
         controls
           width="100%"
           height="100%"

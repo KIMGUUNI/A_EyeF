@@ -163,7 +163,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   </IconButton>
                 </Link>
               }
-
               <IconButton
                 size="small"
                 disableRipple
@@ -184,6 +183,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               >
                 <Icon sx={iconsStyle}>settings</Icon>
               </IconButton>
+
               <IconButton
                 size="small"
                 disableRipple
