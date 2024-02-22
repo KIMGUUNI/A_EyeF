@@ -40,12 +40,12 @@ export default function ResultTable({ result }) {
         </TableHead>
         <TableBody>
           {result && result.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.광고}</TableCell>
-              <TableCell align="right">{row['시작 날짜']}</TableCell>
-              <TableCell align="right">{row['종료 날짜']}</TableCell>
-              <TableCell align="right">{row['재생 횟수']}</TableCell>
-              <TableCell align="right">{row.금액}</TableCell>
+            <TableRow key={row.id} >
+              <TableCell style={{fontWeight:"normal"}}>{row.광고}</TableCell>
+              <TableCell style={{fontWeight:"normal"}} align="right">{row['시작 날짜']}</TableCell>
+              <TableCell style={{fontWeight:"normal"}} align="right">{row['종료 날짜']}</TableCell>
+              <TableCell style={{fontWeight:"normal"}} align="right">{row['재생 횟수']}</TableCell>
+              <TableCell style={{fontWeight:"normal"}} align="right">{row.금액}</TableCell>
             </TableRow>
           ))}
         </TableBody>
