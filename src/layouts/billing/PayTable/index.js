@@ -12,15 +12,15 @@ export default function PayTable() {
 
   const columns = [
     { field: '광고', headerName: '광고', width: 400 },
-    { field: '금액', headerName: '금액', width: 300 },
-    { field: '재생 횟수', headerName: '재생 횟수', width: 300 },
-    { field: '시작 날짜', headerName: '시작 날짜', type: 'number', width: 300 },
+    { field: '금액', headerName: '금액', width: 200 },
+    { field: '재생 횟수', headerName: '재생 횟수', width: 200 },
+    { field: '시작 날짜', headerName: '시작 날짜', type: 'number', width: 170 },
     { field: '종료 날짜', headerName: '종료 날짜', type: 'number', width: 350 },
     {
       field: '결제상태',
       headerName: '결제 상태',
       sortable: false,
-      width: 200,
+      width: 90,
       valueGetter: (params) => params.row['결제상태'],
     },
   ];
