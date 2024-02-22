@@ -6,9 +6,7 @@ import './index.css'
 import 'weather-icons/css/weather-icons.css';
 import Video from "components/S3/Video";
 
-const API_KEY = 'f828f2753374c6d5cf9bd283096a7a21';
 const CITY_NAME = 'Gwangju';
-const NEWS_API_KEY = 'd8048ee103aa4740909844166d05e92d'; // Replace with your actual news API key
 
 function Notifications() {
 
@@ -24,7 +22,7 @@ function Notifications() {
     const fetchWeatherData = async () => {
       try {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${CITY_NAME}&appid=${API_KEY}&cnt=24&units=metric`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${CITY_NAME}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&cnt=24&units=metric`
         );
 
         console.log('Weather API 응답:', response.data);
@@ -38,7 +36,7 @@ function Notifications() {
     const fetchNewsData = async () => {
       try {
         const response = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${NEWS_API_KEY}`
+          `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
         );
 
         setArticles(response.data.articles.map(article => article.title));

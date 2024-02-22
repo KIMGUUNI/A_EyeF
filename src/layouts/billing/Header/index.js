@@ -33,17 +33,19 @@ import MDAvatar from "components/MDAvatar";
 
 // Material Dashboard 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
-import Addata from "./Addata"
+import Date from "components/S3/Date"
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
 import backgroundImage from "assets/images/a-big-company-lobby2.png";
-function Header() {
+function Header({ children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
   const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
   const email = loginVO.user_name;
   console.log("email",email)
   useEffect(() => {
+
+    
 
     // A function that sets the orientation state of the tabs.
     function handleTabsOrientation() {
@@ -63,7 +65,7 @@ function Header() {
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleTabsOrientation);
   }, [tabsOrientation]);
-
+  
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
   return (
     <MDBox position="relative" mb={5}>
@@ -102,30 +104,19 @@ function Header() {
               <MDTypography variant="h5" fontWeight="medium">
               {email}
               </MDTypography>
-
               <MDTypography variant="button" color="text" fontWeight="regular">
                 Email: {loginVO.user_email}
               </MDTypography>
             </MDBox>
-
           </Grid>
           <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
-<<<<<<< HEAD
-                  label="광고 신청 리스트"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      home
-                    </Icon>
-                  }
-                />
-                  <Tab
                   label="결제 현황"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      home
+                      money
                     </Icon>
                   }
                 />
@@ -133,37 +124,26 @@ function Header() {
                   label="내 광고"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      money
-                    </Icon>
-                  }
-                />
-=======
-                  label="광고"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       monitor
                     </Icon>
                   }
                 />
-                  
->>>>>>> ba002112304ce55b8380d6953f8ed924f2c4df09
-
+                <Tab
+                  label="Settings"
+                  icon={
+                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                      settings
+                    </Icon>
+                  }
+                />
               </Tabs>
             </AppBar>
           </Grid>
         </Grid>
-
-        {tabValue == 0 ? <Addata /> : ""}
-<<<<<<< HEAD
-        {tabValue == 1 ? children : ""}
         {tabValue == 0 ? children : ""}
         {tabValue == 1 ? <Date/> : ""}        
-=======
->>>>>>> ba002112304ce55b8380d6953f8ed924f2c4df09
       </Card>
-      
     </MDBox>
-    
   );
 }
 
