@@ -1,68 +1,556 @@
-body {
-    margin: 0;
-    padding: 0;
-  }
-  
+@media (max-width: 767px) {
   .main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: 0.5s;
   }
-  
+
+
+  .ad-container {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top: 12vh;
+  }
+
+
+
   .weather-list {
     list-style: none;
     padding: 0;
-    display: flex;
     gap: 10px;
     justify-content: center;
+    width: 100%;
+    position: absolute;
+    animation: slideUp 60s linear infinite;
+    z-index: 1050;
   }
+
   
+
+  .weather-list li {
+    padding: 10px;
+    border-radius: 5%;
+    border: 1px none black;
+    height: 12vh;
+  }
+
+
   .weather-container {
-    background-color: #e8eaf6;
+    position: fixed;
+    background-color: rgba(234, 219, 243, 0.9);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 15px;
     text-align: center;
-    min-width: 180px; /* Adjust as needed */
+    min-width: 200px;
     display: flex;
-    transition: transform 0.3s ease-in-out;
+    /* Adjust as needed */
+    width: 100%;
+    height: 12vh;
+    z-index: 1000;
+    position: relative;
   }
-  
+
+
   .weather-item p {
     margin: 1px 0;
     white-space: nowrap;
-    color: #555;
+    color: white;
+    width: 100%;
+    font-size: large;
+    z-index: 1200;
+    font-weight: bolder;
   }
-  
-  
+
+
+
   .news-container {
-    position: fixed;
-    bottom: 2%;
+
+    background-color: rgba(176, 180, 245, 0.9);
     overflow: hidden;
     width: 100%;
+    padding: 3px;
+    position: fixed;
+    margin-top: 48vw;
   }
-  
+
   .news-wrapper {
     display: flex;
-    flex-direction: row-reverse; /* 기사들을 오른쪽에서 왼쪽으로 정렬합니다. */
+    flex-direction: row-reverse;
+    /* 기사들을 오른쪽에서 왼쪽으로 정렬합니다. */
     animation: slide 200s linear infinite;
   }
-  
+
   .news-item {
     white-space: nowrap;
-    margin-right: 20%; /* 각 기사 사이의 간격을 조절합니다. */
+    margin-right: 20%;
+    /* 각 기사 사이의 간격을 조절합니다. */
+  }
+
+  .weather-box{
+    position: absolute;
+    right: 3%;
+    padding: 0;
+    width: 9vw;
+    height: 9vh;
+    border-radius: 50%;
+    align-items: center;
+    z-index: 1100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .time-container{
+    position: absolute;
+    right: 16vw;
+    width: 15vw;
+    height: 9vh;
+    display: flex;
+    font-size: 1em;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1100;
+    font-weight: bolder;
+    color: white;
+    
+  }
+
+  .Aeye-Logo{
+    background-image: url("../../assets/images/A-eye-remove.png");
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+      left: 3%;
+      padding: 0;
+      width: 16vw;
+      height: 9vh;
+      border-radius: 30%;
+      align-items: center;
+      z-index: 1200;
+  }
+
+
+}
+
+
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: 0.5s;
   }
   
-  .current {
-    font-weight: bold; /* 현재 기사를 강조하기 위해 bold 스타일 적용 */
+
+  
+  .ad-container {
+    overflow: hidden;
+    position: absolute;
+    top: 12vh;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .weather-list {
+    position: flex;
+    list-style: none;
+    padding: 0;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    animation: slideUp 60s linear infinite;
+    z-index: 1100;
   }
   
-  @keyframes slide {
-    from {
-      transform: translateX(3000%); /* 오른쪽 끝에서 시작합니다. */
-    }
-    to {
-      transform: translateX(-100%); /* 왼쪽 끝까지 이동합니다. */
-    }
-  }
+
   
+
+  .weather-list li {
+    padding: 10px;
+    border-radius: 5%;
+    border: 1px none black;
+    height: 12vh;
+  }
+
+  
+
+  .weather-container {
+    position: fixed;
+    background-color: rgba(234, 219, 243, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    min-width: 200px;
+    /* Adjust as needed */
+    display: flex;
+    width: 100%;
+    height: 12vh;
+    z-index: 1000;
+    position: relative;
+    
+  }
+
+  
+
+
+  .weather-item p {
+    margin: 1px 0;
+    white-space: nowrap;
+    color: white;
+    width: 100%;
+    font-size: large;
+    z-index: 1200;
+    font-weight: bolder;
+  }
+
+
+
+  .news-container {
+
+    background-color: rgba(176, 180, 245, 0.9);
+    overflow: hidden;
+    width: 100%;
+    padding: 3px;
+    position: fixed;
+    margin-top: 50vw;
+  }
+
+  .news-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    /* 기사들을 오른쪽에서 왼쪽으로 정렬합니다. */
+    animation: slide 200s linear infinite;
+  }
+
+  .news-item {
+    white-space: nowrap;
+    margin-right: 20%;
+    /* 각 기사 사이의 간격을 조절합니다. */
+  }
+
+  .weather-box{
+    position: absolute;
+    right: 3%;
+    padding: 0;
+    width: 8vw;
+    height: 9vh;
+    border-radius: 50%;
+    align-items: center;
+    z-index: 1100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .time-container{
+    position: absolute;
+    right: 15%;
+    width: 15vw;
+    height: 9vh;
+    display: flex;
+    font-size: 1.3em;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1100;
+    font-weight: bold;
+    color: white;
+  }
+
+  .Aeye-Logo{
+    background-image: url("../../assets/images/A-eye-remove.png");
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+      left: 3%;
+      padding: 0;
+      width: 11vw;
+      height: 9vh;
+      border-radius: 30%;
+      align-items: center;
+      z-index: 1200;
+  }
+
+
+}
+
+
+@media (min-width: 1025px) {
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: 0.5s;
+  }
+
+  .ad-container {
+    overflow: hidden;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .weather-list {
+    position: flex;
+    list-style: none;
+    padding: 0;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    z-index: 1100;
+    position: absolute;
+    animation: slideUp 60s linear infinite;
+  }
+
+  
+
+  .weather-container {
+    position: fixed;
+    background-color: rgba(213, 221, 236, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    min-width: 200px;
+    /* Adjust as needed */
+    display: flex;
+    width: 100%;
+    height: 12vh;
+    z-index: 1000;
+    position: relative;
+  }
+
+
+
+  .weather-item p {
+    margin: 1px 0;
+    white-space: nowrap;
+    color: white;
+    width: 100%;
+    font-size: x-large;
+    z-index: 1200;
+    font-weight: bolder;
+  
+  }
+  .weather-list li {
+    padding: 10px;
+    border-radius: 5%;
+    border: 1px none black;
+    height: 12vh;
+  }
+
+
+
+
+
+
+
+  .news-container {
+
+    background-color: rgba(176, 180, 245, 0.8);
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    padding: 3px;
+    bottom: 0;
+  }
+
+  .news-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    /* 기사들을 오른쪽에서 왼쪽으로 정렬합니다. */
+    animation: slide 200s linear infinite;
+  }
+
+  .news-item {
+    white-space: nowrap;
+    margin-right: 20%;
+    /* 각 기사 사이의 간격을 조절합니다. */
+    font-size: x-large;
+  }
+
+  .weather-box{
+    position: absolute;
+    right: 3%;
+    padding: 0;
+    width: 8vw;
+    height: 9vh;
+    border-radius: 50%;
+    align-items: center;
+    z-index: 1100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .time-container{
+    position: absolute;
+    right: 16vw;
+    width: 15vw;
+    height: 9vh;
+    display: flex;
+    font-size: 1.9em;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1100;
+    font-weight: bolder;
+    color: white;
+    white-space: nowrap;
+  }
+
+  .Aeye-Logo{
+    background-image: url("../../assets/images/A-eye-remove.png");
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+      left: 3%;
+      padding: 0;
+      width: 10vw;
+      height: 9vh;
+      border-radius: 30%;
+      align-items: center;
+      z-index: 1200;
+  }
+
+}
+
+
+@keyframes slideUp {
+  0% { transform: translateY(calc(12vh*4 - (12vh*3))); } /* 시작 지점 */
+  5.26% { transform: translateY(calc(12vh*4 - (12vh*3))); } /* 1번째 구간, 정체 */
+  10.52% { transform: translateY(calc(12vh*4 - (12vh*4))); } /* 2번째 구간, 정체 */
+  15.78% { transform: translateY(calc(12vh*4 - (12vh*4))); } /* 2번째 구간, 이동 */
+  21.04% { transform: translateY(calc(12vh*4 - (12vh*5))); } /* 3번째 구간, 정체 */
+  26.30% { transform: translateY(calc(12vh*4 - (12vh*5))); } /* 3번째 구간, 이동 */
+  31.56% { transform: translateY(calc(12vh*4 - (12vh*6))); } /* 4번째 구간, 정체 */
+  36.8% { transform: translateY(calc(12vh*4 - (12vh*6))); } /* 4번째 구간, 이동 */
+  42.08% { transform: translateY(calc(12vh*4 - (12vh*7))); } /* 5번째 구간, 정체 */
+  47.34% { transform: translateY(calc(12vh*4 - (12vh*7))); } /* 5번째 구간, 이동 */
+  52.6% { transform: translateY(calc(12vh*4 - (12vh*8))); } /* 6번째 구간, 정체 */
+  57.86% { transform: translateY(calc(12vh*4 - (12vh*8))); } /* 6번째 구간, 이동 */
+  63.12% { transform: translateY(calc(12vh*4 - (12vh*9))); } /* 7번째 구간, 정체 */
+  68.38% { transform: translateY(calc(12vh*4 - (12vh*9))); } /* 7번째 구간, 이동 */
+  73.64% { transform: translateY(calc(12vh*4 - (12vh*10))); } /* 8번째 구간, 정체 */
+  78.90% { transform: translateY(calc(12vh*4 - (12vh*10))); } /* 8번째 구간, 이동 */
+  84.16% { transform: translateY(calc(12vh*4 - (12vh*11))); } /* 9번째 구간, 정체 */
+  89.42% { transform: translateY(calc(12vh*4 - (12vh*11))); } /* 9번째 구간, 이동 */
+  94.68% { transform: translateY(calc(12vh*4 - (12vh*12))); } /*10번째구간*/
+  100% { transform: translateY(calc(12vh*4 - (12vh*12))); } /* 종료 지점 */
+}
+
+
+
+  
+.Rain{
+    background-image: url("../../assets/images/rain.jpg");
+    background-size: 100% 100%;
+    opacity: 0.9;
+}
+
+.Snow{
+  background-image: url("../../assets/images/snow.jpg");
+    background-size: 100% 100%;
+    opacity: 0.9;
+}
+.Clear{
+  background-image: url("../../assets/images/sun.jpg");
+    background-size: 100% 100%;
+    opacity: 0.9;
+}
+.Wind{
+  background-image: url("../../assets/images/wind.jpg");
+    background-size: 100% 100%;
+    opacity: 0.9;
+}
+.Thunderstorm{
+  background-image: url("../../assets/images/thunder.jpg");
+    background-size: 100% 100%;
+    opacity: 0.9;
+}
+
+.weather-background-Rain {
+  background-image: url("../../assets/images/rainbanner4.jpg");
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% auto; /* 배경 이미지를 세로로만 늘립니다. */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 1050;
+  /* 배경 이미지의 투명도를 70%로 설정 */
+}
+.weather-background-Snow {
+  background-image: url("../../assets/images/snowbanner.jpg");
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% auto; /* 배경 이미지를 세로로만 늘립니다. */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 1050;
+  /* 배경 이미지의 투명도를 70%로 설정 */
+}
+.weather-background-Clear {
+  background-image: url("../../assets/images/sunbanner.jpg");
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% auto; /* 배경 이미지를 세로로만 늘립니다. */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 1050;
+  /* 배경 이미지의 투명도를 70%로 설정 */
+}
+.weather-background-Wind {
+  background-image: url("../../assets/images/windbanner.jpg");
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% auto; /* 배경 이미지를 세로로만 늘립니다. */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 1050;
+  /* 배경 이미지의 투명도를 70%로 설정 */
+}
+.weather-background-Thunderstorm {
+  background-image: url("../../assets/images/thunderbanner.jpg");
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% auto; /* 배경 이미지를 세로로만 늘립니다. */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 1050;
+  /* 배경 이미지의 투명도를 70%로 설정 */
+}
+

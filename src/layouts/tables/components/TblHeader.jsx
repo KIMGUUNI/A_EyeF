@@ -11,7 +11,7 @@ import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import breakpoints from "assets/theme/base/breakpoints";
 import burceMars from "assets/images/bruce-mars.jpg";
-import backgroundImage from "assets/images/bg-sign-up-cover.jpeg";
+import backgroundImage from "assets/images/elevator1.png";
 
 function TblHeader({ children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
