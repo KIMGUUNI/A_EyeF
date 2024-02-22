@@ -4,7 +4,7 @@ import { Grid, Divider } from '@mui/material';
 import MDBox from 'components/MDBox';
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
-import Header from 'layouts/profile/components/Header';
+import Header from 'layouts/billing/Header/';
 import MDTypography from 'components/MDTypography';
 import PayTable from './PayTable';
 
