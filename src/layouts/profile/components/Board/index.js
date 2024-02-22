@@ -13,9 +13,11 @@ import Tmodal from '../Tmodal';
 import Umodal from '../Usmodal';
 import BasicModal from '../Modal';
 import MDButton from 'components/MDButton';
+import MDBox from 'components/MDBox';
+import MDTypography from 'components/MDTypography';
 
 const columns = [
-  { id: 'inquiry_indx', label: 'No', minWidth: 170 },
+  { id: 'inquiry_indx', label: '글 번호', minWidth: 170 },
   { id: 'inquiry_title', label: '제목', minWidth: 100 },
   {
     id: 'inquiry_date',
@@ -60,23 +62,23 @@ export default function StickyHeadTable() {
       try {
         const response = await axiosInstance.post("/api/boardList");
         const boardList = response.data;
-
+  
         if (boardList) {
           const updatedBoardList = boardList.map(row => ({
             ...row,
             answerStatus: row.inquiry_completed === 1 ? '답변완료' : '미등록',
           }));
-
+  
           setData(updatedBoardList);
         }
       } catch (error) {
         console.error("Error during data fetching:", error);
       }
     };
-
+  
     // 페이지 로드 시에 실행
     fetchData();
-  }, []); // 두 번째 매개변수로 빈 배열을 전달하여 초기 렌더링 시에만 실행
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -102,8 +104,12 @@ export default function StickyHeadTable() {
   };
 
 
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <MDBox p={1} style={{ textAlign: 'left', marginBottom: '10px' }}>
+        <MDTypography variant="h5">문의글</MDTypography>
+      </MDBox>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead sx={{ display: 'table-header-group' }}>
@@ -144,7 +150,7 @@ export default function StickyHeadTable() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[5,10,25]}
         component="div"
         count={data.length}
         rowsPerPage={rowsPerPage}
@@ -156,11 +162,13 @@ export default function StickyHeadTable() {
         글쓰기
       </MDButton>
       {modalType === 'rowClick' && selectedRow && (
-        user_position === 0 ? <Umodal row={selectedRow} /> : <Tmodal row={selectedRow} />
+        user_position === 0 ? <Umodal row={selectedRow} /> : <Tmodal row={selectedRow} setData={setData} />
       )}
+
       {modalType === 'modal' && (
-        <BasicModal isOpen={true} onClose={() => setModalType(null)} />
+        <BasicModal isOpen={true} onClose={() => setModalType(null)} data={data} setData={setData} />
       )}
+
       {modalType !== null && modalType !== 'rowClick' && modalType !== 'modal' && (
         <Modal />
       )}

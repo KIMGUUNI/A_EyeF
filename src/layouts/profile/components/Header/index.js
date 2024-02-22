@@ -33,7 +33,7 @@ import MDAvatar from "components/MDAvatar";
 
 // Material Dashboard 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
-import Date from "components/S3/Date"
+import Addata from "./Addata"
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
 import backgroundImage from "assets/images/bg-profile.jpeg";
@@ -43,8 +43,6 @@ function Header({ children }) {
 
 
   useEffect(() => {
-
-    
 
     // A function that sets the orientation state of the tabs.
     function handleTabsOrientation() {
@@ -64,7 +62,7 @@ function Header({ children }) {
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleTabsOrientation);
   }, [tabsOrientation]);
-  
+
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
   return (
     <MDBox position="relative" mb={5}>
@@ -103,16 +101,15 @@ function Header({ children }) {
               <MDTypography variant="h5" fontWeight="medium">
                 조원제
               </MDTypography>
-              <MDTypography variant="button" color="text" fontWeight="regular">
-                개발자 / 연봉1억
-              </MDTypography>
+
             </MDBox>
+
           </Grid>
           <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
-                  label="App"
+                  label="광고 신청 리스트"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       home
@@ -127,22 +124,17 @@ function Header({ children }) {
                     </Icon>
                   }
                 />
-                <Tab
-                  label="Settings"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      settings
-                    </Icon>
-                  }
-                />
+
               </Tabs>
             </AppBar>
           </Grid>
         </Grid>
-        {tabValue == 0 ? <Date/> : ""}        
+        {tabValue == 0 ? <Addata /> : ""}
         {tabValue == 1 ? children : ""}
       </Card>
+      
     </MDBox>
+    
   );
 }
 

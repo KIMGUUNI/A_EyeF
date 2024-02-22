@@ -10,7 +10,6 @@ const API_KEY = 'f828f2753374c6d5cf9bd283096a7a21';
 const CITY_NAME = 'Gwangju';
 const NEWS_API_KEY = 'd8048ee103aa4740909844166d05e92d'; // Replace with your actual news API key
 
-
 function Notifications() {
 
   const [weatherData, setWeatherData] = useState([]);

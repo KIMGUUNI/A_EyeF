@@ -28,12 +28,14 @@ export default function Tmodal({ row, setData }) {
   const [answer_content, setAnswer_content] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [inquiry_pw, setInquiry_pw] = React.useState("");
-  const handleClose = () => setOpen(false);
   const { inquiry_indx } = row;
   const axiosInstance = axios.create({
     baseURL: "http://localhost:8089/A_Eye",
     withCredentials: true,
   });
+  const handleClose = () => {
+    setOpen(false);
+  };
   const [confirmDeleteOpen, setConfirmDeleteOpen] = React.useState(false);
   const [deleteCancelled, setDeleteCancelled] = React.useState(false);
 
@@ -63,6 +65,7 @@ export default function Tmodal({ row, setData }) {
           answerStatus: row.inquiry_completed === 1 ? '답변완료' : '미등록',
         }));
   
+        // Update the state with the new data using the prop
         setData(updatedBoardList);
       }
   
@@ -71,6 +74,8 @@ export default function Tmodal({ row, setData }) {
       console.error("Error during post deletion:", error);
     }
   };
+  
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +83,6 @@ export default function Tmodal({ row, setData }) {
         const requestData = ({
           inquiry_indx: inquiry_indx
         })
-        console.log("11", requestData)
         const response = await axiosInstance.post("/api/boardGet", requestData);
         
         const boardList = response.data;
