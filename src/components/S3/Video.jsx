@@ -67,7 +67,15 @@ const Video = () => {
       console.error('HTTP POST 요청 중 오류 발생:', error);
     }
   };
+  const resetSession = () => {
+    sessionStorage.removeItem('sessionUrls');
+  };
 
+  useEffect(() => {
+    if (videoUrls.current.length === 0 && videoUrls.next.length === 0) {
+      resetSession();
+    }
+  }, [videoUrls]);
   return (
     <div>
       {videoUrls.current.length > 0 ? (
