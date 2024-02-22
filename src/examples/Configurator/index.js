@@ -14,7 +14,6 @@ Coded by www.creative-tim.com
 */
 
 import { useState, useEffect, useContext } from "react";
-import { useCookies } from 'react-cookie';
 
 // react-github-btn
 
@@ -22,7 +21,6 @@ import { useCookies } from 'react-cookie';
 import Divider from "@mui/material/Divider";
 import Switch from "@mui/material/Switch";
 import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
 
 // @mui icons
@@ -49,7 +47,6 @@ import { AdHostInfo } from "context/AdHostInfo";
 
 function Configurator() {
 
-  const [,,removeCookie] = useCookies(['MM']);
   const [controller, dispatch] = useMaterialUIController();
   const {
     openConfigurator,
@@ -61,19 +58,19 @@ function Configurator() {
   } = controller;
   const [disabled, setDisabled] = useState(false);
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
-  const {adHostInfo} = useContext(AdHostInfo);
-  
+  const { adHostInfo } = useContext(AdHostInfo);
   const logoutHandler = async () => {
     try {
+
       // 여기에서 로그아웃 동작 수행
-      document.cookie = "MM=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       localStorage.clear();
       sessionStorage.clear();
-      removeCookie('MM');
-      window.location.reload(true);
+
+      document.cookie = "Admin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "User=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       window.location.href = "http://localhost:3000/mainPage";
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -155,7 +152,7 @@ function Configurator() {
         <MDBox>
           <MDTypography variant="body" color="text">
             {adHostInfo != null ? adHostInfo.user_name : "로그인을 해주세요"}
-            {adHostInfo != null ? adHostInfo.user_email :""}
+            {adHostInfo != null ? adHostInfo.user_email : ""}
           </MDTypography>
         </MDBox>
 
@@ -300,28 +297,17 @@ function Configurator() {
         <MDBox mt={2} textAlign="center">
           <MDBox display="flex" justifyContent="center">
             <MDBox mr={1.5}>
-
-              
-              <MDButton
-                component={Link}
-                onClick={logoutHandler}
-                target="_blank"
-                rel="noreferrer"
-                color="dark"
-              >
-                로그아웃 
-              </MDButton>
-            
+              {sessionStorage.length != 0   && (
+                <MDButton
+                  onClick={logoutHandler}
+                  target="_blank"
+                  rel="noreferrer"
+                  color="dark"
+                >
+                  로그아웃
+                </MDButton>
+              )}
             </MDBox>
-            <MDButton
-              component={Link}
-              href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard-react"
-              target="_blank"
-              rel="noreferrer"
-              color="dark"
-            >
-              지울 버튼
-            </MDButton>
           </MDBox>
         </MDBox>
       </MDBox>
@@ -331,6 +317,7 @@ function Configurator() {
 Configurator.defaultProps = {
   adHostInfo: null,
 };
+
 
 
 export default Configurator;
