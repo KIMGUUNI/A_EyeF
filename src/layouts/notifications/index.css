@@ -458,9 +458,12 @@
   100% { transform: translateY(calc(12vh*4 - (12vh*12))); } /* 종료 지점 */
 }
 
+.Clouds{
+    background-image: url("../../assets/images/cloud.jpg");
+    background-size: 100% 100%;
+    opacity: 0.9;
+}
 
-
-  
 .Rain{
     background-image: url("../../assets/images/rain.jpg");
     background-size: 100% 100%;
@@ -486,6 +489,19 @@
   background-image: url("../../assets/images/thunder.jpg");
     background-size: 100% 100%;
     opacity: 0.9;
+}
+
+.weather-background-Clouds{
+  background-image: url("../../assets/images/cloudbanner.jpg");
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% auto; /* 배경 이미지를 세로로만 늘립니다. */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 1050;
 }
 
 .weather-background-Rain {
