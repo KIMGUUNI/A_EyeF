@@ -52,7 +52,7 @@ export default function BasicModal({ isOpen, onClose }) {
       };
       console.log(user_idx);
       console.log(boardData);
-      const response = await axios.post('http://localhost:8089/A_Eye/api/profile', boardData);
+      const response = await axios.post('http://43.201.117.185:8089/A_Eye/api/profile', boardData);
       console.log(response.data);
       alert('완료');
       onClose();
