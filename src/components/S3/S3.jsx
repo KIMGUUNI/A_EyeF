@@ -16,7 +16,7 @@ import Cookies from 'js-cookie'
 import { useNavigate } from "react-router-dom";
 const S3 = () => {
     const axiosInstance = axios.create({
-        baseURL: "http://localhost:8089/A_Eye",
+        baseURL: "http://43.201.117.185:8089/A_Eye",
         withCredentials: true,
       });
       
@@ -76,10 +76,6 @@ const S3 = () => {
             };
 
             try {
-                const axiosInstance = axios.create({
-                    baseURL: "http://43.201.117.185:8089/A_Eye",
-                    withCredentials: true,
-                });
                 const response = await s3.upload(params).promise();
                 console.log("File uploaded successfully:", response.Location);
                 const adData = {
