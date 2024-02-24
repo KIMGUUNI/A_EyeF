@@ -56,7 +56,7 @@ export default function data() {
 
     if (user != null) {
       const axiosInstance = axios.create({
-        baseURL: "http://localhost:8089/A_Eye",
+        baseURL: "http://43.201.117.185:8089/A_Eye",
         withCredentials: true
       })
       axiosInstance.post("/api/getUserAds", { user_idx: user.user_idx })
@@ -129,7 +129,7 @@ export default function data() {
   async function getMonthAd(item) {
 
       const AxiosInstance = await axios.create({
-        baseURL: "http://localhost:8089/A_Eye",
+        baseURL: "http://43.201.117.185:8089/A_Eye",
         withCredentials: true
       })
       AxiosInstance.post("/api/getMonthAds", { ad_idx: item })
@@ -143,7 +143,7 @@ export default function data() {
   async function getChartAd(item) {
 
     const AxiosInstance = await axios.create({
-      baseURL: "http://localhost:8089/A_Eye",
+      baseURL: "http://43.201.117.185:8089/A_Eye",
       withCredentials: true
     })
     AxiosInstance.post("/api/getChartAd", { ad_idx: item })
@@ -164,7 +164,7 @@ export default function data() {
 async function getBarChartAd(item) {
 
   const AxiosInstance = await axios.create({
-    baseURL: "http://localhost:8089/A_Eye",
+    baseURL: "http://43.201.117.185:8089/A_Eye",
     withCredentials: true
   })
   AxiosInstance.post("/api/getBarChartAd", { ad_idx: item })

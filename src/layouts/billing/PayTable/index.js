@@ -6,7 +6,7 @@ import PaymentMethod from '../PaymentMethod';
 
 export default function PayTable() {
   const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8089/A_Eye',
+    baseURL: 'http://43.201.117.185:8089/A_Eye',
     withCredentials: true,
   });
 
