@@ -15,6 +15,8 @@ import BasicModal from '../Modal';
 import MDButton from 'components/MDButton';
 import MDBox from 'components/MDBox';
 import MDTypography from 'components/MDTypography';
+import Cookies from 'js-cookie'
+import { useNavigate } from "react-router-dom";
 
 const columns = [
   { id: 'inquiry_indx', label: '글 번호', minWidth: 170 },
@@ -36,13 +38,16 @@ const columns = [
   },
 
 ];
-
 const axiosInstance = axios.create({
   baseURL: "http://localhost:8089/A_Eye",
   withCredentials: true,
 });
 
+
+
 export default function StickyHeadTable() {
+const navigate = useNavigate();
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState([]);
@@ -58,6 +63,7 @@ export default function StickyHeadTable() {
       setUser_position(storedLoginVO ? storedLoginVO.user_position : null);
     } catch (error) {
       storedLoginVO = null;
+   
     }
 
     const fetchData = async () => {
@@ -99,10 +105,93 @@ export default function StickyHeadTable() {
     setModalType('rowClick');
   };
 
-  const handleWriteButtonClick = () => {
+  const handleWriteButtonClick = async () => {
+    await getUserInfo();
     setSelectedRow(null); // 새 글 작성 시 선택된 행 초기화
     setModalType('modal'); // Set modal type to 'modal' for general writing
-  };
+};
+  const getUserInfo = async () => {
+    try {
+      let token;
+
+      const adminCookie = Cookies.get("Admin");
+      const userCookie = Cookies.get("User");
+
+      if (adminCookie) {
+        token = adminCookie
+      } else if (userCookie) {
+        token = userCookie
+      } else {
+        // 쿠키가 없을 때 --> 로그인이 아예 안된 경우
+        alert("로그인을 해 주세요.")
+        navigate("/authentication/sign-in");
+      }
+
+       const config = {
+        headers: {
+          Authorization: `Bearer${token}`
+        }
+      };
+ 
+       await axiosInstance.get("/api/prove", config);
+      /*  if (response.status === 200) {
+        alert("검증 성공")
+      }  */
+
+    } catch (error) {
+      //  토큰의 서명이 올바르지 않거나 토큰의 내용이 손상되었을 경우
+      if (error.response.data == "토큰 검증에 실패했습니다.") {
+        alert("다시 로그인 해주세요.")
+        navigate("/authentication/sign-in");
+        // 쿠키는 있지만 jwt가 만료되었을 때
+      } else if (error.response.data == "토큰이 만료되었습니다.") {
+        
+        
+        var jwtFromCookie = Cookies.get("reToken");
+        if (jwtFromCookie) {
+          const reTkken = {
+            headers: {
+              Authorization: `Bearer${jwtFromCookie}`
+            }
+          };
+
+          try {
+            // refresh 토큰을 이용해 access 토큰을 재발급
+            const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
+
+            const queryParams = new URLSearchParams({
+              user_name: loginVO.user_name,
+              user_position: loginVO.user_position,
+              user_idx: loginVO.user_idx
+              //user_idx:loginVO.user_idx
+            }).toString();
+
+            const url = `/api/reProve?${queryParams}`;
+
+            const response = await axiosInstance.get(url, reTkken);
+
+            // const response = await axiosInstance.get("/api/reProve", reTkken, data);
+            const newToken = response.data
+            const adminCookie = Cookies.get("Admin");
+            const userCookie = Cookies.get("User");
+            if (adminCookie) {
+              Cookies.set("Admin", newToken)
+            } else if (userCookie) {
+              Cookies.set("User", newToken)
+            }
+
+          } catch (error) {
+            // refresh 토큰이 유효하지 않거나 발급 실패 등의 처리
+            if (error.response.data == "다시 로그인 해주세요") {
+              alert("다시 로그인 해주세요.")
+              navigate("/authentication/sign-in");
+            }
+          }
+        }
+
+      }
+    }
+  }
 
 
   return (

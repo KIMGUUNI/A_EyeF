@@ -72,6 +72,14 @@ if (adminCookie) {
       route: "/NotFoundPage",
       component: <NotFoundPage />
     },
+    {
+      type: "collapse",
+      name: "로그인",
+      key: "sign-in",
+      icon: <Icon fontSize="small">key</Icon>,
+      route: "/authentication/sign-in",
+      component: <SignIn />,
+    },
   );
 } else if (userCookie) { // User 쿠키가 있는 경우
   routes.push(
@@ -121,6 +129,14 @@ if (adminCookie) {
       icon: <Icon fontSize="small">person</Icon>,
       route: "/profile",
       component: <Profile />,
+    },
+    {
+      type: "collapse",
+      name: "로그인",
+      key: "sign-in",
+      icon: <Icon fontSize="small">key</Icon>,
+      route: "/authentication/sign-in",
+      component: <SignIn />,
     },
 
   );

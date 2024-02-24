@@ -25,8 +25,10 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 import bgImage from "assets/images/a-big-company-lobby2.png";
 import axios from "axios";
 import Cookies from "js-cookie";
+// import API from "components/API"
 /* eslint-disable no-unused-vars */
 import { AdHostInfo } from "context/AdHostInfo";
+
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -36,7 +38,6 @@ function Basic() {
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
   /* eslint-disable no-unused-vars */
   const [user_rol, setUser_rol] = useState("");
-  const expirationTime = 10 * 60 * 1000;
   /* eslint-disable no-unused-vars */
   // const {setUserInfo} = useContext(UserInfo);
 
@@ -61,6 +62,7 @@ function Basic() {
       const user_Email = response.data.user_email;
       const user_position = response.data.user_position;
 
+      console.log(response)
 
       const UserInfo = {
         user_idx,
@@ -90,7 +92,6 @@ function Basic() {
       console.error("Error during sign in:", error);
     }
   };
-
 
   /* const getUserInfo = async () => {
     try {
@@ -127,6 +128,7 @@ function Basic() {
         navigate("/authentication/sign-in");
         // 쿠키는 있지만 jwt가 만료되었을 때
       } else if (error.response.data == "토큰이 만료되었습니다.") {
+        alert("시간 만료")
         var jwtFromCookie = Cookies.get("reToken");
         if (jwtFromCookie) {
           const reTkken = {
@@ -141,7 +143,9 @@ function Basic() {
 
             const queryParams = new URLSearchParams({
               user_name: loginVO.user_name,
-              user_position: loginVO.user_position
+              user_position: loginVO.user_position,
+              user_idx: loginVO.user_idx
+              //user_idx:loginVO.user_idx
             }).toString();
 
             const url = `/api/reProve?${queryParams}`;
@@ -163,16 +167,19 @@ function Basic() {
           } catch (error) {
             // refresh 토큰이 유효하지 않거나 발급 실패 등의 처리
             if (error.response.data == "다시 로그인 해주세요") {
-              alert("권한이 없습니다. 다시 로그인 해주세요.");
+              console.log(error)
             }
           }
         }
 
       }
     }
-  } */
+  }
+ */
+ 
 
   return (
+    
     <BasicLayout image={bgImage}>
       <Card>
         <MDBox
@@ -190,6 +197,7 @@ function Basic() {
             A-eye
           </MDTypography>
         </MDBox>
+             {/*  <button onClick={getUserInfo}>정보요청</button> */}
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
