@@ -11,7 +11,7 @@ const CITY_NAME = 'Gwangju';
 function Notifications() {
 
   const [weatherData, setWeatherData] = useState([]);
-  const [articles, setArticles] = useState([
+  const [articles] = useState([
     "삼성전자, MWC 2024서 '갤럭시 AI' 존재감 과시 - 라이센스뉴스",
     "임시 감독 '박항서'냐 '황선홍'이냐…고심에 빠진 축구협회 - 세계일보",
     "공명·김도연, 초고속 열애설 부인 '선후배 사이일 뿐'[공식] - 서울경제 - 서울경제신문",
@@ -56,9 +56,9 @@ function Notifications() {
 
     const fetchNewsData = async () => {
       try {
-        const response = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
-        );
+        // const response = await axios.get(
+        //   `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+        // );
         //setArticleLength(response.data.articles.map(article => article.title).reduce((acc, curr) => acc + curr, 0))
         setArticleLength(articles.reduce((acc, curr) => acc + curr, 0))
       } catch (error) {
