@@ -52,7 +52,6 @@ export default function Tmodal({ row, setData }) {
 
   const deletePost = async () => {
     try {
-      console.log("보내줄거", inquiry_indx);
       await axiosInstance.post("/api/deletePost", { inquiry_indx });
 
       // Fetch updated data after deletion
@@ -86,7 +85,6 @@ export default function Tmodal({ row, setData }) {
         const boardList = response.data;
 
         if (boardList) {
-          console.log("가져온데이터", boardList);
           setInquiry_title(boardList.inquiry_title);
           setInquiry_pw(boardList.inquiry_pw)
           setInquiry_content(boardList.inquiry_content);

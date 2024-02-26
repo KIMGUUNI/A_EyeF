@@ -42,7 +42,6 @@ function Header() {
   const [tabValue, setTabValue] = useState(0);
   const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
   const email = loginVO.user_name;
-  console.log("email",email)
   useEffect(() => {
 
     // A function that sets the orientation state of the tabs.
@@ -88,9 +87,9 @@ function Header() {
         sx={{
           position: "relative",
           mt: -8,
-          mx: 3,
-          py: 2,
-          px: 2,
+          mx: 1,
+          py: 3,
+          px: 1,
         }}
       >
         <Grid container spacing={3} alignItems="center">

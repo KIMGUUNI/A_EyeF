@@ -42,7 +42,6 @@ function Header({ children }) {
   const [tabValue, setTabValue] = useState(0);
   const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
   const email = loginVO.user_name;
-  console.log("email",email)
   useEffect(() => {
 
     

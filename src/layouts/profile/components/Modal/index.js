@@ -43,17 +43,13 @@ export default function BasicModal({ isOpen, onClose }) {
   
       var storedLoginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
   
-      console.log(storedLoginVO.user_idx);
       const boardData = {
         user_idx: storedLoginVO.user_idx,
         inquiry_title,
         inquiry_pw,
         inquiry_content,
       };
-      console.log(user_idx);
-      console.log(boardData);
       const response = await axios.post('http://43.201.117.185:8089/A_Eye/api/profile', boardData);
-      console.log(response.data);
       alert('완료');
       onClose();
     } catch (error) {

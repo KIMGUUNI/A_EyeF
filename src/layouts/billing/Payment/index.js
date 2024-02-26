@@ -28,7 +28,6 @@ const Payment = ({ onCloseModal, totalAmount, result }) => {
             document.head.appendChild(script);
           });
         };
-        console.log(totalAmount)
         await loadScript('https://code.jquery.com/jquery-1.12.4.min.js');
         await loadScript('https://cdn.iamport.kr/js/iamport.payment-1.1.7.js');
 
