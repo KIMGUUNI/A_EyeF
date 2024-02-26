@@ -12,7 +12,15 @@ import Select from '@mui/material/Select';
 import axios from "axios";
 import { TextField, Card, CardContent } from '@mui/material';
 import MDTypography from "components/MDTypography";
+import Cookies from 'js-cookie'
+import { useNavigate } from "react-router-dom";
 const S3 = () => {
+    const axiosInstance = axios.create({
+        baseURL: "http://43.201.117.185:8089/A_Eye",
+        withCredentials: true,
+      });
+      
+    const navigate = useNavigate();
     const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
 
     const [uploadedFile, setUploadedFile] = useState(null);
@@ -47,6 +55,7 @@ const S3 = () => {
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
     const handleButtonClick = async () => {
+        await getUserInfo();
         if (uploadedFile && startDate && endDate) {
             const id_key = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
             const secret_key = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
@@ -67,10 +76,6 @@ const S3 = () => {
             };
 
             try {
-                const axiosInstance = axios.create({
-                    baseURL: "http://43.201.117.185:8089/A_Eye",
-                    withCredentials: true,
-                });
                 const response = await s3.upload(params).promise();
                 console.log("File uploaded successfully:", response.Location);
                 const adData = {
@@ -93,6 +98,86 @@ const S3 = () => {
             setShowUploadAlert(true)
         }
     };
+
+    const getUserInfo = async () => {
+        try {
+          let token;
+    
+          const adminCookie = Cookies.get("Admin");
+          const userCookie = Cookies.get("User");
+    
+          if (adminCookie) {
+            token = adminCookie
+          } else if (userCookie) {
+            token = userCookie
+          } else {
+            // 쿠키가 없을 때 --> 로그인이 아예 안된 경우
+            alert("로그인을 해 주세요.")
+            navigate("/authentication/sign-in");
+          }
+    
+           const config = {
+            headers: {
+              Authorization: `Bearer${token}`
+            }
+          };
+     
+           await axiosInstance.get("/api/prove", config);
+    
+        } catch (error) {
+          //  토큰의 서명이 올바르지 않거나 토큰의 내용이 손상되었을 경우
+          if (error.response.data == "토큰 검증에 실패했습니다.") {
+            alert("다시 로그인 해주세요.")
+            navigate("/authentication/sign-in");
+            // 쿠키는 있지만 jwt가 만료되었을 때
+          } else if (error.response.data == "토큰이 만료되었습니다.") {
+            
+            
+            var jwtFromCookie = Cookies.get("reToken");
+            if (jwtFromCookie) {
+              const reTkken = {
+                headers: {
+                  Authorization: `Bearer${jwtFromCookie}`
+                }
+              };
+    
+              try {
+                // refresh 토큰을 이용해 access 토큰을 재발급
+                const loginVO = JSON.parse(sessionStorage.getItem('UserInfo'));
+    
+                const queryParams = new URLSearchParams({
+                  user_name: loginVO.user_name,
+                  user_position: loginVO.user_position,
+                  user_idx: loginVO.user_idx
+                  //user_idx:loginVO.user_idx
+                }).toString();
+    
+                const url = `/api/reProve?${queryParams}`;
+    
+                const response = await axiosInstance.get(url, reTkken);
+    
+                // const response = await axiosInstance.get("/api/reProve", reTkken, data);
+                const newToken = response.data
+                const adminCookie = Cookies.get("Admin");
+                const userCookie = Cookies.get("User");
+                if (adminCookie) {
+                  Cookies.set("Admin", newToken)
+                } else if (userCookie) {
+                  Cookies.set("User", newToken)
+                }
+    
+              } catch (error) {
+                // refresh 토큰이 유효하지 않거나 발급 실패 등의 처리
+                if (error.response.data == "다시 로그인 해주세요") {
+                  alert("다시 로그인 해주세요.")
+                  navigate("/authentication/sign-in");
+                }
+              }
+            }
+    
+          }
+        }
+      }
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
