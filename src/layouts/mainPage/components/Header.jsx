@@ -29,11 +29,11 @@ export const Header = () => {
     }, []);
 
     return (
-        <MDBox mt={12} ml={"20%"} style={{ display: "flex", position: "fixed", alignItems: "center", justifyContent: "space-between", width: "70%", zIndex: "1000" }}>
-            <MDTypography variant="h1" fontWeight="medium" color="white" >
+        <MDBox mt={12} style={{ display: "flex", position: "fixed", alignItems: "center", justifyContent: "space-between", width: "100%", zIndex: "1000" }}>
+            <MDTypography ml={"10vw"} variant="h1" fontWeight="medium" color="white" >
                 A-eye
             </MDTypography >
-            <MDBox ml={"10%"} mr={"20%"} style={{ display: "flex", alignItems: "center" }} >
+            <MDBox mr={"10vw"} style={{ display: "flex", alignItems: "center" }} >
 
                 <Link to={"/dashboard"}>
                     <HomeIcon fontSize='large' color="white" style={{ display: "flex", margin: "10" }} />
