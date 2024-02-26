@@ -40,8 +40,6 @@ export default function Umodal({row}) {
         const boardList = response.data;
   
         if (boardList) {
-          console.log(inquiry_indx)
-          console.log(boardList);
           setInquiry_title(boardList[0].inquiry_title);
           setInquiry_content(boardList[0].inquiry_content);
           setRealAnswer_content(boardList[0].answer_content);
@@ -57,13 +55,9 @@ export default function Umodal({row}) {
     fetchData()
    
   }, [])
-  console.log(answer_content);
   
   // 위에 함수에서 [inquiry_title, inquiry_content] 값이 바뀔때마다 실행
   useEffect(() => {
-    console.log("제목1 : " + inquiry_title);
-    console.log("내용1 : " + inquiry_content);
-    console.log("아아아아아")
   }, [inquiry_title, inquiry_content]);
 
 
@@ -78,7 +72,6 @@ export default function Umodal({row}) {
           answer_content
         }
         const response = await axiosInstance.post("/api/boardAnswer", boardAnswer);
-        console.log("res:",response.data)
         if(response.data==1) {
           alert("답글 완료")
         }

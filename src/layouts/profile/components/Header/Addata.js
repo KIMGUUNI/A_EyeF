@@ -96,7 +96,6 @@ export default function CollapsibleTable() {
 
         const fetchData = async () => {
             const requestdata = JSON.parse(sessionStorage.getItem("UserInfo"))
-            console.log("보내줄 데이터",requestdata)
             const response = await axiosInstance.post("/api/Addata",requestdata )
             const adData = response.data;
             const newRows = adData.map(data => createData(data.ad_name, data.user_idx, data.ad_target_age, data.ad_target_gender, data.ad_play_number, data.ad_start_date, data.ad_end_date));

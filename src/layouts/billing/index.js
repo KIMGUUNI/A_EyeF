@@ -11,7 +11,6 @@ import PayTable from './PayTable';
 
 function Billing() {
 
-  console.log("빌링")
   return (
     <DashboardLayout>
       <DashboardNavbar />

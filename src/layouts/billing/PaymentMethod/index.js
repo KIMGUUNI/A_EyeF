@@ -33,7 +33,6 @@ import axios from "axios";
 
 function PaymentMethod({ result }) {
   const navigate = useNavigate();
-  console.log("result3",result)
   const [totalAmount, setTotalAmount] = useState(0);
   useEffect(() => {
     if (result) {
