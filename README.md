@@ -23,8 +23,8 @@
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/5d37f1ac-ca6b-4e50-a107-f4adda580753" width="100%" height="100%">
 
 # 5. 핵심 기능
-<details>
-    <summary>핵심 기능 설명 펼치기</summary>
+<details>  
+     <summary><b><h2>> 핵심 기능 설명 펼치기</h2></b></summary>
 
 # 5.1 전체 흐름도 
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/d1b6abde-bf4d-4c6b-9da8-e5df2b5556a3" width="100%" height="100%">
@@ -53,7 +53,7 @@
     
 # 5.5 광고 승인
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/2fbc8f3f-4efc-48aa-bec2-81e83b037673" width="48%" alt="Image 1">
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/0d92a225-f611-4c46-921b-1021159cb295" width="48%" alt="Image 2" height="100%">
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/0d92a225-f611-4c46-921b-1021159cb295" width="48%" alt="Image 2">
     <h4>승인되지 않은 광고를 웹페이지에서 확인가능</h4>
     <h4>승인 시 기존 S3 URL 파일을 복사하여 새로운 폴더에 저장 후 기존 파일 삭제</h4>
 
@@ -72,7 +72,6 @@
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/92321e9e-5a16-43bc-a01d-191395f5a723" width="100%" height="100%">
     <h4>사용자는 문의할 내용이 있으면 게시글 작성 가능</h4>
     <h4>관리자는 문의 내용 열람 가능 및 답변과 삭제 가능</h4>
-# 
 
 </details>
 
