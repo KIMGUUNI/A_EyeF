@@ -31,28 +31,47 @@
 
 # 5.2 JWT 시큐리티 
 
-# 5.3 광고 송출 페이지
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/58f79ab5-3dc1-4092-a5bf-d62c94146dd4" width="100%" height="100%">
-
 # 5.4 객체 인식
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/74f2c094-3ea8-49af-bf2f-28cf2c273eeb" width="100%" height="100%">
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/13c77b8f-ee99-4da0-982d-9a5c90a4666f" width="100%" height="100%">
+<p align="center">
+  <img src="https://github.com/KIMGUUNI/A_EyeF/assets/142488051/74f2c094-3ea8-49af-bf2f-28cf2c273eeb" alt="Image 1" width="48%">
+  <img src="https://github.com/KIMGUUNI/A_EyeF/assets/142488051/13c77b8f-ee99-4da0-982d-9a5c90a4666f" alt="Image 2" width="48%">
+</p>
+    <h4>얼굴을 인식해서 나이대와 성별 파악 후 SQS Message Body 생성</h4>
+    <h4>MediaPipe Face Mesh를 이용하여 특정 행동 시 노출 횟수 카운트로 인사이트 제공</h4>
 
-# 5.5 광고 승인
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/2fbc8f3f-4efc-48aa-bec2-81e83b037673" width="100%" height="100%">
-
-# 5.6 대시보드
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/76671829-c7c4-4f6e-9e26-1563fb8725ab" width="100%" height="100%">
+# 5.3 광고 송출 페이지
+<p>
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/58f79ab5-3dc1-4092-a5bf-d62c94146dd4" alt="Image 1" width="48%">
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/ccbb0622-c529-4979-a22d-85a1402e7a3d" alt="Image 2" width="48%">
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/fc123eb1-811d-4099-a77f-8f057f7a84a2" alt="Image 3" width="48%">
+</p>
+     <h4>Message로 Lambda 함수 트리거 / S3 객체 URL 반환 후 API Gateway WebSocket으로 실시간 영상 송출</h4>
 
 # 5.7 광고 신청
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/9004c8f1-76af-451e-a753-3acea0ef4886" width="100%" height="100%">
+    <h4>파일을 업로드하면 데이터베이스 및 S3 저장</h4>
+    
+# 5.5 광고 승인
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/2fbc8f3f-4efc-48aa-bec2-81e83b037673" width="100%" height="100%">
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/0d92a225-f611-4c46-921b-1021159cb295" width="100%" height="100%">
+    <h4>승인되지 않은 광고를 웹페이지에서 확인가능</h4>
+    <h4>승인 시 기존 S3 URL 파일을 복사하여 새로운 폴더에 저장 후 기존 파일 삭제</h4>
+
+# 5.6 대시보드
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/76671829-c7c4-4f6e-9e26-1563fb8725ab" width="100%" height="100%">
+    <h4>사용자가 특정한 광고 데이터를 선택하여 열람 가능</h4>
+    <h4>사용자가 본인의 광고 현황 확인 가능</h4>
+    <h4>실적 지역별 실시간 노출 횟수 열람 가능</h4>
 
 # 5.8 광고 결제
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/4865b864-f61c-4ae3-a5b9-552b2d9e4631" width="100%" height="100%">
-
+    <h4>신청한 광고의 현재 재생 횟수와 결제할 금액 확인 및 결제 가능</h4>
+    <h4>간편 결제 기능 구현(카카오페이,삼성페이 등)</h4>
+    
 # 5.9 문의글 답변 및 삭제
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/92321e9e-5a16-43bc-a01d-191395f5a723" width="100%" height="100%">
-
+    <h4>사용자는 문의할 내용이 있으면 게시글 작성 가능</h4>
+    <h4>관리자는 문의 내용 열람 가능 및 답변과 삭제 가능</h4>
 # 
 
 </details>
