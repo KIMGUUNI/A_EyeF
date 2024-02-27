@@ -41,7 +41,7 @@
 
 # 5.3 광고 송출 페이지
 <p>
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/58f79ab5-3dc1-4092-a5bf-d62c94146dd4" alt="Image 1" width="48%">
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/58f79ab5-3dc1-4092-a5bf-d62c94146dd4" alt="Image 1" width="100%">
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/ccbb0622-c529-4979-a22d-85a1402e7a3d" alt="Image 2" width="48%">
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/fc123eb1-811d-4099-a77f-8f057f7a84a2" alt="Image 3" width="48%">
 </p>
@@ -52,8 +52,8 @@
     <h4>파일을 업로드하면 데이터베이스 및 S3 저장</h4>
     
 # 5.5 광고 승인
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/2fbc8f3f-4efc-48aa-bec2-81e83b037673" width="100%" height="100%">
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/0d92a225-f611-4c46-921b-1021159cb295" width="100%" height="100%">
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/2fbc8f3f-4efc-48aa-bec2-81e83b037673" width="48%" alt="Image 1">
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/0d92a225-f611-4c46-921b-1021159cb295" width="48%" alt="Image 2" height="100%">
     <h4>승인되지 않은 광고를 웹페이지에서 확인가능</h4>
     <h4>승인 시 기존 S3 URL 파일을 복사하여 새로운 폴더에 저장 후 기존 파일 삭제</h4>
 
