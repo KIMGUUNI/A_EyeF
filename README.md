@@ -4,22 +4,22 @@
 </br>
 
 # 1. 개요
-## 프로젝트 소개
+## 💡 프로젝트 소개
 ### AI를 기반으로 한 맞춤형 광고 송출 및 광고 신청 플랫폼 서비스
-  - 엘리베이터 CCTV를 통해 객체를 인식하여, 연령와 성별을 분석한다.
+  - 엘리베이터 CCTV를 통해 객체를 인식하여, 연령과 성별을 분석한다.
   - 분석된 결과를 기반으로 맞춤화된 광고를 제공한다.
   - 광고주는 노출되기 원하는 연령과 성별을 선택하여 광고를 신청한다.
   - 광고가 재생되는 횟수를 카운트하여 재생된 횟수만큼 결제가 가능하다.
 
 </br>
 
-## 제안배경
+## 💡 제안배경
 - 엘리베이터 시장, 2028년까지 연평균 4.42% 성장 전망
 - 전세계 광고비 지출 규모 2023년 대비 2024년 8.2% 증가 예상
   
 </br>
 
-# 2. 사용한 언어
+# 2. 사용 언어
 | 구분         | 내용               |
 |--------------|-------------------|
 | 사용 언어    | <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" /> <img src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white" /> <img src="https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white" /> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white" /> <img src="https://img.shields.io/badge/CSS-239120?style=for-the-badge&logo=css3&logoColor=white" /> |
@@ -133,10 +133,18 @@
   - 사용자는 문의글 작성이 가능하다.
   - 관리자는 모든 문의 내용 열람, 답변 및 삭제가 가능하다.
 
+</br>
+
+## 6.9 반응형 웹
+
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/20b82c41-1e28-4d95-9618-e1d76044d502)
+
+  - 화면 크기에 따라 최적화되는 반응형 웹 페이지를 구현했다.
+
 </details>
 
 # 7. 트러블 슈팅
-### 토큰 관리 문제
+### 📍 토큰 관리 문제
 
 <details>
 <summary><b> 자세히 보기</b></summary>
@@ -161,7 +169,7 @@
 
 </br>
 
-### 웹 소켓 통신 모니터링 및 로깅문제
+### 📍 웹 소켓 통신 모니터링 및 로깅문제
 
 <details>
 <summary><b> 자세히 보기</b></summary>
