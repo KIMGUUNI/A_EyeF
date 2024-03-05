@@ -55,16 +55,17 @@
 <summary>기능 보기</summary>
 
 ## 6.1 Security
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/236167f1-2452-4775-bf4b-b063490f5811)
+
 - JWT를 통해 페이지 권한 부여한다.
 - 비밀번호를 암호화 한다.
 
 </br>
 
 ## 6.2 객체 인식
-<p align="center">
-  <img src="https://github.com/KIMGUUNI/A_EyeF/assets/142488051/74f2c094-3ea8-49af-bf2f-28cf2c273eeb" alt="Image 1" width="48%">
-  <img src="https://github.com/KIMGUUNI/A_EyeF/assets/142488051/13c77b8f-ee99-4da0-982d-9a5c90a4666f" alt="Image 2" width="48%">
-</p>
+
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/35f870a4-92a9-4826-a4b3-ee89c3f1721b)
+
 
 - YOLOv8을 통해 객체의 얼굴을 인식한다.
 - CNN기반의 모델을 통해 나이와 성별을 예측한다.
@@ -75,8 +76,11 @@
 ## 6.3 광고 송출
 <p>
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/58f79ab5-3dc1-4092-a5bf-d62c94146dd4" alt="Image 1" width="100%">
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/ccbb0622-c529-4979-a22d-85a1402e7a3d" alt="Image 2" width="48%">
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/fc123eb1-811d-4099-a77f-8f057f7a84a2" alt="Image 3" width="48%">
+
+
+
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/1db09440-c545-4f27-b46e-db7979011cea)
+
 </p>
 
   - Message로 Lambda 함수 트리거가 작동한다.
@@ -85,7 +89,9 @@
 </br>
 
 ## 6.4 광고 신청
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/9004c8f1-76af-451e-a753-3acea0ef4886" width="100%" height="100%">
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/a45c5e19-6983-4967-8d83-52d0f6b00479)
+
+
 
   - 사용자는 원하는 타겟의 성별과 연령을 선택한다.
   - 선택 후 광고 파일을 업로드한다.
@@ -94,8 +100,8 @@
 </br>
 
 ## 6.5 광고 승인
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/2fbc8f3f-4efc-48aa-bec2-81e83b037673" width="48%" alt="Image 1">
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/0d92a225-f611-4c46-921b-1021159cb295" width="48%" alt="Image 2">
+
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/08cb2c11-c304-4a9b-be74-b9fa29640e87)
 
   - 광고 승인 대기 목록들이 보여진다.
   - 광고 승인 시, 기존 S3 URL 파일을 복사하여 새로운 폴더에 저장되고 기존의 파일은 삭제된다.
@@ -104,7 +110,8 @@
 </br>
 
 ## 6.6 대시보드
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/76671829-c7c4-4f6e-9e26-1563fb8725ab" width="100%" height="100%">
+
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/a4b672bb-3706-4d58-ae6c-86527aa44961)
   
   - 클릭된 광고의 정보를 확인할 수 있다.
   - 클릭된 광고의 노출 횟수와 광고 타겟 정보가 대시보드로 보여진다.
@@ -112,7 +119,9 @@
 </br>
 
 ## 6.7 광고 결제
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/4865b864-f61c-4ae3-a5b9-552b2d9e4631" width="100%" height="100%">
+
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/8547053a-4efc-4f9e-9e1f-a770c049d704)
+
 
   - 신청한 광고의 현재 재생 횟수에 따른 결제 금액이 보여진다.
   - 결제를 원하는 광고를 선택하여 결제 가능하다.
@@ -121,7 +130,8 @@
 </br>
 
 ## 6.8 문의글 답변 및 삭제
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/92321e9e-5a16-43bc-a01d-191395f5a723" width="100%" height="100%">
+
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/20c8f44e-0cf9-45d6-a8dd-5c8a1dc61890)
 
   - 사용자는 문의글 작성이 가능하다.
   - 관리자는 모든 문의 내용 열람, 답변 및 삭제가 가능하다.
