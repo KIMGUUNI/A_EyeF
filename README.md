@@ -86,6 +86,40 @@
 
 # 7. 팀원소개
 
+<table>
+  <tr>
+    <td align="center"><img src="https://github.com/KIMGUUNI/A_EyeF/assets/118683437/459cea7a-7324-4e4c-8783-6157db8847f6" width="140" height="180" /></td>
+    <td align="center"><img src="https://github.com/KIMGUUNI/A_EyeF/assets/118683437/278b105e-c98e-4238-a8b3-0a6a54cd0908" width="140" height="180" /></td>
+    <td align="center"><img src="https://github.com/KIMGUUNI/A_EyeF/assets/118683437/bc2b30e0-8924-4194-8a75-a6c959398132" width="140" height="180" /></td>
+    <td align="center"><img src="https://github.com/KIMGUUNI/A_EyeF/assets/118683437/90e2da19-10cb-4fd2-a11f-fed623fa2eb7" width="140" height="180" /></td>
+    <td align="center"><img src="https://github.com/KIMGUUNI/A_EyeF/assets/118683437/92c07452-b00e-4914-b8ed-4d5562c68609" width="140" height="180" /></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>김건휘</strong></td>
+    <td align="center"><strong>김찬혁</strong></td>
+    <td align="center"><strong>조원제</strong></td>
+    <td align="center"><strong>임혜지</strong></td>
+    <td align="center"><strong>박형찬</strong></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Project Manager</b></td>
+    <td align="center"><b>Backend</b></td>
+    <td align="center"><b>Backend</b></td>
+    <td align="center"><b>Modeling</b></td>
+    <td align="center"><b>Frontend</b></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/KIMGUUNI" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/chanhyuckkim" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/jaewon07" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/Limmaji" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/phc1235" target='_blank'>github</a></td>
+  </tr>
+</table>
+
+
+
+
 # 8. 트러블 슈팅
 
 # 9. API 
