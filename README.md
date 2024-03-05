@@ -43,78 +43,92 @@
 
 </br>
 
-# 5. 기능
-<details>  
-<summary><b> 핵심 기능 설명 펼치기</b></summary>
-
-## 5.1 시스템 흐름도 
+# 5. 시스템 흐름도 
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/118683437/cf6d6b0c-e1b0-4fe7-8c0f-80bb4685b7fc" width="100%" height="100%">
 
 </br>
 
-## 5.2 JWT 시큐리티 
+# 6. 기능
+
+<details>
+
+<summary>기능 보기</summary>
+
+## 6.1 Security
+- JWT를 통해 페이지 권한 부여한다.
+- 비밀번호를 암호화 한다.
 
 </br>
 
-## 5.3 객체 인식
+## 6.2 객체 인식
 <p align="center">
   <img src="https://github.com/KIMGUUNI/A_EyeF/assets/142488051/74f2c094-3ea8-49af-bf2f-28cf2c273eeb" alt="Image 1" width="48%">
   <img src="https://github.com/KIMGUUNI/A_EyeF/assets/142488051/13c77b8f-ee99-4da0-982d-9a5c90a4666f" alt="Image 2" width="48%">
 </p>
 
-### 1. YOLOv8을 통해 객체의 얼굴을 인식한다. 
-### 2. CNN기반의 모델을 통해 나이와 성별을 예측한다.
-### 3. 예측된 값이 SQS Message Body로 전송된다.
+- YOLOv8을 통해 객체의 얼굴을 인식한다.
+- CNN기반의 모델을 통해 나이와 성별을 예측한다.
+- 예측된 값을 SQS Message Body에 담아 전송한다.
 
 </br>
 
-## 5.4 광고 송출
+## 6.3 광고 송출
 <p>
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/58f79ab5-3dc1-4092-a5bf-d62c94146dd4" alt="Image 1" width="100%">
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/ccbb0622-c529-4979-a22d-85a1402e7a3d" alt="Image 2" width="48%">
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/fc123eb1-811d-4099-a77f-8f057f7a84a2" alt="Image 3" width="48%">
 </p>
-     <h4>Message로 Lambda 함수 트리거 / S3 객체 URL 반환 후 API Gateway WebSocket으로 실시간 영상 송출</h4>
+
+  - Message로 Lambda 함수 트리거가 작동한다.
+  - S3 객체 URL 반환 후 API Gateway WebSocket으로 실시간으로 영상이 송출된다.
 
 </br>
 
-## 5.5 광고 신청
+## 6.4 광고 신청
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/9004c8f1-76af-451e-a753-3acea0ef4886" width="100%" height="100%">
-    <h4>파일을 업로드하면 데이터베이스 및 S3 저장</h4>
+
+  - 사용자는 원하는 타겟의 성별과 연령을 선택한다.
+  - 선택 후 광고 파일을 업로드한다.
+  - 광고 신청 버튼을 클릭하면 데이터베이스 및 S3에 정보가 저장된다.
 
 </br>
 
-## 5.6 광고 승인
+## 6.5 광고 승인
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/2fbc8f3f-4efc-48aa-bec2-81e83b037673" width="48%" alt="Image 1">
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/0d92a225-f611-4c46-921b-1021159cb295" width="48%" alt="Image 2">
-    <h4>승인되지 않은 광고를 웹페이지에서 확인가능</h4>
-    <h4>승인 시 기존 S3 URL 파일을 복사하여 새로운 폴더에 저장 후 기존 파일 삭제</h4>
+
+  - 광고 승인 대기 목록들이 보여진다.
+  - 광고 승인 시, 기존 S3 URL 파일을 복사하여 새로운 폴더에 저장되고 기존의 파일은 삭제된다.
+
 
 </br>
 
-## 5.7 대시보드
+## 6.6 대시보드
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/76671829-c7c4-4f6e-9e26-1563fb8725ab" width="100%" height="100%">
-    <h4>사용자가 특정한 광고 데이터를 선택하여 열람 가능</h4>
-    <h4>사용자가 본인의 광고 현황 확인 가능</h4>
-    <h4>실적 지역별 실시간 노출 횟수 열람 가능</h4>
+  
+  - 클릭된 광고의 정보를 확인할 수 있다.
+  - 클릭된 광고의 노출 횟수와 광고 타겟 정보가 대시보드로 보여진다.
 
 </br>
 
-## 5.8 광고 결제
+## 6.7 광고 결제
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/4865b864-f61c-4ae3-a5b9-552b2d9e4631" width="100%" height="100%">
-    <h4>신청한 광고의 현재 재생 횟수와 결제할 금액 확인 및 결제 가능</h4>
-    <h4>간편 결제 기능 구현(카카오페이,삼성페이 등)</h4>
+
+  - 신청한 광고의 현재 재생 횟수에 따른 결제 금액이 보여진다.
+  - 결제를 원하는 광고를 선택하여 결제 가능하다.
+  - 간편 결제가 가능하다. (카카오페이,삼성페이 등)
 
 </br>
 
-## 5.9 문의글 답변 및 삭제
+## 6.8 문의글 답변 및 삭제
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/92321e9e-5a16-43bc-a01d-191395f5a723" width="100%" height="100%">
-    <h4>사용자는 문의할 내용이 있으면 게시글 작성 가능</h4>
-    <h4>관리자는 문의 내용 열람 가능 및 답변과 삭제 가능</h4>
+
+  - 사용자는 문의글 작성이 가능하다.
+  - 관리자는 모든 문의 내용 열람, 답변 및 삭제가 가능하다.
 
 </details>
 
-# 6. 트러블 슈팅
+# 7. 트러블 슈팅
 ### 토큰 관리 문제
 
 <details>
@@ -159,18 +173,19 @@
 
 </br>
 
-# 7. 개발 기간 및 작업관리
-
-> ## 개발 기간
+# 8. 개발 기간 및 작업관리
+## 개발 기간
 > - 전체 개발 기간 : 2024-02-01 ~ 2024-02-27
-> 
-> ## 작업관리
+
+</br>
+
+ ## 작업관리
 > - GitHub를 사용하여 프로젝트 협업을 진행하였습니다.
 > - 매일 프로젝트를 진행하기 전 작업 순서와 방향성에 대해 회의를 하고 새롭게 배운 내용을 공유하는 시간을 가졌습니다.
 
 </br>
 
-# 8. 팀원소개
+# 9. 팀원소개
 
 <table>
   <tr>
@@ -205,7 +220,7 @@
 
 </br>
 
-# 9. API 
+# 10. API 
 날씨 https://openweathermap.org/
 
 뉴스 https://newsapi.org/
