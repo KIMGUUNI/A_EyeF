@@ -74,14 +74,11 @@
 </br>
 
 ## 6.3 광고 송출
-<p>
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/58f79ab5-3dc1-4092-a5bf-d62c94146dd4" alt="Image 1" width="100%">
+
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/ff2119fd-ec08-46d3-accf-dda6792282e1)
+![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/baf10eb0-9b1a-4bd8-ab9c-5b837b131dc7)
 
 
-
-![image](https://github.com/KIMGUUNI/A_EyeF/assets/118683437/1db09440-c545-4f27-b46e-db7979011cea)
-
-</p>
 
   - Message로 Lambda 함수 트리거가 작동한다.
   - S3 객체 URL 반환 후 API Gateway WebSocket으로 실시간으로 영상이 송출된다.
