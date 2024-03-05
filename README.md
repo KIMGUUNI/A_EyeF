@@ -20,14 +20,14 @@
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/d002a731-40eb-4bec-9337-c2773b836a6a" width="100%" height="100%">
 
 # 4. 시스템 아키텍처 
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/5d37f1ac-ca6b-4e50-a107-f4adda580753" width="100%" height="100%">
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/118683437/25ef6622-a5e7-499e-8194-a85fb37de62d" width="100%" height="100%">
 
-# 5. 핵심 기능
+# 5. 기능
 <details>  
-     <summary><b><h2>> 핵심 기능 설명 펼치기</h2></b></summary>
+<summary><b> 핵심 기능 설명 펼치기</b></summary>
 
-# 5.1 전체 흐름도 
-<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/d1b6abde-bf4d-4c6b-9da8-e5df2b5556a3" width="100%" height="100%">
+# 5.1 시스템 흐름도 
+<img src = "https://github.com/KIMGUUNI/A_EyeF/assets/118683437/cf6d6b0c-e1b0-4fe7-8c0f-80bb4685b7fc" width="100%" height="100%">
 
 # 5.2 JWT 시큐리티 
 
@@ -39,7 +39,7 @@
     <h4>얼굴을 인식해서 나이대와 성별 파악 후 SQS Message Body 생성</h4>
     <h4>MediaPipe Face Mesh를 이용하여 특정 행동 시 노출 횟수 카운트로 인사이트 제공</h4>
 
-# 5.3 광고 송출 페이지
+# 5.3 광고 송출
 <p>
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/58f79ab5-3dc1-4092-a5bf-d62c94146dd4" alt="Image 1" width="100%">
 <img src = "https://github.com/KIMGUUNI/A_EyeF/assets/142488051/ccbb0622-c529-4979-a22d-85a1402e7a3d" alt="Image 2" width="48%">
